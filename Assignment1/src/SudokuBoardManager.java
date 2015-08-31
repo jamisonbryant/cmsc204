@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -15,13 +16,16 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class SudokuBoardManager implements SudokuBoardManagerInterface 
@@ -35,18 +39,18 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 	 */
 	public static void main(String[] args)
 	{
-		// Create main window
+		/*
+		 * Create main window
+		 */
 		JFrame mainWindow = new JFrame("Sudoku Board Manager");
 		mainWindow.setLocationRelativeTo(null);
 		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//mainWindow.setSize(700, 700);
 		
-		// Create board panel
+		/*
+		 * Construct board GUI
+		 */		
 		JPanel boardPanel = new JPanel();
-		boardPanel.setLayout(new BoxLayout(boardPanel, BoxLayout.Y_AXIS));
-		
-		// Create control panel
-		JPanel controlPanel = new JPanel();
+		boardPanel.setLayout(new BoxLayout(boardPanel, BoxLayout.Y_AXIS));	
 		
 		// Add cells to board
 		for (int i = 0; i < 9; i++) {
@@ -81,25 +85,119 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 			}
 			
 			// Add row to board
-			boardPanel.add(rowPanel, BorderLayout.AFTER_LAST_LINE);
+			boardPanel.add(rowPanel);
 		}
 		
-		// Add panels to main window
+		/*
+		 * Construct control panel
+		 */
+		JPanel controlPanel = new JPanel();
+		controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.X_AXIS));
+		
+		// Create input panel
+		JPanel inputPanel = new JPanel();
+		inputPanel.setLayout(new BoxLayout(inputPanel, BoxLayout.Y_AXIS));
+		inputPanel.setBorder(BorderFactory.createTitledBorder("Enter Value"));
+		
+		// Create row input field
+		JPanel rowInputField1 = new JPanel();
+		JLabel rowInputLabel1 = new JLabel("Row:");
+		JSpinner rowInputSpinner1 = new JSpinner(new SpinnerNumberModel(1, 1, 9, 1));
+		rowInputSpinner1.setPreferredSize(new Dimension(60, 25));
+		rowInputField1.add(rowInputLabel1);
+		rowInputField1.add(rowInputSpinner1);
+		
+		// Add row input field to input panel			
+		inputPanel.add(rowInputField1);
+		
+		// Create column input field
+		JPanel columnInputField1 = new JPanel();
+		JLabel columnInputLabel1 = new JLabel("Column:");
+		JSpinner columnInputSpinner1 = new JSpinner(new SpinnerNumberModel(1, 1, 9, 1));
+		columnInputSpinner1.setPreferredSize(new Dimension(60, 25));
+		columnInputField1.add(columnInputLabel1);
+		columnInputField1.add(columnInputSpinner1);
+		
+		// Add column input field to panel
+		inputPanel.add(columnInputField1);		
+		
+		// Create value input field
+		JPanel valueInputField1 = new JPanel();
+		JLabel valueInputLabel1 = new JLabel("Value:");
+		JTextField valueInputTextField1 = new JTextField();
+		valueInputTextField1.setPreferredSize(new Dimension(60, 25));
+		valueInputField1.add(valueInputLabel1);
+		valueInputField1.add(valueInputTextField1);
+		
+		// Add value input field to panel
+		inputPanel.add(valueInputField1);
+		
+		// Create display panel
+		JPanel displayPanel = new JPanel();
+		displayPanel.setLayout(new BoxLayout(displayPanel, BoxLayout.Y_AXIS));
+		displayPanel.setBorder(BorderFactory.createTitledBorder("Display Values"));
+		
+		// Create row input field
+		JPanel rowInputField2 = new JPanel();
+		JLabel rowInputLabel2 = new JLabel("Row:");
+		JSpinner rowInputSpinner2 = new JSpinner(new SpinnerNumberModel(1, 1, 9, 1));
+		rowInputSpinner2.setPreferredSize(new Dimension(60, 25));
+		rowInputField2.add(rowInputLabel2);
+		rowInputField2.add(rowInputSpinner2);
+		
+		// Add row input field to input panel			
+		displayPanel.add(rowInputField2);
+		
+		// Create column input field
+		JPanel columnInputField2 = new JPanel();
+		JLabel columnInputLabel2 = new JLabel("Column:");
+		JSpinner columnInputSpinner2 = new JSpinner(new SpinnerNumberModel(1, 1, 9, 1));
+		columnInputSpinner2.setPreferredSize(new Dimension(60, 25));
+		columnInputField2.add(columnInputLabel2);
+		columnInputField2.add(columnInputSpinner2);
+		
+		// Add column input field to panel
+		displayPanel.add(columnInputField2);
+		
+		// Create value input field
+		JPanel valueInputField2 = new JPanel();
+		JLabel valueInputLabel2 = new JLabel("Value(s):");
+		JTextField valueInputTextField2 = new JTextField();
+		valueInputTextField2.setEnabled(false);
+		valueInputTextField2.setPreferredSize(new Dimension(60, 25));
+		valueInputField2.add(valueInputLabel2);
+		valueInputField2.add(valueInputTextField2);		
+		
+		// Add value input field to panel
+		displayPanel.add(valueInputField2);
+		
+		// Add panels to control panel
+		controlPanel.add(inputPanel);
+		controlPanel.add(displayPanel);
+		
+		/*
+		 * Add panels to main window
+		 */
 		mainWindow.add(boardPanel, BorderLayout.NORTH);
 		mainWindow.add(controlPanel, BorderLayout.SOUTH);
 		
-		// Create menu bar
+		/*
+		 * Create menu bar and menus
+		 */
 		JMenuBar menuBar = new JMenuBar();
-		
-		// Create menus
+
+		// Create Game menu
 		JMenu gameMenu = new JMenu("Game");		
 		gameMenu.setMnemonic(KeyEvent.VK_G);
+		
+		// Create New item
 		JMenuItem newItem = new JMenuItem("New...", KeyEvent.VK_N);
 		newItem.setAccelerator(KeyStroke.getKeyStroke('N', Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 		
+		// Listen for New item click
 		newItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// Prompt user to open game file
+				// Prompt user for game file
 				final JFileChooser chooser = new JFileChooser();
 				FileNameExtensionFilter filter = new FileNameExtensionFilter("Text files (*.txt)", "txt");
 				chooser.setFileFilter(filter);
@@ -112,6 +210,7 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 						File file = chooser.getSelectedFile();
 						reader = new BufferedReader(new FileReader(file));
 						
+						// TODO Validate file content here if have time
 						for (int i = 0; i < 9; i++) {
 							if ((line = reader.readLine()) != null) {
 								String[] values = line.split(",");
@@ -145,13 +244,18 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 			}
 		});
 		
+		// Add New item to Game menu
 		gameMenu.add(newItem);
 		
+		// Create Help 
 		JMenu helpMenu = new JMenu("Help");
 		helpMenu.setMnemonic(KeyEvent.VK_H);
+		
+		// Create About item
 		JMenuItem aboutItem = new JMenuItem("About", KeyEvent.VK_A);
 		aboutItem.setAccelerator(KeyStroke.getKeyStroke('A', Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
 		
+		// Listen for About item click
 		aboutItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Display about information
@@ -160,16 +264,19 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 			}
 		});
 		
+		// Add About item to Help menu
 		helpMenu.add(aboutItem);		
 		
-		// Add menus to menu bar
+		// Add menu bars to menu
 		menuBar.add(gameMenu);
 		menuBar.add(helpMenu);
 		
 		// Add menu to main window
 		mainWindow.setJMenuBar(menuBar);
 		
-		// Display main window
+		/*
+		 * Display main window
+		 */
 		mainWindow.pack();
 		mainWindow.setVisible(true);
 	}
