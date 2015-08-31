@@ -13,6 +13,7 @@ local.properties
 .loadpath
 *.launch
 .classpath
+.recommenders/
 
 ## Emacs files
 *~
