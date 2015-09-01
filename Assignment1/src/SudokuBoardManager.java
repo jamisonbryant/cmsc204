@@ -205,13 +205,14 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 		JPanel valueButtonField2 = new JPanel();		
 		JButton valueFetchButton = new JButton("Fetch");
 		valueFetchButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int row = (int) rowInputSpinner1.getValue() - 1;
-				int column = (int) columnInputSpinner1.getValue() - 1;
+			public void actionPerformed(ActionEvent e) {								
+				int row = (int) rowInputSpinner2.getValue() - 1;
+				int column = (int) columnInputSpinner2.getValue() - 1;
 				int[] values = displayPossibleValues(row, column);
 				String text = "";
 				
 				for (int value : values) {
+					System.out.println(value);
 					text += Integer.toString(value) + ", ";
 				}
 				
