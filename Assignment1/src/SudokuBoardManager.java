@@ -53,7 +53,7 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 		/*
 		 * Create main window
 		 */
-		JFrame mainWindow = new JFrame("Sudoku Board Manager");
+		JFrame mainWindow = new JFrame("Sudoku");
 		mainWindow.setLocationRelativeTo(null);
 		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
