@@ -31,12 +31,22 @@ import javax.swing.KeyStroke;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+/**
+ * Sudoku Board Manager
+ *  
+ * A simple Sudoku application
+ *
+ * @author Jamison Bryant <jbryan46@montgomerycollege.edu> for CMSC 204 (R. Alexander) M/W 1PM-3PM
+ */
 public class SudokuBoardManager implements SudokuBoardManagerInterface 
 {
+	/**
+	 * 2D array of text fields for board cells
+	 */
 	private static JTextField[][] boardCells = new JTextField[9][9];
 	
 	/**
-	 * Initializes program and builds GUI
+	 * Initializes program
 	 * 
 	 * @param args Command-line arguments
 	 */
@@ -46,7 +56,7 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 	}
 
 	/**
-	 * 
+	 * Builds GUI and sets up action listeners
 	 */
 	public SudokuBoardManager()
 	{
@@ -258,6 +268,14 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 				
 				if (chooser.showOpenDialog(mainWindow) == JFileChooser.APPROVE_OPTION) {
 					newGame(chooser.getSelectedFile());
+					
+					// Reset input fields
+					rowInputSpinner1.setValue(1);
+					columnInputSpinner1.setValue(1);
+					valueInputTextField1.setText("");					
+					rowInputSpinner2.setValue(1);
+					columnInputSpinner2.setValue(1);
+					valueInputTextField2.setText("");
 				}
 			}
 		});
