@@ -15,6 +15,7 @@ import java.io.LineNumberReader;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -126,12 +127,39 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 		JPanel valueInputField1 = new JPanel();
 		JLabel valueInputLabel1 = new JLabel("Value:");
 		JTextField valueInputTextField1 = new JTextField();
+		
+		// Create value submit button
+		JButton valueSubmitButton = new JButton("Enter");
+		valueSubmitButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int row = (int) rowInputSpinner1.getValue() - 1;
+				int column = (int) columnInputSpinner1.getValue() - 1;
+				
+				try {
+					int value = Integer.parseInt(valueInputTextField1.getText());
+					
+					if (value >= 0 && (int) value <= 9) {
+						boardCells[row][column].setText(new Integer(value).toString());
+					} else {
+						throw new InputOutOfRangeException();
+					}
+				} catch (NumberFormatException nfe) {
+					JOptionPane.showMessageDialog(null, "Invalid number", "Error", 
+							JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
+		
 		valueInputTextField1.setPreferredSize(new Dimension(60, 25));
 		valueInputField1.add(valueInputLabel1);
 		valueInputField1.add(valueInputTextField1);
+		valueInputField1.add(valueSubmitButton);
 		
 		// Add value input field to panel
-		inputPanel.add(valueInputField1);
+		inputPanel.add(valueInputField1);	
+		
+		// Add submit button to panel
+		inputPanel.add(valueSubmitButton);
 		
 		// Create display panel
 		JPanel displayPanel = new JPanel();
@@ -170,7 +198,7 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 		valueInputField2.add(valueInputTextField2);		
 		
 		// Add value input field to panel
-		displayPanel.add(valueInputField2);
+		displayPanel.add(valueInputField2);	
 		
 		// Add panels to control panel
 		controlPanel.add(inputPanel);
