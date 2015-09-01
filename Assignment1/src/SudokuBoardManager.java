@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.LineNumberReader;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -201,20 +202,38 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 				final JFileChooser chooser = new JFileChooser();
 				FileNameExtensionFilter filter = new FileNameExtensionFilter("Text files (*.txt)", "txt");
 				chooser.setFileFilter(filter);
-				BufferedReader reader = null;
+				BufferedReader fileReader = null;
+				LineNumberReader lineReader = null;
 				String line = null;
 				
 				if (chooser.showOpenDialog(mainWindow) == JFileChooser.APPROVE_OPTION) {
 					// Read file into board
 					try {
 						File file = chooser.getSelectedFile();
-						reader = new BufferedReader(new FileReader(file));
+						fileReader = new BufferedReader(new FileReader(file));
 						
-						// TODO Validate file content here if have time
+						// Validate file content
+						lineReader = new LineNumberReader(new FileReader(file));
+						lineReader.skip(Long.MAX_VALUE);
+						
+						if (lineReader.getLineNumber() + 1 < 9) {
+							JOptionPane.showMessageDialog(null, "Invalid game file", "Fatal error", 
+									JOptionPane.ERROR_MESSAGE);
+							System.exit(1);
+						}
+						
+						// Apply file to board
 						for (int i = 0; i < 9; i++) {
-							if ((line = reader.readLine()) != null) {
+							if ((line = fileReader.readLine()) != null) {
 								String[] values = line.split(",");
 								
+								// Validate line content
+								if (values.length != 9) {
+									JOptionPane.showMessageDialog(null, "Invalid game file", "Fatal error", 
+											JOptionPane.ERROR_MESSAGE);
+									System.exit(1);
+								} 
+							
 								for (int j = 0; j < 9; j++) {
 									if (!values[j].equals("0")) {
 									    boardCells[i][j].setText(values[j]);	
@@ -234,9 +253,16 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 						System.exit(1);
 					} finally {
 						try {
-							// Close reader resource
-							if (reader != null) {
-								reader.close();
+							// Close file reader
+							if (fileReader != null) {
+								fileReader.close();
+							}
+						} catch (IOException ex) {}
+						
+						try {
+							// Close line number reader
+							if (lineReader != null) {
+								lineReader.close();
 							}
 						} catch (IOException ex) {}
 					}
