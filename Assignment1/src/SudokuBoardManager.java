@@ -28,6 +28,7 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class SudokuBoardManager implements SudokuBoardManagerInterface 
@@ -40,6 +41,14 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 	 * @param args Command-line arguments
 	 */
 	public static void main(String[] args)
+	{
+		new SudokuBoardManager();
+	}
+
+	/**
+	 * 
+	 */
+	public SudokuBoardManager()
 	{
 		/*
 		 * Create main window
@@ -134,19 +143,9 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 			public void actionPerformed(ActionEvent e) {
 				int row = (int) rowInputSpinner1.getValue() - 1;
 				int column = (int) columnInputSpinner1.getValue() - 1;
+				int value = Integer.parseInt(valueInputTextField1.getText());
 				
-				try {
-					int value = Integer.parseInt(valueInputTextField1.getText());
-					
-					if (value >= 0 && (int) value <= 9) {
-						boardCells[row][column].setText(new Integer(value).toString());
-					} else {
-						throw new InputOutOfRangeException();
-					}
-				} catch (NumberFormatException nfe) {
-					JOptionPane.showMessageDialog(null, "Invalid number", "Error", 
-							JOptionPane.ERROR_MESSAGE);
-				}
+				setValueAt(row, column, value);
 			}
 		});
 		
@@ -230,70 +229,9 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 				final JFileChooser chooser = new JFileChooser();
 				FileNameExtensionFilter filter = new FileNameExtensionFilter("Text files (*.txt)", "txt");
 				chooser.setFileFilter(filter);
-				BufferedReader fileReader = null;
-				LineNumberReader lineReader = null;
-				String line = null;
 				
 				if (chooser.showOpenDialog(mainWindow) == JFileChooser.APPROVE_OPTION) {
-					// Read file into board
-					try {
-						File file = chooser.getSelectedFile();
-						fileReader = new BufferedReader(new FileReader(file));
-						
-						// Validate file content
-						lineReader = new LineNumberReader(new FileReader(file));
-						lineReader.skip(Long.MAX_VALUE);
-						
-						if (lineReader.getLineNumber() + 1 < 9) {
-							JOptionPane.showMessageDialog(null, "Invalid game file", "Fatal error", 
-									JOptionPane.ERROR_MESSAGE);
-							System.exit(1);
-						}
-						
-						// Apply file to board
-						for (int i = 0; i < 9; i++) {
-							if ((line = fileReader.readLine()) != null) {
-								String[] values = line.split(",");
-								
-								// Validate line content
-								if (values.length != 9) {
-									JOptionPane.showMessageDialog(null, "Invalid game file", "Fatal error", 
-											JOptionPane.ERROR_MESSAGE);
-									System.exit(1);
-								} 
-							
-								for (int j = 0; j < 9; j++) {
-									if (!values[j].equals("0")) {
-									    boardCells[i][j].setText(values[j]);	
-									}									
-							    }
-							}																										
-						}
-					} catch (FileNotFoundException ex) {
-						// Display error message and exit
-						JOptionPane.showMessageDialog(null, "File not found", "Fatal error", JOptionPane.ERROR_MESSAGE);
-						ex.printStackTrace();
-						System.exit(1);
-					} catch (IOException ex) {
-						// Display error message and exit
-						JOptionPane.showMessageDialog(null, "I/O error", "Fatal error", JOptionPane.ERROR_MESSAGE);
-						ex.printStackTrace();
-						System.exit(1);
-					} finally {
-						try {
-							// Close file reader
-							if (fileReader != null) {
-								fileReader.close();
-							}
-						} catch (IOException ex) {}
-						
-						try {
-							// Close line number reader
-							if (lineReader != null) {
-								lineReader.close();
-							}
-						} catch (IOException ex) {}
-					}
+					newGame(chooser.getSelectedFile());
 				}
 			}
 		});
@@ -334,22 +272,36 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 		mainWindow.pack();
 		mainWindow.setVisible(true);
 	}
-
+	
 	/**
 	 * 
 	 */
 	public void setValueAt(int row, int column, int value)			
 	{
-		// TODO Auto-generated method stub
+		try {			
+			if (value >= 1 && (int) value <= 9) {
+				boardCells[row][column].setText(new Integer(value).toString());
+			} else {
+				throw new InputOutOfRangeException();
+			}
+		} catch (NumberFormatException nfe) {
+			JOptionPane.showMessageDialog(null, "Invalid number", "Error", 
+					JOptionPane.ERROR_MESSAGE);
+		}
 	}
 
 	/**
 	 * 
 	 */
 	public int getValueAt(int row, int column) 
-	{
-		// TODO Auto-generated method stub
-		return 0;
+	{		
+		String value = boardCells[row][column].getText();
+		
+		if (value.equals("")) {
+			return 0;
+		} else {
+			return Integer.parseInt(value);
+		}
 	}
 
 	/**
@@ -366,6 +318,67 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 	 */
 	public void newGame(File gameFile) 
 	{
-		// TODO Auto-generated method stub		
+		BufferedReader fileReader = null;
+		LineNumberReader lineReader = null;
+		String line = null;
+		
+		// Read file into board
+		try {
+			fileReader = new BufferedReader(new FileReader(gameFile));
+			
+			// Validate file content
+			lineReader = new LineNumberReader(new FileReader(gameFile));
+			lineReader.skip(Long.MAX_VALUE);
+			
+			if (lineReader.getLineNumber() + 1 < 9) {
+				JOptionPane.showMessageDialog(null, "Invalid game file", "Fatal error", 
+						JOptionPane.ERROR_MESSAGE);
+				System.exit(1);
+			}
+			
+			// Apply file to board
+			for (int i = 0; i < 9; i++) {
+				if ((line = fileReader.readLine()) != null) {
+					String[] values = line.split(",");
+					
+					// Validate line content
+					if (values.length != 9) {
+						JOptionPane.showMessageDialog(null, "Invalid game file", "Fatal error", 
+								JOptionPane.ERROR_MESSAGE);
+						System.exit(1);
+					} 
+				
+					for (int j = 0; j < 9; j++) {
+						if (!values[j].equals("0")) {
+						    boardCells[i][j].setText(values[j]);	
+						}									
+				    }
+				}																										
+			}
+		} catch (FileNotFoundException ex) {
+			// Display error message and exit
+			JOptionPane.showMessageDialog(null, "File not found", "Fatal error", JOptionPane.ERROR_MESSAGE);
+			ex.printStackTrace();
+			System.exit(1);
+		} catch (IOException ex) {
+			// Display error message and exit
+			JOptionPane.showMessageDialog(null, "I/O error", "Fatal error", JOptionPane.ERROR_MESSAGE);
+			ex.printStackTrace();
+			System.exit(1);
+		} finally {
+			try {
+				// Close file reader
+				if (fileReader != null) {
+					fileReader.close();
+				}
+			} catch (IOException ex) {}
+			
+			try {
+				// Close line number reader
+				if (lineReader != null) {
+					lineReader.close();
+				}
+			} catch (IOException ex) {}
+		}		
 	}
 }
