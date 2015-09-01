@@ -318,11 +318,12 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 	}
 	
 	/**
+	 * Checks if a given value is valid at a given row and column
 	 * 
-	 * @param row
-	 * @param column
-	 * @param value
-	 * @return
+	 * @param row    Row to check
+	 * @param column Column to check
+	 * @param value  Value to check
+	 * @return True if value valid at row and column, false otherwise
 	 */
 	public boolean isValueValidAt(int row, int column, int value) 
 	{
@@ -360,7 +361,12 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 	}
 	
 	/**
+	 * Sets the value of a cell at a given row and column to a given value
 	 * 
+	 * @param row    Row of cell to set
+	 * @param column Column of cell to set
+	 * @param value  Value to set cell to
+	 * @return void
 	 */
 	public void setValueAt(int row, int column, int value)			
 	{
@@ -381,7 +387,11 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 	}
 
 	/**
+	 * Returns the value of a cell at a given row and column
 	 * 
+	 * @param row    Row of cell to fetch
+	 * @param column Column of cell to fetch
+	 * @return Value of cell
 	 */
 	public int getValueAt(int row, int column) 
 	{		
@@ -395,7 +405,11 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 	}
 
 	/**
+	 * Returns an array of valid values for a cell at a given row and column
 	 * 
+	 * @param row    Row of cell to fetch
+	 * @param column Column of cell to fetch
+	 * @return Valid values for cell
 	 */
 	public int[] displayPossibleValues(int row, int column)
 	{
@@ -417,7 +431,10 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 	}
 
 	/**
+	 * Creates a new game by opening and importing a game file
 	 * 
+	 * @param gameFile Game file to import
+	 * @return void
 	 */
 	public void newGame(File gameFile) 
 	{
