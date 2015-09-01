@@ -280,6 +280,31 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 	{
 		try {			
 			if (value >= 1 && (int) value <= 9) {
+				String number = Integer.toString(value);
+				
+				// Check row validity
+				for (int i = 0; i < 9; i++) {
+					if (boardCells[i][column].getText().equals(number)) {
+						throw new ValueNotValidException("There is already a " + number + " in that column!");						
+					}
+				}
+				
+				// Check column validity
+				for (int i = 0; i < 9; i++) {
+					if (boardCells[row][i].getText().equals(number)) {
+						throw new ValueNotValidException("There is already a " + number + " in that row!");						
+					}
+				}	
+				
+				// Check box validity
+				for (int i = column; i < (column + 3); i++) {
+					for (int j = row; j < (row + 3); j++) {
+						if (boardCells[i][j].getText().equals(number)) {
+							throw new ValueNotValidException("There is already a " + number + " in that box!");						
+						}
+					}	
+				}
+				
 				boardCells[row][column].setText(new Integer(value).toString());
 			} else {
 				throw new InputOutOfRangeException();
