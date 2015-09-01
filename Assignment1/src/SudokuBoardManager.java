@@ -36,7 +36,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  *  
  * A simple Sudoku application
  *
- * @author Jamison Bryant <jbryan46@montgomerycollege.edu> for CMSC 204 (R. Alexander) M/W 1PM-3PM
+ * @author Jamison Bryant (jbryan46@montgomerycollege.edu) for CMSC 204 (R. Alexander) M/W 1PM-3PM
  */
 public class SudokuBoardManager implements SudokuBoardManagerInterface 
 {
@@ -366,7 +366,6 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 	 * @param row    Row of cell to set
 	 * @param column Column of cell to set
 	 * @param value  Value to set cell to
-	 * @return void
 	 */
 	public void setValueAt(int row, int column, int value)			
 	{
@@ -434,7 +433,6 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 	 * Creates a new game by opening and importing a game file
 	 * 
 	 * @param gameFile Game file to import
-	 * @return void
 	 */
 	public void newGame(File gameFile) 
 	{

@@ -2,6 +2,13 @@
 
 import javax.swing.JOptionPane;
 
+/**
+ * Input Out-of-Range Exception
+ *  
+ * An exception that can occur when a user enters an out-of-range (not 1-9) value for a cell
+ *
+ * @author Jamison Bryant (jbryan46@montgomerycollege.edu) for CMSC 204 (R. Alexander) M/W 1PM-3PM
+ */
 public class InputOutOfRangeException extends RuntimeException 
 {
 	/**
