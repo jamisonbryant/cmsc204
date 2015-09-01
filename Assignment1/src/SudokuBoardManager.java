@@ -12,6 +12,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.LineNumberReader;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -28,7 +29,6 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.SpinnerNumberModel;
-import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class SudokuBoardManager implements SudokuBoardManagerInterface 
@@ -135,11 +135,18 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 		// Create value input field
 		JPanel valueInputField1 = new JPanel();
 		JLabel valueInputLabel1 = new JLabel("Value:");
-		JTextField valueInputTextField1 = new JTextField();
+		JTextField valueInputTextField1 = new JTextField();			
+		valueInputTextField1.setPreferredSize(new Dimension(60, 25));
+		valueInputField1.add(valueInputLabel1);
+		valueInputField1.add(valueInputTextField1);
 		
-		// Create value submit button
-		JButton valueSubmitButton = new JButton("Enter");
-		valueSubmitButton.addActionListener(new ActionListener() {
+		// Add value input field to panel
+		inputPanel.add(valueInputField1);
+		
+		// Create value button field
+		JPanel valueButtonField1 = new JPanel();		
+		JButton valueEnterButton = new JButton("Enter");
+		valueEnterButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int row = (int) rowInputSpinner1.getValue() - 1;
 				int column = (int) columnInputSpinner1.getValue() - 1;
@@ -148,17 +155,11 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 				setValueAt(row, column, value);
 			}
 		});
+				
+		valueButtonField1.add(valueEnterButton);
 		
-		valueInputTextField1.setPreferredSize(new Dimension(60, 25));
-		valueInputField1.add(valueInputLabel1);
-		valueInputField1.add(valueInputTextField1);
-		valueInputField1.add(valueSubmitButton);
-		
-		// Add value input field to panel
-		inputPanel.add(valueInputField1);	
-		
-		// Add submit button to panel
-		inputPanel.add(valueSubmitButton);
+		// Add value button field to panel
+		inputPanel.add(valueButtonField1);
 		
 		// Create display panel
 		JPanel displayPanel = new JPanel();
@@ -187,17 +188,41 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 		// Add column input field to panel
 		displayPanel.add(columnInputField2);
 		
-		// Create value input field
+		// Create values input field
 		JPanel valueInputField2 = new JPanel();
 		JLabel valueInputLabel2 = new JLabel("Value(s):");
 		JTextField valueInputTextField2 = new JTextField();
+		
 		valueInputTextField2.setEnabled(false);
 		valueInputTextField2.setPreferredSize(new Dimension(60, 25));
 		valueInputField2.add(valueInputLabel2);
-		valueInputField2.add(valueInputTextField2);		
+		valueInputField2.add(valueInputTextField2);
 		
 		// Add value input field to panel
-		displayPanel.add(valueInputField2);	
+		displayPanel.add(valueInputField2);
+		
+		// Create value button field
+		JPanel valueButtonField2 = new JPanel();		
+		JButton valueFetchButton = new JButton("Fetch");
+		valueFetchButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int row = (int) rowInputSpinner1.getValue() - 1;
+				int column = (int) columnInputSpinner1.getValue() - 1;
+				int[] values = displayPossibleValues(row, column);
+				String text = "";
+				
+				for (int value : values) {
+					text += Integer.toString(value) + ", ";
+				}
+				
+				valueInputTextField2.setText(text.substring(0, (3 * values.length - 2)));
+			}
+		});
+				
+		valueButtonField2.add(valueFetchButton);	
+		
+		// Add value button field to panel
+		displayPanel.add(valueButtonField2);
 		
 		// Add panels to control panel
 		controlPanel.add(inputPanel);
@@ -275,37 +300,58 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 	
 	/**
 	 * 
+	 * @param row
+	 * @param column
+	 * @param value
+	 * @return
+	 */
+	public boolean isValueValidAt(int row, int column, int value) 
+	{
+		String number = Integer.toString(value);
+		
+		// Check cell validity
+		if (boardCells[row][column].getText().equals(number)) {
+			return true;
+		}
+		
+		// Check row validity
+		for (int i = 0; i < 9; i++) {
+			if (boardCells[i][column].getText().equals(number)) {
+				return false;
+			}
+		}
+		
+		// Check column validity
+		for (int i = 0; i < 9; i++) {
+			if (boardCells[row][i].getText().equals(number)) {
+				return false;
+			}
+		}	
+		
+		// Check box validity
+		for (int i = column; i < (column + 3); i++) {
+			for (int j = row; j < (row + 3); j++) {
+				if (boardCells[i][j].getText().equals(number)) {
+					return false;
+				}
+			}	
+		}
+		
+		return true;
+	}
+	
+	/**
+	 * 
 	 */
 	public void setValueAt(int row, int column, int value)			
 	{
 		try {			
 			if (value >= 1 && (int) value <= 9) {
-				String number = Integer.toString(value);
-				
-				// Check row validity
-				for (int i = 0; i < 9; i++) {
-					if (boardCells[i][column].getText().equals(number)) {
-						throw new ValueNotValidException("There is already a " + number + " in that column!");						
-					}
+				if (isValueValidAt(row, column, value)) {
+					boardCells[row][column].setText(new Integer(value).toString());	
+				} else {
+					throw new ValueNotValidException();
 				}
-				
-				// Check column validity
-				for (int i = 0; i < 9; i++) {
-					if (boardCells[row][i].getText().equals(number)) {
-						throw new ValueNotValidException("There is already a " + number + " in that row!");						
-					}
-				}	
-				
-				// Check box validity
-				for (int i = column; i < (column + 3); i++) {
-					for (int j = row; j < (row + 3); j++) {
-						if (boardCells[i][j].getText().equals(number)) {
-							throw new ValueNotValidException("There is already a " + number + " in that box!");						
-						}
-					}	
-				}
-				
-				boardCells[row][column].setText(new Integer(value).toString());
 			} else {
 				throw new InputOutOfRangeException();
 			}
@@ -334,8 +380,21 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 	 */
 	public int[] displayPossibleValues(int row, int column)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Integer> values = new ArrayList<Integer>();
+		
+		for (int i = 1; i < 10; i++) {
+			if (isValueValidAt(row, column, i)) {
+				values.add(i);
+			}
+		}
+		
+		int[] numbers = new int[values.size()];
+		
+		for (int i = 0; i < values.size(); i++) {
+			numbers[i] = values.get(i);
+		}
+		
+		return numbers;
 	}
 
 	/**
