@@ -1,5 +1,9 @@
+package edu.montgomerycollege.cmsc204.ralexander;
 import java.io.File;
 import java.io.FileNotFoundException;
+
+import edu.montgomerycollege.cmsc204.jbryant.InputOutOfRangeException;
+import edu.montgomerycollege.cmsc204.jbryant.ValueNotValidException;
 
 /**
  * An interface to manage a Sudoku game.  

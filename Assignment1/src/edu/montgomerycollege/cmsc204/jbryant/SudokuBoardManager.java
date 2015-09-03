@@ -1,3 +1,4 @@
+package edu.montgomerycollege.cmsc204.jbryant;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -31,6 +32,8 @@ import javax.swing.KeyStroke;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import edu.montgomerycollege.cmsc204.ralexander.SudokuBoardManagerInterface;
+
 /**
  * Sudoku Board Manager
  *  
@@ -41,9 +44,14 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class SudokuBoardManager implements SudokuBoardManagerInterface 
 {
 	/**
-	 * 2D array of text fields for board cells
+	 * 2D array of text fields for board fields
 	 */
-	private static JTextField[][] boardCells = new JTextField[9][9];
+	private static JTextField[][] boardFields = new JTextField[9][9];
+	
+	/**
+	 * 2D array of integers for board values
+	 */
+	private static int[][] boardValues = new int[9][9];
 	
 	/**
 	 * Initializes program
@@ -101,7 +109,7 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 				}
 
 				// Add cell to row
-				boardCells[i][j] = cellTextField;
+				boardFields[i][j] = cellTextField;
 				rowPanel.add(cellTextField);
 			}
 			
@@ -162,7 +170,13 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 				int column = (int) columnInputSpinner1.getValue() - 1;
 				int value = Integer.parseInt(valueInputTextField1.getText());
 				
-				setValueAt(row, column, value);
+				try {
+				    setValueAt(row, column, value);
+				} catch (ValueNotValidException vnve) {
+				    vnve.printStackTrace();
+				} catch (InputOutOfRangeException ioore) {
+				    ioore.printStackTrace();
+				}
 			}
 		});
 				
@@ -283,7 +297,21 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 		// Add New item to Game menu
 		gameMenu.add(newItem);
 		
-		// Create Help 
+		// Create Exit item
+		JMenuItem exitItem = new JMenuItem("Exit", KeyEvent.VK_W);
+		exitItem.setAccelerator(KeyStroke.getKeyStroke('W', Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+		
+		// Listen for Exit item click
+		exitItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		
+		// Add Exit item to Game menu
+		gameMenu.add(exitItem);
+		
+		// Create Help menu 
 		JMenu helpMenu = new JMenu("Help");
 		helpMenu.setMnemonic(KeyEvent.VK_H);
 		
@@ -327,34 +355,32 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 	 */
 	public boolean isValueValidAt(int row, int column, int value) 
 	{
-		String number = Integer.toString(value);
-		
 		// Check cell validity
-		if (boardCells[row][column].getText().equals(number)) {
+		if (boardValues[row][column] == value) {
 			return true;
 		}
 		
 		// Check row validity
 		for (int i = 0; i < 9; i++) {
-			if (boardCells[i][column].getText().equals(number)) {
+			if (boardValues[i][column] == value) {
 				return false;
 			}
 		}
 		
 		// Check column validity
 		for (int i = 0; i < 9; i++) {
-			if (boardCells[row][i].getText().equals(number)) {
+			if (boardValues[row][i] == value) {
 				return false;
 			}
 		}	
 		
-		// Check box validity
-		for (int i = column; i < (column + 3); i++) {
-			for (int j = row; j < (row + 3); j++) {
-				if (boardCells[i][j].getText().equals(number)) {
-					return false;
-				}
-			}	
+		// Check box validity	
+		for (int i = 2 - (row % 3); i < 2; i++) {
+		    for (int j = 2 - (column % 3); j < 2; j++) {
+		        if (boardValues[i][j] == value) {
+		            return false;
+		        }
+		    }
 		}
 		
 		return true;
@@ -366,13 +392,16 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 	 * @param row    Row of cell to set
 	 * @param column Column of cell to set
 	 * @param value  Value to set cell to
+	 * @throws InputOutOfRangeException If given value is not 1-9
+	 * @throws ValueNotValidException If given value is invalid according to game rules
 	 */
-	public void setValueAt(int row, int column, int value)			
+	public void setValueAt(int row, int column, int value) throws InputOutOfRangeException, ValueNotValidException			
 	{
 		try {			
-			if (value >= 1 && (int) value <= 9) {
+			if (value >= 1 && value <= 9) {
 				if (isValueValidAt(row, column, value)) {
-					boardCells[row][column].setText(new Integer(value).toString());	
+				    boardValues[row][column] = value;
+					boardFields[row][column].setText(new Integer(value).toString());	
 				} else {
 					throw new ValueNotValidException();
 				}
@@ -394,13 +423,7 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 	 */
 	public int getValueAt(int row, int column) 
 	{		
-		String value = boardCells[row][column].getText();
-		
-		if (value.equals("")) {
-			return 0;
-		} else {
-			return Integer.parseInt(value);
-		}
+	    return boardValues[row][column];
 	}
 
 	/**
@@ -468,7 +491,8 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 				
 					for (int j = 0; j < 9; j++) {
 						if (!values[j].equals("0")) {
-						    boardCells[i][j].setText(values[j]);	
+						    boardValues[i][j] = Integer.parseInt(values[j]);
+						    boardFields[i][j].setText(values[j]);	
 						}									
 				    }
 				}																										
@@ -498,5 +522,19 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 				}
 			} catch (IOException ex) {}
 		}		
+	}
+	
+	@Override
+	public String toString()
+	{
+	    String string = "";
+	    
+	    for (int i = 0; i < 9; i++) {
+	        for (int j = 0; j < 9; j++) {
+	            string += Integer.toString(boardValues[i][j]) + ",";
+	        }
+	    }
+	    
+	    return string.substring(0, string.length() - 1);
 	}
 }

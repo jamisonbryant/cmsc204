@@ -1,4 +1,4 @@
-
+package edu.montgomerycollege.cmsc204.jbryant;
 
 import javax.swing.JOptionPane;
 
@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
  *
  * @author Jamison Bryant (jbryan46@montgomerycollege.edu) for CMSC 204 (R. Alexander) M/W 1PM-3PM
  */
-public class ValueNotValidException extends RuntimeException 
+public class ValueNotValidException extends Exception 
 {
 	/**
 	 * Displays a generic error message
