@@ -71,5 +71,4 @@ public interface SudokuBoardManagerInterface {
 	 * 
 	 */
 	public void newGame(File gameFile);
-
 }

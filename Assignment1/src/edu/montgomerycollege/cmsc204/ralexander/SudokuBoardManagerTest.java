@@ -4,7 +4,10 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -42,6 +45,13 @@ public class SudokuBoardManagerTest
 
         myBoard = new SudokuBoardManager();
         myBoard.newGame(newFile.getAbsoluteFile());
+
+        try {
+            Files.deleteIfExists(FileSystems.getDefault().getPath(newFile.getAbsolutePath()));
+        } catch (IOException e) {
+            System.err.println("Unable to delete test file. Manual deletion required.");
+            e.printStackTrace();
+        }
     }
 
     @Test
@@ -79,10 +89,10 @@ public class SudokuBoardManagerTest
     public void testSetValueAtSTUDENT()
     {
         try {
-            assertEquals(myBoard.getValueAt(8, 1), 0);
-            myBoard.setValueAt(8, 1, 1);
-            assertEquals(myBoard.getValueAt(8, 1), 1);
-            myBoard.setValueAt(8, 1, 3);
+            assertEquals(myBoard.getValueAt(4, 5), 0);
+            myBoard.setValueAt(4, 5, 1);
+            assertEquals(myBoard.getValueAt(4, 5), 1);
+            myBoard.setValueAt(4, 5, 2);
             fail("This statement should have thrown a ValueNotValidException");
         } catch (InputOutOfRangeException e) {
             e.printStackTrace();
@@ -165,25 +175,19 @@ public class SudokuBoardManagerTest
         
         try {
             results = myBoard.displayPossibleValues(5, 8);
-            assertEquals(results[0], 2);
-            assertEquals(results[1], 3);
-            assertEquals(results[2], 4);
-            assertEquals(results[3], 8);
-            assertEquals(results[3], 9);
+            assertEquals(results[0], 3);
+            assertEquals(results[1], 8);
+            assertEquals(results[2], 9);
         } catch (Exception e) {
             fail("This statement should not have thrown an Exception");
         }
 
         try {
             results = myBoard.displayPossibleValues(8, 5);
-            assertEquals(results[0], 1);
-            assertEquals(results[1], 3);
-            assertEquals(results[2], 4);
-            assertEquals(results[2], 5);
-            assertEquals(results[2], 6);
-            assertEquals(results[2], 7);
-            assertEquals(results[3], 8);
-            assertEquals(results[2], 9);
+            assertEquals(results[0], 3);
+            assertEquals(results[1], 6);
+            assertEquals(results[2], 8);
+            assertEquals(results[3], 9);
         } catch (Exception e) {
             fail("This statement should not have thrown an Exception");
         }
