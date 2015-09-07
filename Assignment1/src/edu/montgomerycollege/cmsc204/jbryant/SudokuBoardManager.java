@@ -236,7 +236,6 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 				String text = "";
 				
 				for (int value : values) {
-					System.out.println(value);
 					text += Integer.toString(value) + ", ";
 				}
 				
@@ -400,8 +399,8 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 		try {			
 			if (value >= 1 && value <= 9) {
 				if (isValueValidAt(row, column, value)) {
-				    boardValues[row][column] = value;
-					boardFields[row][column].setText(new Integer(value).toString());	
+				    boardValues[row - 1][column - 1] = value;
+					boardFields[row - 1][column - 1].setText(new Integer(value).toString());	
 				} else {
 					throw new ValueNotValidException();
 				}
@@ -423,7 +422,7 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 	 */
 	public int getValueAt(int row, int column) 
 	{		
-	    return boardValues[row][column];
+	    return boardValues[row - 1][column - 1];
 	}
 
 	/**
@@ -491,12 +490,20 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 				
 					for (int j = 0; j < 9; j++) {
 						if (!values[j].equals("0")) {
-						    boardValues[i][j] = Integer.parseInt(values[j]);
-						    boardFields[i][j].setText(values[j]);	
-						}									
+//						    boardValues[i][j] = Integer.parseInt(values[j]);
+//						    boardFields[i][j].setText(values[j]);	
+							
+							try {
+								this.setValueAt(i + 1, j + 1, Integer.parseInt(values[j]));
+							} catch (NumberFormatException | InputOutOfRangeException | ValueNotValidException e) {
+								e.printStackTrace();
+							}
+						}
 				    }
 				}																										
 			}
+			
+			System.out.println(this.toString());
 		} catch (FileNotFoundException ex) {
 			// Display error message and exit
 			JOptionPane.showMessageDialog(null, "File not found", "Fatal error", JOptionPane.ERROR_MESSAGE);
