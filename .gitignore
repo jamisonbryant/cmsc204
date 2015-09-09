@@ -24,3 +24,7 @@ local.properties
 auto-save-list
 tramp
 .\#*
+
+## IntelliJ files
+.idea/
+*.iml

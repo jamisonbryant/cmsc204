@@ -1,11 +1,13 @@
 package edu.montgomerycollege.cmsc204.ralexander;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -38,12 +40,18 @@ public class SudokuBoardManagerTest
             output.println("3,0,0,5,0,7,0,0,4");
             output.close();
         } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
         myBoard = new SudokuBoardManager();
         myBoard.newGame(newFile.getAbsoluteFile());
+
+        try {
+            Files.deleteIfExists(FileSystems.getDefault().getPath(newFile.getAbsolutePath()));
+        } catch (IOException e) {
+            System.err.println("Unable to delete test file. Manual deletion required.");
+            e.printStackTrace();
+        }
     }
 
     @Test
@@ -56,14 +64,11 @@ public class SudokuBoardManagerTest
             myBoard.setValueAt(2, 2, 8);
             fail("This statement should have thrown a ValueNotValidException");
         } catch (InputOutOfRangeException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             fail("This statement should have thrown a ValueNotValidException");
         } catch (ValueNotValidException e) {
-            // TODO Auto-generated catch block
             System.out.println("This is an invalid value");
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             fail("This statement should have thrown a ValueNotValidException");
         }
@@ -73,12 +78,9 @@ public class SudokuBoardManagerTest
             fail("This statement should have thrown a InputOutOfRangeException");
         } catch (InputOutOfRangeException e) {
             System.out.println("This is an invalid row");
-            // TODO Auto-generated catch block
         } catch (ValueNotValidException e) {
-            // TODO Auto-generated catch block
             fail("This statement should have thrown a InputOutOfRangeException");
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             fail("This statement should have thrown a InputOutOfRangeException");
         }
     }
@@ -86,7 +88,32 @@ public class SudokuBoardManagerTest
     @Test
     public void testSetValueAtSTUDENT()
     {
-        fail("Student test not implemented yet");
+        try {
+            assertEquals(myBoard.getValueAt(4, 5), 0);
+            myBoard.setValueAt(4, 5, 1);
+            assertEquals(myBoard.getValueAt(4, 5), 1);
+            myBoard.setValueAt(4, 5, 2);
+            fail("This statement should have thrown a ValueNotValidException");
+        } catch (InputOutOfRangeException e) {
+            e.printStackTrace();
+            fail("This statement should have thrown a ValueNotValidException");
+        } catch (ValueNotValidException e) {
+            System.out.println("This is an invalid value");
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail("This statement should have thrown a ValueNotValidException");
+        }
+
+        try {
+            myBoard.setValueAt(2, 8, 10);
+            fail("This statement should have thrown a InputOutOfRangeException");
+        } catch (InputOutOfRangeException e) {
+            System.out.println("This is an invalid row");
+        } catch (ValueNotValidException e) {
+            fail("This statement should have thrown a InputOutOfRangeException");
+        } catch (Exception e) {
+            fail("This statement should have thrown a InputOutOfRangeException");
+        }
     }
 
     @Test
@@ -98,10 +125,8 @@ public class SudokuBoardManagerTest
             myBoard.getValueAt(5, 10);
             fail("This statement should have thrown an InputOutOfRangeException");
         } catch (InputOutOfRangeException e) {
-            // TODO Auto-generated catch block
             System.out.println("This is an invalid column value");
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             fail("This statement should have thrown an InputOutOfRangeException");
         }
     }
@@ -121,6 +146,7 @@ public class SudokuBoardManagerTest
     public void testDisplayPossibleValues()
     {
         int[] results;
+        
         try {
             results = myBoard.displayPossibleValues(2, 2);
             assertEquals(results[0], 1);
@@ -128,7 +154,6 @@ public class SudokuBoardManagerTest
             assertEquals(results[2], 6);
             assertEquals(results[3], 9);
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             fail("This statement should not have thrown an Exception");
         }
 
@@ -139,7 +164,6 @@ public class SudokuBoardManagerTest
             assertEquals(results[2], 7);
             assertEquals(results[3], 8);
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             fail("This statement should not have thrown an Exception");
         }
     }
@@ -147,7 +171,26 @@ public class SudokuBoardManagerTest
     @Test
     public void testDisplayPossibleValuesSTUDENT()
     {
-        fail("Student test not implemented yet");
+        int[] results;
+        
+        try {
+            results = myBoard.displayPossibleValues(5, 8);
+            assertEquals(results[0], 3);
+            assertEquals(results[1], 8);
+            assertEquals(results[2], 9);
+        } catch (Exception e) {
+            fail("This statement should not have thrown an Exception");
+        }
+
+        try {
+            results = myBoard.displayPossibleValues(8, 5);
+            assertEquals(results[0], 3);
+            assertEquals(results[1], 6);
+            assertEquals(results[2], 8);
+            assertEquals(results[3], 9);
+        } catch (Exception e) {
+            fail("This statement should not have thrown an Exception");
+        }
     }
 
 }
