@@ -171,11 +171,9 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 				int value = Integer.parseInt(valueInputTextField1.getText());
 				
 				try {
-				    setValueAt(row, column, value);
-				} catch (ValueNotValidException vnve) {
-				    vnve.printStackTrace();
-				} catch (InputOutOfRangeException ioore) {
-				    ioore.printStackTrace();
+				    setValueAt(row + 1, column + 1, value);
+				} catch (ValueNotValidException | InputOutOfRangeException ex) {
+				    ex.printStackTrace();
 				}
 			}
 		});
@@ -232,11 +230,10 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 			public void actionPerformed(ActionEvent e) {								
 				int row = (int) rowInputSpinner2.getValue() - 1;
 				int column = (int) columnInputSpinner2.getValue() - 1;
-				int[] values = displayPossibleValues(row, column);
+				int[] values = displayPossibleValues(row + 1, column + 1);
 				String text = "";
 				
 				for (int value : values) {
-					System.out.println(value);
 					text += Integer.toString(value) + ", ";
 				}
 				
@@ -355,6 +352,9 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 	 */
 	public boolean isValueValidAt(int row, int column, int value) 
 	{
+		row = row - 1;
+        column = column - 1;
+
 		// Check cell validity
 		if (boardValues[row][column] == value) {
 			return true;
@@ -374,9 +374,42 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 			}
 		}	
 		
-		// Check box validity	
-		for (int i = 2 - (row % 3); i < 2; i++) {
-		    for (int j = 2 - (column % 3); j < 2; j++) {
+		// Check box validity
+        int startX = row - (row % 3);
+        int startY = column - (column % 3);
+
+		for (int i = startX; i <= startX + 2; i++) {
+		    for (int j = startY; j <= startY + 2; j++) {
+		    /*
+             * Note: This massive block of code is not commented out because it does not work; rather, because it is an
+             * extremely useful debugging tool for visualizing which cells are being checked by the program.
+             *
+             * The logic below is a text-based alternative to updating the board itself, because the board cannot be
+             * updated until the loop is complete; it resides in the same thread as the loop, making any visual updates
+             * useless.
+             */
+//                System.out.println("Checking " + value + " for (" + row + ", " + column + ") at (" + i + ", " + j + ")");
+//                System.out.println("-------------------------------------");
+//                String line = "";
+//
+//                for (int a = 0; a < 9; a++) {
+//                    System.out.print("|");
+//
+//                    for (int b = 0; b < 9; b++) {
+//                        if (a == i && b == j) {
+//                            line += " * |";
+//                        } else {
+//                            line += "   |";
+//                        }
+//                    }
+//
+//                    System.out.println(line);
+//                    System.out.println("-------------------------------------");
+//                    line = "";
+//                }
+//
+//                System.out.println();
+//
 		        if (boardValues[i][j] == value) {
 		            return false;
 		        }
@@ -390,7 +423,7 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 	 * Sets the value of a cell at a given row and column to a given value
 	 * 
 	 * @param row    Row of cell to set
-	 * @param column Column of cell to set
+	 * @param column Column of cell to set+
 	 * @param value  Value to set cell to
 	 * @throws InputOutOfRangeException If given value is not 1-9
 	 * @throws ValueNotValidException If given value is invalid according to game rules
@@ -400,8 +433,8 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 		try {			
 			if (value >= 1 && value <= 9) {
 				if (isValueValidAt(row, column, value)) {
-				    boardValues[row][column] = value;
-					boardFields[row][column].setText(new Integer(value).toString());	
+				    boardValues[row - 1][column - 1] = value;
+					boardFields[row - 1][column - 1].setText(new Integer(value).toString());	
 				} else {
 					throw new ValueNotValidException();
 				}
@@ -419,11 +452,16 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 	 * 
 	 * @param row    Row of cell to fetch
 	 * @param column Column of cell to fetch
+     * @throws InputOutOfRangeException If either row or column are out of range
 	 * @return Value of cell
 	 */
-	public int getValueAt(int row, int column) 
-	{		
-	    return boardValues[row][column];
+	public int getValueAt(int row, int column) throws InputOutOfRangeException
+	{
+        if ((row >= 1 && row <= 9) && (column >= 1 && column <= 9)) {
+            return boardValues[row - 1][column - 1];
+        } else {
+            throw new InputOutOfRangeException();
+        }
 	}
 
 	/**
@@ -478,7 +516,7 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 			}
 			
 			// Apply file to board
-			for (int i = 0; i < 9; i++) {
+			for (int i = 1; i < 10; i++) {
 				if ((line = fileReader.readLine()) != null) {
 					String[] values = line.split(",");
 					
@@ -489,11 +527,14 @@ public class SudokuBoardManager implements SudokuBoardManagerInterface
 						System.exit(1);
 					} 
 				
-					for (int j = 0; j < 9; j++) {
-						if (!values[j].equals("0")) {
-						    boardValues[i][j] = Integer.parseInt(values[j]);
-						    boardFields[i][j].setText(values[j]);	
-						}									
+					for (int j = 1; j < 10; j++) {
+						if (!values[j - 1].equals("0")) {
+							try {
+								this.setValueAt(i, j, Integer.parseInt(values[j - 1]));
+							} catch (NumberFormatException | InputOutOfRangeException | ValueNotValidException e) {
+								e.printStackTrace();
+							}
+						}
 				    }
 				}																										
 			}
