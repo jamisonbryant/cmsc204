@@ -6,155 +6,211 @@ import java.util.LinkedList;
 
 public class BasicLinkedList<T>
 {
-    /**
-     * Linked list that stores elements of basic linked list
-     */
-    private LinkedList<T> list;
+    private LinkedList<Node> nodeList;
+    private Node<T> firstNode;
+    private Node<T> lastNode;
+    private int listSize;
+    private ListIterator iterator;
     
-    /**
-     * Iterator of basic linked list
-     */
-    private Iterator<T> iterator;
-    
-    /**
-     * Index of current element of basic linked list
-     */
-    private int index;
-    
-    public BasicLinkedList()
+    public BasicLinkedList() 
     {
-        // Initialize list
-        list = null;
+        // Initialize nodes
+        firstNode = null;
+        lastNode = null;
+        
+        // Initialize node list size
+        listSize = 0;
         
         // Initialize iterator
-        iterator = new BasicIterator();
-        
-        // Initialize index
-        index = 0;
+        iterator = new ListIterator();
     }
     
     /**
-     * Adds an element to the end of the basic linked list
-     */    
-    public BasicLinkedList<T> addToEnd(T data)
-    {
-        // Add element to end of list
-        list.add(data);        
-        
-        // Return object reference
-        return this;
-        
-    }
-    
-    /**
-     * Adds an element to the beginning of the basic linked list
-     * 
-     * @param data Element to add
-     * @return Reference to the list
-     */
-    public BasicLinkedList<T> addToFront(T data)
-    {
-        // Add element to beginning of list
-        list.add(0, data);
-        
-        // Return object reference
-        return this;
-    }
-    
-    /**
-     * Returns the first element of the basic linked list
-     * 
-     * @return First element
-     */
-    public T getFirst()
-    {
-        return list.getFirst();
-    }
-    
-    /**
-     * Returns the last element of the basic linked list
-     * 
-     * @return Last element
-     */
-    public T getLast()
-    {
-        return list.getLast();
-    }
-    
-    /**
-     * Returns the size of the basic linked list
+     * Returns node list size
      * 
      * @return List size
      */
     public int getSize()
     {
-        return list.size();
+        return listSize;
     }
     
     /**
-     * Returns the iterator object of the basic linked list
+     * Adds node to end of node list
      * 
-     * @return
+     * @param data Node to add
+     * @return Current node list
      */
-    public Iterator<T> iterator()
+    public BasicLinkedList<T> addToEnd(T data) 
     {
+        // Create new node
+        Node<T> newNode = new Node<T>(data);
+        
+        // Add node to end of list
+        nodeList.add(newNode);
+        
+        // Increment list size variable
+        listSize++;
+        
+        // Update last node variable
+        lastNode = newNode;
+        
+        // Return current node list
+        return this;
+    }
+    
+    /**
+     * Adds node to front of node list
+     * 
+     * @param data Node to add
+     * @return Current node list
+     */
+    public BasicLinkedList<T> addToFront(T data) 
+    {
+        // Create new node
+        Node<T> newNode = new Node<T>(data);
+        
+        // Add node to front of list
+        nodeList.add(0, newNode);
+        
+        // Increment list size variable
+        listSize++;
+        
+        // Update first node variable
+        firstNode = newNode;
+        
+        // Return current node list
+        return this;
+    }
+    
+    public T getFirst()
+    {
+        // Check if node list is not empty
+        if (listSize > 0) {
+            // Get first node in list
+            Node<T> firstNode = nodeList.getFirst();
+            
+            // Return node data
+            return (T) firstNode.nodeData;
+        } else {
+            // Return null
+            return null;
+        }       
+    }
+    
+    public T retrieveFirstElement()
+    {
+        // Check if node list is not empty
+        if (listSize > 0) {
+            // Get first node in list
+            Node<T> firstNode = nodeList.getFirst();
+            
+            // Remove node from list
+            nodeList.removeFirst();
+            
+            // Decrement list size variable
+            listSize--;
+            
+            // Return node data
+            return (T) firstNode.nodeData;                      
+        } else {
+            // Return null
+            return null;
+        }        
+    }
+    
+    public T getLast()
+    {
+        // Check if node list is not empty
+        if (listSize > 0) {
+            // Get last node in list
+            Node<T> lastNode = nodeList.getLast();
+            
+            // Return node data
+            return (T) lastNode.nodeData;
+        } else {
+            // Return null
+            return null;
+        }       
+    }
+    
+    public T retrieveLastElement()
+    {
+        // Check if node list is not empty
+        if (listSize > 0) {
+            // Get last node in list
+            Node<T> lastNode = nodeList.getLast();
+            
+            // Remove node from list
+            nodeList.removeLast();
+            
+            // Decrement list size variable
+            listSize--;
+            
+            // Return node data
+            return (T) lastNode.nodeData;                      
+        } else {
+            // Return null
+            return null;
+        }        
+    }
+    
+    public ArrayList<T> toArrayList()
+    {
+        // Initialize node array list
+        ArrayList<T> newList = new ArrayList<T>();
+        
+        // Import node list into array list
+        for (Node<T> currentNode : nodeList) {
+            newList.add(currentNode.nodeData);
+        }
+        
+        // Return array list
+        return newList;
+    }
+    
+    public ListIterator iterator()
+    {
+        // Return node list iterator
         return iterator;
     }
     
-    /**
-     * Removes and returns the first element of the basic linked list
-     * 
-     * @return First element before removal
-     */
-    public T retrieveFirstElement()
+    public class ListIterator implements Iterator
     {
-        // Get and remove first element
-        T element = list.getFirst();
-        list.remove(0);
-        
-        // Return first element
-        return element;
-    }
-    
-    /**
-     * Removes and returns the last element of the basic linked list
-     * 
-     * @return Last element before removal
-     */
-    public T retrieveLastElement()
-    {
-        // Get and remove last element
-        T element = list.getLast();
-        list.remove(0);
-        
-        // Return last element
-        return element;
-    }
-    
-    /**
-     * Converts the basic linked list to an ArrayList
-     * 
-     * @return Converted basic linked list
-     */
-    public ArrayList<T> toArrayList()
-    {
-        return new ArrayList<T>(list);
-    }
-    
-    class BasicIterator implements Iterator<T> 
-    {
-
         @Override
         public boolean hasNext()
         {
-            return index == list.size() - 1;
+            // TODO: Auto-generated method stub
+            return false;
         }
 
         @Override
-        public T next()
-        {            
-            return list.get(++index);
+        public Object next()
+        {
+            // TODO: Auto-generated method stub
+            return null;
+        }      
+    }
+    
+    public class Node<T>
+    {
+        private T nodeData;
+        private Node<T> nextNode;
+        
+        public Node()
+        {
+            // Initialize node data
+            nodeData = null;
+            
+            // Initialize next node
+            nextNode = null;
         }
         
+        // TODO: Specify next node as parameter
+        public Node(T data)
+        {
+            // Initialize node data
+            nodeData = data;
+        }
     }
 }
