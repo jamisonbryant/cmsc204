@@ -4,13 +4,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public class BasicLinkedList<T>
+public class BasicLinkedList<T> extends LinkedList<T>
 {
-    private LinkedList<Node> nodeList;
     private Node<T> firstNode;
     private Node<T> lastNode;
     private int listSize;
-    private ListIterator iterator;
     
     public BasicLinkedList() 
     {
@@ -20,9 +18,6 @@ public class BasicLinkedList<T>
         
         // Initialize node list size
         listSize = 0;
-        
-        // Initialize iterator
-        iterator = new ListIterator();
     }
     
     /**
@@ -47,7 +42,7 @@ public class BasicLinkedList<T>
         Node<T> newNode = new Node<T>(data);
         
         // Add node to end of list
-        nodeList.add(newNode);
+        this.add(data);
         
         // Increment list size variable
         listSize++;
@@ -71,7 +66,7 @@ public class BasicLinkedList<T>
         Node<T> newNode = new Node<T>(data);
         
         // Add node to front of list
-        nodeList.add(0, newNode);
+        this.add(0, data);
         
         // Increment list size variable
         listSize++;
@@ -88,10 +83,10 @@ public class BasicLinkedList<T>
         // Check if node list is not empty
         if (listSize > 0) {
             // Get first node in list
-            Node<T> firstNode = nodeList.getFirst();
+            T firstNode = get(0);
             
             // Return node data
-            return (T) firstNode.nodeData;
+            return firstNode;
         } else {
             // Return null
             return null;
@@ -103,16 +98,16 @@ public class BasicLinkedList<T>
         // Check if node list is not empty
         if (listSize > 0) {
             // Get first node in list
-            Node<T> firstNode = nodeList.getFirst();
+            T firstNode = get(0);
             
             // Remove node from list
-            nodeList.removeFirst();
+            remove(0);
             
             // Decrement list size variable
             listSize--;
             
             // Return node data
-            return (T) firstNode.nodeData;                      
+            return firstNode;
         } else {
             // Return null
             return null;
@@ -124,10 +119,10 @@ public class BasicLinkedList<T>
         // Check if node list is not empty
         if (listSize > 0) {
             // Get last node in list
-            Node<T> lastNode = nodeList.getLast();
+            T lastNode = get(listSize - 1);
             
             // Return node data
-            return (T) lastNode.nodeData;
+            return lastNode;
         } else {
             // Return null
             return null;
@@ -139,16 +134,16 @@ public class BasicLinkedList<T>
         // Check if node list is not empty
         if (listSize > 0) {
             // Get last node in list
-            Node<T> lastNode = nodeList.getLast();
+            T lastNode = get(listSize - 1);
             
             // Remove node from list
-            nodeList.removeLast();
+            remove(listSize - 1);
             
             // Decrement list size variable
             listSize--;
             
             // Return node data
-            return (T) lastNode.nodeData;                      
+            return lastNode;
         } else {
             // Return null
             return null;
@@ -160,9 +155,12 @@ public class BasicLinkedList<T>
         // Initialize node array list
         ArrayList<T> newList = new ArrayList<T>();
         
-        // Import node list into array list
-        for (Node<T> currentNode : nodeList) {
-            newList.add(currentNode.nodeData);
+        // Initialize list iterator
+        ListIterator iterator = iterator();              
+        
+        // Import node list into array list        
+        while (iterator.hasNext()) {
+            newList.add((T) iterator.next());
         }
         
         // Return array list
@@ -171,8 +169,11 @@ public class BasicLinkedList<T>
     
     public ListIterator iterator()
     {
+        // Create new list iterator
+        ListIterator newIterator = new ListIterator();
+        
         // Return node list iterator
-        return iterator;
+        return newIterator;
     }
     
     public class ListIterator implements Iterator
