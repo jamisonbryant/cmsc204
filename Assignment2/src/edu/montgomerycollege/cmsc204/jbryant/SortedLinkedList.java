@@ -5,14 +5,15 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- * Sorted Linked List
- *
- * Description goes here.
+ * A linked list whose members are added with automatic sorting.
  *
  * @author Jamison Bryant (jbryan46@montgomerycollege.edu) for CMSC 204 (R. Alexander) M/W 1PM-3PM
  */
 public class SortedLinkedList<T> extends BasicLinkedList<T>
 {
+    /**
+     * Node comparator
+     */
     private Comparator<T> comparator;
 
     public SortedLinkedList(Comparator<T> c)

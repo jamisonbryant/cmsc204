@@ -2,10 +2,26 @@ package edu.montgomerycollege.cmsc204.jbryant;
 
 import java.util.*;
 
+/**
+ * A linked list whose members are added without automatic sorting.
+ *
+ * @author Jamison Bryant (jbryan46@montgomerycollege.edu) for CMSC 204 (R. Alexander) M/W 1PM-3PM
+ */
 public class BasicLinkedList<T>
 {
+    /**
+     * First node in list
+     */
     protected Node<T> firstNode;
+
+    /**
+     * Last node in list
+     */
     protected Node<T> lastNode;
+
+    /**
+     * Number of nodes in list
+     */
     protected int listSize;
 
     public BasicLinkedList()
