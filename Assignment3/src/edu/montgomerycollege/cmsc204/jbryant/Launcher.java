@@ -9,9 +9,14 @@ import edu.montgomerycollege.cmsc204.jbryant.data.FurnitureTrackerManager;
  */
 public class Launcher
 {
+    /**
+     * Launches the application
+     *
+     * @param args Command-line arguments
+     */
     public static void main(String[] args)
     {
         // Create new manager instance
-        FurnitureTrackerManager manager = new FurnitureTrackerManager()
+        FurnitureTrackerManager manager = new FurnitureTrackerManager();
     }
 }

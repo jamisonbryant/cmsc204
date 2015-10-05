@@ -9,31 +9,52 @@ import edu.montgomerycollege.cmsc204.jmyers.StackInterface;
  */
 public class MyStack<T> implements StackInterface<T>
 {
-    @Override
+    /**
+     * Returns if the stack is empty
+     *
+     * @return True if the stack is empty, false otherwise
+     */
     public boolean isEmpty()
     {
         return false;
     }
 
-    @Override
+    /**
+     * Removes the item at the top of the stack
+     *
+     * @return The removed item
+     */
     public T pop()
     {
         return null;
     }
 
-    @Override
+    /**
+     * Returns the size of the stack
+     *
+     * @return Stack size
+     */
     public int size()
     {
         return 0;
     }
 
-    @Override
-    public boolean push(T e)
+    /**
+     * Adds an item to the stack
+     *
+     * @param item Item to add
+     * @return True if successful, false otherwise
+     */
+    public boolean push(T item)
     {
         return false;
     }
 
-    @Override
+    /**
+     * Converts the stack to an array
+     *
+     * @return Stack as an array
+     */
     public T[] toArray()
     {
         return new T[0];

@@ -10,30 +10,48 @@ import edu.montgomerycollege.cmsc204.jmyers.Location;
  */
 public class Factory extends Location implements FactoryInterface
 {
-    Factory(String inName)
+    /**
+     * Creates a new factory object
+     *
+     * @param name Factory name
+     */
+    Factory(String name)
     {
-        super(inName);
+        super(name);
     }
 
-    @Override
-    public void addFurniture(Furniture frn)
-    {
+    /**
+     * Adds a piece of furniture to the factory
+     *
+     * @param furniture Piece of furniture to add
+     */
+    public void addFurniture(Furniture furniture) {}
 
-    }
-
-    @Override
+    /**
+     * Remove a piece of furniture from the factory
+     *
+     * @return Piece of furniture that was removed
+     */
     public Furniture removeFurniture()
     {
         return null;
     }
 
-    @Override
+    /**
+     * Returns an array of the furniture in the factory
+     *
+     * @return Furniture array
+     */
     public Furniture[] getFurnitures()
     {
         return new Furniture[0];
     }
 
-    @Override
+    /**
+     * Returns if the factory is empty
+     *
+     * @return True if factory is empty, false otherwise
+     */
     public boolean empty()
     {
         return false;

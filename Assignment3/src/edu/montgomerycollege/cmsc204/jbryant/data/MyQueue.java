@@ -2,6 +2,9 @@ package edu.montgomerycollege.cmsc204.jbryant.data;
 
 import edu.montgomerycollege.cmsc204.jmyers.QueueInterface;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+
 /**
  * My implementation of a queue
  *
@@ -9,33 +12,65 @@ import edu.montgomerycollege.cmsc204.jmyers.QueueInterface;
  */
 public class MyQueue<T> implements QueueInterface<T>
 {
-    @Override
+    private LinkedList<T> queue;
+
+    /**
+     * Returns if queue is empty
+     *
+     * @return True if queue is empty, false otherwise
+     */
     public boolean isEmpty()
     {
-        return false;
+        return (queue.size() == 0);
     }
 
-    @Override
+    /**
+     * Deletes the last item in the queue
+     *
+     * @return Deleted item
+     */
     public T dequeue()
     {
-        return null;
+        // Fetch and delete last item
+        T item = queue.getLast();
+        queue.removeLast();
+
+        // Return last item
+        return item;
     }
 
-    @Override
+    /**
+     * Returns the size of the queue
+     *
+     * @return Size of the queue
+     */
     public int size()
     {
-        return 0;
+        return queue.size();
     }
 
-    @Override
-    public boolean enqueue(T e)
+    /**
+     * Adds an item to the queue
+     *
+     * @param item Item to add
+     * @return True if successful, false otherwise
+     */
+    public boolean enqueue(T item)
     {
-        return false;
+        // Add item to queue
+        queue.add(item);
+
+        // TODO: What conditions cause this method to fail?
+        return true;
     }
 
-    @Override
+    /**
+     * Converts the queue to an array
+     *
+     * @return Queue as an array
+     */
     public T[] toArray()
     {
-        return new T[0];
+        return null;
     }
 }

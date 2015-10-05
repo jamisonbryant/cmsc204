@@ -11,6 +11,9 @@ public class Furniture
     public String material;
     public String color;
 
+    /**
+     * Creates a new Furniture object
+     */
     public Furniture()
     {
         name = null;
@@ -18,6 +21,13 @@ public class Furniture
         material = null;
     }
 
+    /**
+     * Creates a new Furniture object with properties
+     *
+     * @param name Furniture name
+     * @param color Furniture color
+     * @param material Furniture material
+     */
     public Furniture(String name, String color, String material)
     {
         this.name = name;

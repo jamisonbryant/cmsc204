@@ -10,24 +10,41 @@ import edu.montgomerycollege.cmsc204.jmyers.StoreInterface;
  */
 public class Store extends Location implements StoreInterface
 {
-    Store(String inName)
+    /**
+     * Creates a new Store object
+     *
+     * @param name Store name
+     */
+    Store(String name)
     {
-        super(inName);
+        super(name);
     }
 
-    @Override
-    public void addFurniture(Furniture frn)
+    /**
+     * Adds a piece of furniture to the store
+     *
+     * @param furniture Furniture to add
+     */
+    public void addFurniture(Furniture furniture)
     {
 
     }
 
-    @Override
+    /**
+     * Gets the furniture in a store
+     *
+     * @return Furniture in the store
+     */
     public Furniture[] getFurnitures()
     {
         return new Furniture[0];
     }
 
-    @Override
+    /**
+     * Returns if the store is full
+     *
+     * @return True if the store is full, false otherwise
+     */
     public boolean full()
     {
         return false;

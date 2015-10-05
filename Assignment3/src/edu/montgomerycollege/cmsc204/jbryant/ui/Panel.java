@@ -11,13 +11,21 @@ public class Panel
 {
     private FurnitureTrackerManager manager;
 
-    public Panel(FurnitureTrackerManager manager)
-    {
-        this.manager = manager;
-    }
-
+    /**
+     * Creates a new Panel object
+     */
     public Panel()
     {
         this.manager = null;
+    }
+
+    /**
+     * Creates a new Panel object with properties
+     *
+     * @param manager Furniture manager
+     */
+    public Panel(FurnitureTrackerManager manager)
+    {
+        this.manager = manager;
     }
 }

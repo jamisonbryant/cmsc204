@@ -11,19 +11,32 @@ import java.util.EmptyStackException;
  */
 public class Truck implements TruckInterface
 {
-    @Override
-    public void uploadFurniture(Furniture frn)
+    /**
+     * Adds a piece of furniture to the truck
+     *
+     * @param furniture Piece of furniture to add
+     */
+    public void uploadFurniture(Furniture furniture)
     {
 
     }
 
-    @Override
+    /**
+     * Removes a piece of furniture from the truck
+     *
+     * @return The removed piece of furniture
+     * @throws EmptyStackException If the furniture truck is empty
+     */
     public Furniture offloadFurniture() throws EmptyStackException
     {
         return null;
     }
 
-    @Override
+    /**
+     * Returns an array of the furniture in the truck
+     *
+     * @return Furniture array
+     */
     public Furniture[] toArray()
     {
         return new Furniture[0];
