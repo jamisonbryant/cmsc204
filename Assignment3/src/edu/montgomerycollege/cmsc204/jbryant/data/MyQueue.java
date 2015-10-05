@@ -3,7 +3,9 @@ package edu.montgomerycollege.cmsc204.jbryant.data;
 import edu.montgomerycollege.cmsc204.jmyers.QueueInterface;
 
 /**
- * Created by Jamison on 10/5/2015.
+ * My implementation of a queue
+ *
+ * @author Jamison Bryant (jbryan46@montgomerycollege.edu) for CMSC 204 (R. Alexander) M/W 1PM-3PM
  */
 public class MyQueue<T> implements QueueInterface<T>
 {

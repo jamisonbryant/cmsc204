@@ -4,7 +4,9 @@ import edu.montgomerycollege.cmsc204.jmyers.FactoryInterface;
 import edu.montgomerycollege.cmsc204.jmyers.Location;
 
 /**
- * Created by Jamison on 10/5/2015.
+ * The factory data object
+ *
+ * @author Jamison Bryant (jbryan46@montgomerycollege.edu) for CMSC 204 (R. Alexander) M/W 1PM-3PM
  */
 public class Factory extends Location implements FactoryInterface
 {
