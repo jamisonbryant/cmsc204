@@ -1,5 +1,3 @@
-package edu.montgomerycollege.cmsc204.jmyers;
-
 /**
  * The class that implements this class uses a data structure (your choice) to store the Furniture in the store
  * 

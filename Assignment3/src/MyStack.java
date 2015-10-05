@@ -1,7 +1,3 @@
-package edu.montgomerycollege.cmsc204.jbryant.data;
-
-import edu.montgomerycollege.cmsc204.jmyers.StackInterface;
-
 /**
  * My implementation of a stack
  *
@@ -57,6 +53,6 @@ public class MyStack<T> implements StackInterface<T>
      */
     public T[] toArray()
     {
-        return new T[0];
+        return null;
     }
 }

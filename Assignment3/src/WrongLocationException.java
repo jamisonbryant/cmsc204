@@ -1,5 +1,3 @@
-package edu.montgomerycollege.cmsc204.jbryant.error;
-
 /**
  * An error thrown when a truck is unloaded in the wrong location, such as a factory.
  *

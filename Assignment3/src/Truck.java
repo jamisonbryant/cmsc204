@@ -1,7 +1,3 @@
-package edu.montgomerycollege.cmsc204.jbryant.model;
-
-import edu.montgomerycollege.cmsc204.jmyers.TruckInterface;
-
 import java.util.EmptyStackException;
 
 /**

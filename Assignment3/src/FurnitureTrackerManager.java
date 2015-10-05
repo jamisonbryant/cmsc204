@@ -1,10 +1,3 @@
-package edu.montgomerycollege.cmsc204.jbryant.data;
-
-import edu.montgomerycollege.cmsc204.jbryant.model.Factory;
-import edu.montgomerycollege.cmsc204.jbryant.model.Furniture;
-import edu.montgomerycollege.cmsc204.jbryant.model.Store;
-import edu.montgomerycollege.cmsc204.jbryant.model.Truck;
-
 import java.io.File;
 
 /**
@@ -45,9 +38,11 @@ public class FurnitureTrackerManager
     /**
      * ???
      *
+     * @throws WrongLocationException ???
+     * @throws TruckLoadException ???
      * @return ???
      */
-    public Furniture[] loadTruck()
+    public Furniture[] loadTruck() throws WrongLocationException, TruckLoadException
     {
         return new Furniture[0];
     }
@@ -56,9 +51,11 @@ public class FurnitureTrackerManager
      * Unloads the manager's truck into one of the manager's stores
      *
      * @param store The store to unload the truck into
+     * @throws WrongLocationException ???
+     * @throws TruckLoadException ???
      * @return ???
      */
-    public Furniture[] unloadTruck(Store store)
+    public Furniture[] unloadTruck(Store store) throws  WrongLocationException, TruckLoadException
     {
         return new Furniture[0];
     }
@@ -74,8 +71,10 @@ public class FurnitureTrackerManager
 
     /**
      * Moves the manager's truck to the next location
+     *
+     * @throws FurnitureTrackerNotInitializedException If furniture tracker is not initialized
      */
-    public void dispatchTruck()
+    public void dispatchTruck() throws FurnitureTrackerNotInitializedException
     {
     }
 

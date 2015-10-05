@@ -1,8 +1,3 @@
-package edu.montgomerycollege.cmsc204.jbryant.data;
-
-import edu.montgomerycollege.cmsc204.jmyers.QueueInterface;
-
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**

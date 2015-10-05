@@ -1,8 +1,3 @@
-package edu.montgomerycollege.cmsc204.jbryant.model;
-
-import edu.montgomerycollege.cmsc204.jmyers.Location;
-import edu.montgomerycollege.cmsc204.jmyers.StoreInterface;
-
 /**
  * The store data object
  *

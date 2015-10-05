@@ -1,5 +1,3 @@
-package edu.montgomerycollege.cmsc204.jbryant.error;
-
 /**
  * ???
  *

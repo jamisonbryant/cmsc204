@@ -1,5 +1,3 @@
-package edu.montgomerycollege.cmsc204.jbryant.model;
-
 /**
  * The furniture data object
  *
@@ -8,8 +6,8 @@ package edu.montgomerycollege.cmsc204.jbryant.model;
 public class Furniture
 {
     private String name;
-    public String material;
-    public String color;
+    protected String material;
+    protected String color;
 
     /**
      * Creates a new Furniture object

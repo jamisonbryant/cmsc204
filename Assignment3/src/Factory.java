@@ -1,8 +1,3 @@
-package edu.montgomerycollege.cmsc204.jbryant.model;
-
-import edu.montgomerycollege.cmsc204.jmyers.FactoryInterface;
-import edu.montgomerycollege.cmsc204.jmyers.Location;
-
 /**
  * The factory data object
  *

@@ -1,5 +1,3 @@
-package edu.montgomerycollege.cmsc204.jmyers;
-
 /** Interface for a Queue data structure
  * 
  * @author JMYERS

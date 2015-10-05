@@ -1,5 +1,3 @@
-package edu.montgomerycollege.cmsc204.jmyers;
-
 /**
  * The class that implements this interface uses a MyQueue<Furniture> to simulate Furniture being created in a factory
  * @author JMYERS

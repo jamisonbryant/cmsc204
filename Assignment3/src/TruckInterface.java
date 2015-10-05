@@ -1,5 +1,3 @@
-package edu.montgomerycollege.cmsc204.jmyers;
-
 import java.util.EmptyStackException;
 
 /**

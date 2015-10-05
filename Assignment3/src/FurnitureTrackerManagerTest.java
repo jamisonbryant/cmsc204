@@ -1,19 +1,9 @@
-package edu.montgomerycollege.cmsc204.jmyers;
-
 import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
-import edu.montgomerycollege.cmsc204.jbryant.data.FurnitureTrackerManager;
-import edu.montgomerycollege.cmsc204.jbryant.error.FurnitureTrackerNotInitializedException;
-import edu.montgomerycollege.cmsc204.jbryant.error.TruckLoadException;
-import edu.montgomerycollege.cmsc204.jbryant.error.WrongLocationException;
-import edu.montgomerycollege.cmsc204.jbryant.model.Factory;
-import edu.montgomerycollege.cmsc204.jbryant.model.Furniture;
-import edu.montgomerycollege.cmsc204.jbryant.model.Store;
-import edu.montgomerycollege.cmsc204.jbryant.model.Truck;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

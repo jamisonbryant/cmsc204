@@ -1,5 +1,3 @@
-package edu.montgomerycollege.cmsc204.jmyers;
-
 public abstract class Location {
 	String name = "";
 

@@ -1,5 +1,3 @@
-package edu.montgomerycollege.cmsc204.jmyers;
-
 /** Interface for a generic Stack data structure
  * 
  * @author JMYERS

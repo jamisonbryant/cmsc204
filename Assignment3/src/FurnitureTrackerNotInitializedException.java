@@ -1,5 +1,3 @@
-package edu.montgomerycollege.cmsc204.jbryant.error;
-
 /**
  * An error thrown when a furniture tracker is manipulated before being initialized
  *

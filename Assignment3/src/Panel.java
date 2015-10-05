@@ -1,7 +1,3 @@
-package edu.montgomerycollege.cmsc204.jbryant.ui;
-
-import edu.montgomerycollege.cmsc204.jbryant.data.FurnitureTrackerManager;
-
 /**
  * The application GUI
  *
