@@ -1,7 +1,8 @@
+import javax.swing.*;
 import java.io.File;
 
 /**
- * The data management class
+ * Application data class
  *
  * @author Jamison Bryant (jbryan46@montgomerycollege.edu) for CMSC 204 (R. Alexander) M/W 1PM-3PM
  */
@@ -20,9 +21,7 @@ public class FurnitureTrackerManager
      *
      * @param file Furniture data file
      */
-    public void newFurnitureTracker(File file)
-    {
-    }
+    public void newFurnitureTracker(File file) {}
 
     /**
      * Returns an array of the furniture in a factory

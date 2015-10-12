@@ -28,3 +28,4 @@ tramp
 ## IntelliJ files
 .idea/
 *.iml
+out/

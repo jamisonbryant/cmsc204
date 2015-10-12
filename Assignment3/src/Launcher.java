@@ -12,7 +12,7 @@ public class Launcher
      */
     public static void main(String[] args)
     {
-        // Create new manager instance
-        FurnitureTrackerManager manager = new FurnitureTrackerManager();
+        // Create GUI
+        GUI gui = new GUI();
     }
 }
