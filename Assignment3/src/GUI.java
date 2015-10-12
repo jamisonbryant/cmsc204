@@ -1,4 +1,6 @@
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Application GUI class
@@ -15,6 +17,9 @@ public class GUI extends JFrame
         window.setSize(500, 300);
         window.setLocationRelativeTo(null);
 
+        // Create action handler
+        ActionHandler handler = new ActionHandler();
+
         // Create main panel
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -30,17 +35,35 @@ public class GUI extends JFrame
 
         // Create buttons
         JPanel topButtonPanel = new JPanel();
+        JPanel bottomButtonPanel = new JPanel();
+
         JButton loadButton = new JButton("Load Furniture");
+        loadButton.setActionCommand("load_furniture");
+        loadButton.addActionListener(handler);
+
         JButton unloadButton = new JButton("Unload Furniture");
+        unloadButton.setActionCommand("unload_furniture");
+        unloadButton.addActionListener(handler);
+
         JButton driveButton = new JButton("Drive Truck");
+        driveButton.setActionCommand("drive_truck");
+        driveButton.addActionListener(handler);
+
+        JButton newButton = new JButton("New");
+        newButton.setActionCommand("new_simulation");
+        newButton.addActionListener(handler);
+
+        JButton addButton = new JButton("Add Furniture");
+        addButton.setActionCommand("add_furniture");
+        addButton.addActionListener(handler);
+
+        JButton exitButton = new JButton("Exit");
+        exitButton.setActionCommand("exit_application");
+        exitButton.addActionListener(handler);
+
         topButtonPanel.add(loadButton);
         topButtonPanel.add(unloadButton);
         topButtonPanel.add(driveButton);
-
-        JPanel bottomButtonPanel = new JPanel();
-        JButton newButton = new JButton("New");
-        JButton addButton = new JButton("Add Furniture");
-        JButton exitButton = new JButton("Exit");
         bottomButtonPanel.add(newButton);
         bottomButtonPanel.add(addButton);
         bottomButtonPanel.add(exitButton);
@@ -57,5 +80,37 @@ public class GUI extends JFrame
 
         // Show window
         window.setVisible(true);
+    }
+
+    public class ActionHandler implements ActionListener
+    {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+            switch (e.getActionCommand())
+            {
+                case "load_furniture":
+                    break;
+
+                case "unload_furniture":
+                    break;
+
+                case "drive_truck":
+                    break;
+
+                case "new_simulation":
+                    break;
+
+                case "add_furniture":
+                    break;
+
+                case "exit_application":
+                    System.exit(0);
+                    break;
+
+                default:
+                    System.err.println("Error: Command \"" + e.getActionCommand() + "\" not recognized");
+            }
+        }
     }
 }
