@@ -21,7 +21,10 @@ public class FurnitureTrackerManager
      *
      * @param file Furniture data file
      */
-    public void newFurnitureTracker(File file) {}
+    public void newFurnitureTracker(File file)
+    {
+        System.out.println("Tracker initialized with \"" + file.getAbsolutePath() + "\"");
+    }
 
     /**
      * Returns an array of the furniture in a factory

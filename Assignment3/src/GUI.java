@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 /**
  * Application GUI class
@@ -9,6 +10,11 @@ import java.awt.event.ActionListener;
  */
 public class GUI extends JFrame
 {
+    private FurnitureTrackerManager manager;
+
+    /**
+     * Creates GUI and sets up controls
+     */
     public GUI()
     {
         // Create main window
@@ -50,7 +56,7 @@ public class GUI extends JFrame
         driveButton.addActionListener(handler);
 
         JButton newButton = new JButton("New");
-        newButton.setActionCommand("new_simulation");
+        newButton.setActionCommand("create_simulation");
         newButton.addActionListener(handler);
 
         JButton addButton = new JButton("Add Furniture");
@@ -80,6 +86,26 @@ public class GUI extends JFrame
 
         // Show window
         window.setVisible(true);
+
+        // Create manager
+        manager = new FurnitureTrackerManager();
+    }
+
+    /**
+     * Creates a new simulation
+     */
+    private void createSimulation()
+    {
+        // Show file chooser
+        JFileChooser chooser = new JFileChooser();
+        int choice = chooser.showOpenDialog(GUI.this);
+
+        if (choice == JFileChooser.APPROVE_OPTION) {
+            // Create new manager
+            manager.newFurnitureTracker(chooser.getSelectedFile());
+        } else {
+            System.out.println("Notice: File choosing cancelled by user");
+        }
     }
 
     public class ActionHandler implements ActionListener
@@ -98,7 +124,8 @@ public class GUI extends JFrame
                 case "drive_truck":
                     break;
 
-                case "new_simulation":
+                case "create_simulation":
+                    createSimulation();
                     break;
 
                 case "add_furniture":
