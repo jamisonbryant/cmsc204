@@ -1,5 +1,5 @@
 import javax.swing.*;
-import java.io.File;
+import java.io.*;
 
 /**
  * Application data class
@@ -23,7 +23,34 @@ public class FurnitureTrackerManager
      */
     public void newFurnitureTracker(File file)
     {
-        System.out.println("Tracker initialized with \"" + file.getAbsolutePath() + "\"");
+        System.out.println("Notice: Tracker initialized with \"" + file.getAbsolutePath() + "\"");
+
+        // Read furniture file
+        try {
+            FileInputStream fis = new FileInputStream(file);
+            BufferedReader br = new BufferedReader(new InputStreamReader(fis));
+            String line;
+            String[] contents;
+
+            while ((line = br.readLine()) != null) {
+                // Parse line contents into array
+                contents = line.split(",");
+
+                // Create furniture object
+                try {
+                    Furniture f = new Furniture(contents[0], contents[1], contents[2]);
+                    System.out.println("Info: Created furniture object: " + f.toString());
+                } catch(ArrayIndexOutOfBoundsException e) {
+                    System.err.println("Error: Exception occurred while parsing file");
+                    e.printStackTrace();
+                    GUI.displayError("An error occurred while parsing the file", true);
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error: Exception occurred while reading file");
+            e.printStackTrace();
+            GUI.displayError("An error occurred while reading the file", true);
+        }
     }
 
     /**

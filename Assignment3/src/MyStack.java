@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+
 /**
  * My implementation of a stack
  *
@@ -5,6 +7,8 @@
  */
 public class MyStack<T> implements StackInterface<T>
 {
+    private LinkedList<T> stack;
+
     /**
      * Returns if the stack is empty
      *
@@ -12,7 +16,7 @@ public class MyStack<T> implements StackInterface<T>
      */
     public boolean isEmpty()
     {
-        return false;
+        return stack.isEmpty();
     }
 
     /**
@@ -22,7 +26,7 @@ public class MyStack<T> implements StackInterface<T>
      */
     public T pop()
     {
-        return null;
+        return stack.pop();
     }
 
     /**
@@ -32,7 +36,7 @@ public class MyStack<T> implements StackInterface<T>
      */
     public int size()
     {
-        return 0;
+        return stack.size();
     }
 
     /**
@@ -43,7 +47,9 @@ public class MyStack<T> implements StackInterface<T>
      */
     public boolean push(T item)
     {
-        return false;
+        stack.push(item);
+
+        return true;
     }
 
     /**
@@ -51,8 +57,5 @@ public class MyStack<T> implements StackInterface<T>
      *
      * @return Stack as an array
      */
-    public T[] toArray()
-    {
-        return null;
-    }
+    public T[] toArray() { return null; }
 }

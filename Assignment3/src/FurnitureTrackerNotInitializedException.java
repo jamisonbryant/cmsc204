@@ -5,4 +5,5 @@
  */
 public class FurnitureTrackerNotInitializedException extends Exception
 {
+    public FurnitureTrackerNotInitializedException() {}
 }

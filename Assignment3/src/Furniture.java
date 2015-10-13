@@ -10,7 +10,7 @@ public class Furniture
     protected String color;
 
     /**
-     * Creates a new Furniture object
+     * Creates a new furniture object
      */
     public Furniture()
     {
@@ -20,7 +20,7 @@ public class Furniture
     }
 
     /**
-     * Creates a new Furniture object with properties
+     * Creates a new furniture object with properties
      *
      * @param name Furniture name
      * @param color Furniture color
@@ -31,5 +31,38 @@ public class Furniture
         this.name = name;
         this.color = color;
         this.material = material;
+    }
+
+    /**
+     * Returns a string representation of the furniture object
+     *
+     * @return String representation
+     */
+    public String toString()
+    {
+        String label = "";
+
+        if (material != null) {
+            label += material + " ";
+        } else {
+            label += "Unknown ";
+            System.err.println("Warning: Furniture material not specified");
+        }
+
+        if (name != null) {
+            label += name + " ";
+        } else {
+            label += "Unknown ";
+            System.err.println("Warning: Furniture name not specified");
+        }
+
+        if (color != null) {
+            label += "(" + color + ")";
+        } else {
+            label += "(Unknown)";
+            System.err.println("Warning: Furniture color not specified");
+        }
+
+        return label;
     }
 }

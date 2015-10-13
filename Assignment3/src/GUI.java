@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -11,6 +12,7 @@ import java.io.File;
 public class GUI extends JFrame
 {
     private FurnitureTrackerManager manager;
+    private boolean initialized;
 
     /**
      * Creates GUI and sets up controls
@@ -31,13 +33,14 @@ public class GUI extends JFrame
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
         // Create table
-        JTable table = new JTable(10, 6);
+        JTable table = new JTable(10, 7);
         table.getColumnModel().getColumn(0).setHeaderValue("Truck");
-        table.getColumnModel().getColumn(1).setHeaderValue("Wal-Mart");
-        table.getColumnModel().getColumn(2).setHeaderValue("Sam's Club");
-        table.getColumnModel().getColumn(3).setHeaderValue("BJ's");
-        table.getColumnModel().getColumn(4).setHeaderValue("Big Lots");
-        table.getColumnModel().getColumn(5).setHeaderValue("Marlo");
+        table.getColumnModel().getColumn(1).setHeaderValue("Factory");
+        table.getColumnModel().getColumn(2).setHeaderValue("Wal-Mart");
+        table.getColumnModel().getColumn(3).setHeaderValue("Sam's Club");
+        table.getColumnModel().getColumn(4).setHeaderValue("BJ's");
+        table.getColumnModel().getColumn(5).setHeaderValue("Big Lots");
+        table.getColumnModel().getColumn(6).setHeaderValue("Marlo");
 
         // Create buttons
         JPanel topButtonPanel = new JPanel();
@@ -92,19 +95,88 @@ public class GUI extends JFrame
     }
 
     /**
+     * Displays an error message in a dialog box
+     *
+     * @param message Message to display
+     * @param exit Exit application after message acknowledged
+     */
+    public static void displayError(String message, boolean exit)
+    {
+        JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);
+
+        if (exit) {
+            System.exit(1);
+        }
+    }
+
+    /**
+     * Displays a warning message in a dialog box
+     *
+     * @param message Message to display
+     * @param exit Exit application after message acknowledged
+     */
+    public static void displayWarning(String message, boolean exit)
+    {
+        JOptionPane.showMessageDialog(null, message, "Warning", JOptionPane.WARNING_MESSAGE);
+
+        if (exit) {
+            System.exit(1);
+        }
+    }
+
+    /**
      * Creates a new simulation
      */
     private void createSimulation()
     {
         // Show file chooser
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Text files", "txt");
         JFileChooser chooser = new JFileChooser();
+        chooser.setFileFilter(filter);
         int choice = chooser.showOpenDialog(GUI.this);
 
         if (choice == JFileChooser.APPROVE_OPTION) {
             // Create new manager
             manager.newFurnitureTracker(chooser.getSelectedFile());
+            initialized = true;
         } else {
             System.out.println("Notice: File choosing cancelled by user");
+        }
+    }
+
+    private void loadFurniture() throws FurnitureTrackerNotInitializedException
+    {
+        if (initialized) {
+
+        } else {
+            throw new FurnitureTrackerNotInitializedException();
+        }
+    }
+
+    private void unloadFurniture() throws FurnitureTrackerNotInitializedException
+    {
+        if (initialized) {
+
+        } else {
+            throw new FurnitureTrackerNotInitializedException();
+        }
+    }
+
+    private void driveTruck() throws FurnitureTrackerNotInitializedException
+    {
+        if (initialized) {
+
+        } else {
+            throw new FurnitureTrackerNotInitializedException();
+        }
+    }
+
+    private void addFurniture() throws FurnitureTrackerNotInitializedException
+    {
+        if (initialized) {
+
+        } else {
+            throw new FurnitureTrackerNotInitializedException();
         }
     }
 
@@ -115,20 +187,44 @@ public class GUI extends JFrame
         {
             switch (e.getActionCommand())
             {
-                case "load_furniture":
-                    break;
-
-                case "unload_furniture":
-                    break;
-
-                case "drive_truck":
-                    break;
-
                 case "create_simulation":
                     createSimulation();
                     break;
 
+                case "load_furniture":
+                    try {
+                        loadFurniture();
+                    } catch (FurnitureTrackerNotInitializedException e1) {
+                        GUI.displayWarning("You must initialize the tracker before loading furniture", false);
+                    }
+
+                    break;
+
+                case "unload_furniture":
+                    try {
+                        unloadFurniture();
+                    } catch (FurnitureTrackerNotInitializedException e2) {
+                        GUI.displayWarning("You must initialize the tracker before unloading furniture", false);
+                    }
+
+                    break;
+
+                case "drive_truck":
+                    try {
+                        driveTruck();
+                    } catch (FurnitureTrackerNotInitializedException e3) {
+                        GUI.displayWarning("You must initialize the tracker before driving the truck", false);
+                    }
+
+                    break;
+
                 case "add_furniture":
+                    try {
+                        addFurniture();
+                    } catch (FurnitureTrackerNotInitializedException e4) {
+                        GUI.displayWarning("You must initialize the tracker before adding furniture", false);
+                    }
+
                     break;
 
                 case "exit_application":
