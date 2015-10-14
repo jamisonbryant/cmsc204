@@ -1,5 +1,6 @@
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.TableColumn;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -21,7 +22,7 @@ public class GUI extends JFrame
         // Create main window
         JFrame window = new JFrame("Furniture Tracker");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setSize(500, 300);
+        window.setSize(600, 300);
         window.setLocationRelativeTo(null);
 
         // Create action handler
@@ -134,6 +135,52 @@ public class GUI extends JFrame
         }
     }
 
+    private int getTruckLocation()
+    {
+        String truckLabel = " (T)";
+
+        // Reset all column headers
+        for (int i = 1; i < furnitureTable.getColumnCount(); i++) {
+            TableColumn c = furnitureTable.getColumnModel().getColumn(i);
+            String header = c.getHeaderValue().toString();
+
+            if (header.contains(truckLabel)) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    /**
+     * Updates a column header with the truck's location
+     *
+     * @param column Index of column to update
+     */
+    private void setTruckLocation(int column)
+    {
+        String truckLabel = " (T)";
+
+        // Reset all column headers
+        for (int i = 1; i < furnitureTable.getColumnCount(); i++) {
+            TableColumn c = furnitureTable.getColumnModel().getColumn(i);
+            String header = c.getHeaderValue().toString();
+
+            if (header.contains(truckLabel)) {
+                c.setHeaderValue(header.substring(0, header.length() - 4));
+            }
+        }
+
+        // Update requested column header
+        if (column > furnitureTable.getColumnCount() - 1) {
+            column = column % furnitureTable.getColumnCount() + 1;
+        }
+
+        TableColumn c = furnitureTable.getColumnModel().getColumn(column);
+        c.setHeaderValue(c.getHeaderValue() + truckLabel);
+        furnitureTable.getTableHeader().repaint();
+    }
+
     /**
      * Creates a new simulation
      */
@@ -156,6 +203,9 @@ public class GUI extends JFrame
             for (Furniture f : furnitures) {
                 furnitureTable.setValueAt(f.getName(), r++, 1);
             }
+
+            // Set truck location
+            setTruckLocation(1);
         } else {
             System.out.println("Notice: File choosing cancelled by user");
         }
@@ -179,7 +229,7 @@ public class GUI extends JFrame
             // Update factory column
             int r2 = 0;
             clearColumn(1);
-            
+
             for (Furniture f : tracker.getFactory().getFurnitures()) {
                 furnitureTable.setValueAt(f.getName(), r2++, 1);
             }
@@ -200,7 +250,7 @@ public class GUI extends JFrame
     private void driveTruck() throws FurnitureTrackerNotInitializedException
     {
         if (tracker.isInitialized()) {
-
+            setTruckLocation(getTruckLocation() + 1);
         } else {
             throw new FurnitureTrackerNotInitializedException("Action attempted before tracker initialized");
         }
