@@ -32,12 +32,8 @@ public class MyQueue<T> implements QueueInterface<T>
      */
     public T dequeue()
     {
-        // Fetch and delete last item
-        T item = queue.getLast();
-        queue.removeLast();
-
         // Return last item
-        return item;
+        return queue.removeFirst();
     }
 
     /**

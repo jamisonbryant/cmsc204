@@ -7,7 +7,7 @@ import java.lang.reflect.Array;
  */
 public class Factory extends Location implements FactoryInterface
 {
-    private String name;
+    public String name;
     private MyQueue<Furniture> queue;
 
     /**
@@ -36,8 +36,7 @@ public class Factory extends Location implements FactoryInterface
      */
     public Furniture removeFurniture()
     {
-        Furniture f = queue.dequeue();
-        return f;
+        return queue.dequeue();
     }
 
     /**
@@ -64,5 +63,10 @@ public class Factory extends Location implements FactoryInterface
     public boolean empty()
     {
         return queue.isEmpty();
+    }
+
+    public String getName()
+    {
+        return name;
     }
 }

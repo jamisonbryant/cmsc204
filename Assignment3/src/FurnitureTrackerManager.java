@@ -35,9 +35,6 @@ public class FurnitureTrackerManager
      */
     public void newFurnitureTracker(File file)
     {
-        // Create truck
-        truck = new Truck();
-
         // Read furniture file
         try {
             FileInputStream fis = new FileInputStream(file);
@@ -66,6 +63,9 @@ public class FurnitureTrackerManager
             e.printStackTrace();
             GUI.displayError("An error occurred while reading the file", true);
         }
+
+        // Set tracker as initialized
+        initialized = true;
     }
 
     /**

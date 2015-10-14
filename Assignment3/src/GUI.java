@@ -123,6 +123,18 @@ public class GUI extends JFrame
     }
 
     /**
+     * Clears the contents of a column of the table
+     *
+     * @param column Index of column to clear
+     */
+    private void clearColumn(int column)
+    {
+        for (int i = 0; i < furnitureTable.getRowCount(); i++) {
+            furnitureTable.setValueAt("", i, column);
+        }
+    }
+
+    /**
      * Creates a new simulation
      */
     private void createSimulation()
@@ -152,7 +164,25 @@ public class GUI extends JFrame
     private void loadFurniture() throws FurnitureTrackerNotInitializedException
     {
         if (tracker.isInitialized()) {
+            // Load furniture onto truck
+            Truck truck = tracker.getTruck();
+            truck.uploadFurniture(truck.getLocation().removeFurniture());
 
+            // Update truck column
+            int r1 = 0;
+            clearColumn(0);
+
+            for (Furniture f : truck.toArray()) {
+                furnitureTable.setValueAt(f.getName(), r1++, 0);
+            }
+
+            // Update factory column
+            int r2 = 0;
+            clearColumn(1);
+            
+            for (Furniture f : tracker.getFactory().getFurnitures()) {
+                furnitureTable.setValueAt(f.getName(), r2++, 1);
+            }
         } else {
             throw new FurnitureTrackerNotInitializedException("Action attempted before tracker initialized");
         }

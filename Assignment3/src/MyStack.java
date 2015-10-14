@@ -66,4 +66,9 @@ public class MyStack<T> implements StackInterface<T>
     {
         return (T[]) stack.toArray();
     }
+
+    public T getElementAt(int index)
+    {
+        return stack.get(index);
+    }
 }

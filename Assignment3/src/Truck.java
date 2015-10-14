@@ -1,5 +1,6 @@
 import sun.invoke.empty.Empty;
 
+import java.lang.reflect.Array;
 import java.util.EmptyStackException;
 
 /**
@@ -56,7 +57,13 @@ public class Truck implements TruckInterface
      */
     public Furniture[] toArray()
     {
-        return null;
+        Furniture[] array = (Furniture[]) Array.newInstance(Furniture.class, stack.size());
+
+        for (int i = 0; i < stack.size(); i++) {
+            Array.set(array, i, (Furniture) stack.getElementAt(i));
+        }
+
+        return array;
     }
 
     /**
