@@ -46,6 +46,7 @@ public class Truck implements TruckInterface
         if (!stack.isEmpty()) {
             return (Furniture) stack.pop();
         } else {
+            GUI.displayWarning("The truck is empty and cannot be unloaded", false);
             throw new EmptyStackException();
         }
     }

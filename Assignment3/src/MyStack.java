@@ -1,4 +1,4 @@
-import java.util.LinkedList;
+import java.util.Stack;
 
 /**
  * My implementation of a stack
@@ -7,11 +7,11 @@ import java.util.LinkedList;
  */
 public class MyStack<T> implements StackInterface<T>
 {
-    private LinkedList<T> stack;
+    private Stack<T> stack;
 
     public MyStack()
     {
-        stack = new LinkedList<T>();
+        stack = new Stack<T>();
     }
 
     /**

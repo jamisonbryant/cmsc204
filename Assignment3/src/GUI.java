@@ -135,7 +135,7 @@ public class GUI extends JFrame
         int choice = chooser.showOpenDialog(GUI.this);
 
         if (choice == JFileChooser.APPROVE_OPTION) {
-            // Create new tracker
+            // Initialize tracker
             tracker.newFurnitureTracker(chooser.getSelectedFile());
 
             // Add furniture to factory
@@ -156,24 +156,26 @@ public class GUI extends JFrame
     private void loadFurniture() throws FurnitureTrackerNotInitializedException
     {
         if (tracker.isInitialized()) {
-            // Load furniture onto truck
-            Truck truck = tracker.getTruck();
-            truck.uploadFurniture(tracker.getFactory().removeFurniture());
+            int r = 0; int s = 0;
 
-            // Update truck column
-            int r1 = 0;
-            clearColumn(0);
-
-            for (Furniture f : truck.toArray()) {
-                furnitureTable.setValueAt(f.getName(), r1++, 0);
+            try {
+                // Update truck
+                clearColumn(0);
+                for (Furniture f : tracker.loadTruck()) {
+                    furnitureTable.setValueAt(f.getName(), r++, 0);
+                }
+            } catch (TruckLoadException e) {
+                GUI.displayWarning("You cannot load furniture onto a full truck", false);
+            } catch (WrongLocationException e) {
+                GUI.displayWarning("You cannot load furniture onto the truck at a store", false);
             }
 
             // Update factory column
-            int r2 = 0;
-            clearColumn(1);
+            int c = 1;
+            clearColumn(c);
 
             for (Furniture f : tracker.getFactory().getFurnitures()) {
-                furnitureTable.setValueAt(f.getName(), r2++, 1);
+                furnitureTable.setValueAt(f.getName(), s++, c);
             }
         } else {
             throw new FurnitureTrackerNotInitializedException("Error: Action attempted before tracker initialized");
@@ -183,30 +185,28 @@ public class GUI extends JFrame
     private void unloadFurniture() throws FurnitureTrackerNotInitializedException
     {
         if (tracker.isInitialized()) {
-            int r;
-
-            // Remove furniture from truck
-            r = 0;
+            int r = 0; int s = 0;
             Truck truck = tracker.getTruck();
-            Furniture f = truck.offloadFurniture();
+            Store store = (Store) truck.getLocation();
 
-            // Add furniture to store
-            ((Store) truck.getLocation()).addFurniture(f);
-
-            // Update truck column
-            clearColumn(0);
-
-            for (Furniture f2 : truck.toArray()) {
-                furnitureTable.setValueAt(f.getName(), r++, 0);
+            try {
+                // Update truck
+                clearColumn(0);
+                for (Furniture f : tracker.unloadTruck(store)) {
+                    furnitureTable.setValueAt(f.getName(), r++, 0);
+                }
+            } catch (TruckLoadException e) {
+                GUI.displayWarning("You cannot unload furniture from an empty truck", false);
+            } catch (WrongLocationException e) {
+                GUI.displayWarning("You cannot unload furniture from the truck at the factory", false);
             }
 
             // Update store column
-            r = 0;
-            int c = tracker.getLocationIndex();
+            int c = tracker.getLocationIndex() + 1;
             clearColumn(c);
 
-            for (Furniture f2 : ((Store) truck.getLocation()).getFurnitures()) {
-                furnitureTable.setValueAt(f.getName(), r++, c);
+            for (Furniture f : store.getFurnitures()) {
+                furnitureTable.setValueAt(f.getName(), s++, c);
             }
         } else {
             throw new FurnitureTrackerNotInitializedException("Error: Action attempted before tracker initialized");

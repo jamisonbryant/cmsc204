@@ -114,7 +114,12 @@ public class FurnitureTrackerManager
             // Check if truck is not empty
             if (truck.toArray().length != 0) {
                 // Remove furniture from truck
-                truck.offloadFurniture();
+                Furniture f = truck.offloadFurniture();
+
+                // Add furniture to store
+                store.addFurniture(f);
+
+                // Return new truck contents
                 return truck.toArray();
             } else {
                 throw new TruckLoadException("Error: Cannot unload furniture from empty truck");
