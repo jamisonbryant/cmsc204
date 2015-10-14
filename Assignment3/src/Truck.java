@@ -83,7 +83,9 @@ public class Truck implements TruckInterface
     }
 
     /**
-     * Sets the truck's current location
+     * Gets the truck's current location
+     *
+     * @return Location Current location
      */
     public Location getLocation()
     {
