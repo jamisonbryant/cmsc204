@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.LinkedList;
 
 /**
@@ -8,6 +9,11 @@ import java.util.LinkedList;
 public class MyQueue<T> implements QueueInterface<T>
 {
     private LinkedList<T> queue;
+
+    public MyQueue()
+    {
+        queue = new LinkedList<T>();
+    }
 
     /**
      * Returns if queue is empty
@@ -66,6 +72,11 @@ public class MyQueue<T> implements QueueInterface<T>
      */
     public T[] toArray()
     {
-        return null;
+        return (T[]) queue.toArray();
+    }
+
+    public T getElementAt(int index)
+    {
+        return queue.get(index);
     }
 }

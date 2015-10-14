@@ -5,5 +5,8 @@
  */
 public class FurnitureTrackerNotInitializedException extends Exception
 {
-    public FurnitureTrackerNotInitializedException() {}
+    public FurnitureTrackerNotInitializedException(String message)
+    {
+        super(message);
+    }
 }

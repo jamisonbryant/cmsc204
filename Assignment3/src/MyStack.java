@@ -9,6 +9,11 @@ public class MyStack<T> implements StackInterface<T>
 {
     private LinkedList<T> stack;
 
+    public MyStack()
+    {
+        stack = new LinkedList<T>();
+    }
+
     /**
      * Returns if the stack is empty
      *
@@ -57,5 +62,8 @@ public class MyStack<T> implements StackInterface<T>
      *
      * @return Stack as an array
      */
-    public T[] toArray() { return null; }
+    public T[] toArray()
+    {
+        return (T[]) stack.toArray();
+    }
 }

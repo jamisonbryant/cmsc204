@@ -1,3 +1,5 @@
+import java.lang.reflect.Array;
+
 /**
  * The factory data object
  *
@@ -5,14 +7,16 @@
  */
 public class Factory extends Location implements FactoryInterface
 {
+    private String name;
+    private MyQueue<Furniture> queue;
+
     /**
      * Creates a new factory object
-     *
-     * @param name Factory name
      */
     Factory(String name)
     {
         super(name);
+        queue = new MyQueue<Furniture>();
     }
 
     /**
@@ -20,7 +24,10 @@ public class Factory extends Location implements FactoryInterface
      *
      * @param furniture Piece of furniture to add
      */
-    public void addFurniture(Furniture furniture) {}
+    public void addFurniture(Furniture furniture)
+    {
+        queue.enqueue(furniture);
+    }
 
     /**
      * Remove a piece of furniture from the factory
@@ -29,7 +36,8 @@ public class Factory extends Location implements FactoryInterface
      */
     public Furniture removeFurniture()
     {
-        return null;
+        Furniture f = queue.dequeue();
+        return f;
     }
 
     /**
@@ -39,7 +47,13 @@ public class Factory extends Location implements FactoryInterface
      */
     public Furniture[] getFurnitures()
     {
-        return new Furniture[0];
+        Furniture[] array = (Furniture[]) Array.newInstance(Furniture.class, queue.size());
+
+        for (int i = 0; i < queue.size(); i++) {
+            Array.set(array, i, (Furniture) queue.getElementAt(i));
+        }
+
+        return array;
     }
 
     /**
@@ -49,6 +63,6 @@ public class Factory extends Location implements FactoryInterface
      */
     public boolean empty()
     {
-        return false;
+        return queue.isEmpty();
     }
 }

@@ -5,4 +5,8 @@
  */
 public class TruckLoadException extends Exception
 {
+    public TruckLoadException(String message)
+    {
+        super(message);
+    }
 }

@@ -2,7 +2,6 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
 /**
  * Application GUI class
@@ -11,8 +10,8 @@ import java.io.File;
  */
 public class GUI extends JFrame
 {
-    private FurnitureTrackerManager manager;
-    private boolean initialized;
+    private FurnitureTrackerManager tracker;
+    private JTable furnitureTable;
 
     /**
      * Creates GUI and sets up controls
@@ -33,14 +32,13 @@ public class GUI extends JFrame
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
         // Create table
-        JTable table = new JTable(10, 7);
-        table.getColumnModel().getColumn(0).setHeaderValue("Truck");
-        table.getColumnModel().getColumn(1).setHeaderValue("Factory");
-        table.getColumnModel().getColumn(2).setHeaderValue("Wal-Mart");
-        table.getColumnModel().getColumn(3).setHeaderValue("Sam's Club");
-        table.getColumnModel().getColumn(4).setHeaderValue("BJ's");
-        table.getColumnModel().getColumn(5).setHeaderValue("Big Lots");
-        table.getColumnModel().getColumn(6).setHeaderValue("Marlo");
+        furnitureTable = new JTable(10, 6);
+        furnitureTable.getColumnModel().getColumn(0).setHeaderValue("Truck");
+        furnitureTable.getColumnModel().getColumn(1).setHeaderValue("Factory");
+        furnitureTable.getColumnModel().getColumn(2).setHeaderValue("Wal-Mart");
+        furnitureTable.getColumnModel().getColumn(3).setHeaderValue("Sam's Club");
+        furnitureTable.getColumnModel().getColumn(4).setHeaderValue("BJ's");
+        furnitureTable.getColumnModel().getColumn(5).setHeaderValue("Big Lots");
 
         // Create buttons
         JPanel topButtonPanel = new JPanel();
@@ -78,7 +76,7 @@ public class GUI extends JFrame
         bottomButtonPanel.add(exitButton);
 
         // Add table to panel
-        panel.add(new JScrollPane(table));
+        panel.add(new JScrollPane(furnitureTable));
 
         // Add buttons to panel
         panel.add(topButtonPanel);
@@ -90,8 +88,8 @@ public class GUI extends JFrame
         // Show window
         window.setVisible(true);
 
-        // Create manager
-        manager = new FurnitureTrackerManager();
+        // Create tracker
+        tracker = new FurnitureTrackerManager();
     }
 
     /**
@@ -136,9 +134,16 @@ public class GUI extends JFrame
         int choice = chooser.showOpenDialog(GUI.this);
 
         if (choice == JFileChooser.APPROVE_OPTION) {
-            // Create new manager
-            manager.newFurnitureTracker(chooser.getSelectedFile());
-            initialized = true;
+            // Create new tracker
+            tracker.newFurnitureTracker(chooser.getSelectedFile());
+
+            // Add furniture to factory
+            int r = 0;
+            Furniture[] furnitures = tracker.getFurnitures(tracker.getFactory());
+
+            for (Furniture f : furnitures) {
+                furnitureTable.setValueAt(f.getName(), r++, 1);
+            }
         } else {
             System.out.println("Notice: File choosing cancelled by user");
         }
@@ -146,37 +151,37 @@ public class GUI extends JFrame
 
     private void loadFurniture() throws FurnitureTrackerNotInitializedException
     {
-        if (initialized) {
+        if (tracker.isInitialized()) {
 
         } else {
-            throw new FurnitureTrackerNotInitializedException();
+            throw new FurnitureTrackerNotInitializedException("Action attempted before tracker initialized");
         }
     }
 
     private void unloadFurniture() throws FurnitureTrackerNotInitializedException
     {
-        if (initialized) {
+        if (tracker.isInitialized()) {
 
         } else {
-            throw new FurnitureTrackerNotInitializedException();
+            throw new FurnitureTrackerNotInitializedException("Action attempted before tracker initialized");
         }
     }
 
     private void driveTruck() throws FurnitureTrackerNotInitializedException
     {
-        if (initialized) {
+        if (tracker.isInitialized()) {
 
         } else {
-            throw new FurnitureTrackerNotInitializedException();
+            throw new FurnitureTrackerNotInitializedException("Action attempted before tracker initialized");
         }
     }
 
     private void addFurniture() throws FurnitureTrackerNotInitializedException
     {
-        if (initialized) {
+        if (tracker.isInitialized()) {
 
         } else {
-            throw new FurnitureTrackerNotInitializedException();
+            throw new FurnitureTrackerNotInitializedException("Action attempted before tracker initialized");
         }
     }
 

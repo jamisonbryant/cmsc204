@@ -1,3 +1,5 @@
+import sun.invoke.empty.Empty;
+
 import java.util.EmptyStackException;
 
 /**
@@ -7,6 +9,21 @@ import java.util.EmptyStackException;
  */
 public class Truck implements TruckInterface
 {
+    private MyStack stack;
+    private Factory location;
+
+    public Truck()
+    {
+        stack = new MyStack();
+        location = null;
+    }
+
+    public Truck(Factory location)
+    {
+        stack = new MyStack();
+        this.location = location;
+    }
+
     /**
      * Adds a piece of furniture to the truck
      *
@@ -14,7 +31,7 @@ public class Truck implements TruckInterface
      */
     public void uploadFurniture(Furniture furniture)
     {
-
+        stack.push(furniture);
     }
 
     /**
@@ -25,7 +42,11 @@ public class Truck implements TruckInterface
      */
     public Furniture offloadFurniture() throws EmptyStackException
     {
-        return null;
+        if (!stack.isEmpty()) {
+            return (Furniture) stack.pop();
+        } else {
+            throw new EmptyStackException();
+        }
     }
 
     /**
@@ -35,6 +56,19 @@ public class Truck implements TruckInterface
      */
     public Furniture[] toArray()
     {
-        return new Furniture[0];
+        return null;
+    }
+
+    /**
+     * Sets the truck's current location
+     */
+    public Factory getLocation()
+    {
+        return location;
+    }
+
+    public void setLocation(Factory location)
+    {
+        this.location = location;
     }
 }

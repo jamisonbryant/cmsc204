@@ -8,13 +8,25 @@ import java.io.*;
  */
 public class FurnitureTrackerManager
 {
-    private Truck truck;
+    private boolean initialized;
     private Factory factory;
+    private Factory location;
+    private Truck truck;
     private Store store1;
     private Store store2;
     private Store store3;
     private Store store4;
-    private Factory location;
+
+    public FurnitureTrackerManager()
+    {
+        factory = new Factory("Factory");
+        location = factory;
+        truck = new Truck(location);
+        store1 = new Store("Wal-Mart");
+        store2 = new Store("Sam's Club");
+        store3 = new Store("BJ's");
+        store4 = new Store("Big Lots");
+    }
 
     /**
      * Creates a new furniture tracker
@@ -23,7 +35,8 @@ public class FurnitureTrackerManager
      */
     public void newFurnitureTracker(File file)
     {
-        System.out.println("Notice: Tracker initialized with \"" + file.getAbsolutePath() + "\"");
+        // Create truck
+        truck = new Truck();
 
         // Read furniture file
         try {
@@ -36,10 +49,12 @@ public class FurnitureTrackerManager
                 // Parse line contents into array
                 contents = line.split(",");
 
-                // Create furniture object
                 try {
+                    // Create furniture object
                     Furniture f = new Furniture(contents[0], contents[1], contents[2]);
-                    System.out.println("Info: Created furniture object: " + f.toString());
+
+                    // Add furniture to factory
+                    factory.addFurniture(f);
                 } catch(ArrayIndexOutOfBoundsException e) {
                     System.err.println("Error: Exception occurred while parsing file");
                     e.printStackTrace();
@@ -61,7 +76,7 @@ public class FurnitureTrackerManager
      */
     public Furniture[] getFurnitures(Factory factory)
     {
-        return null;
+        return factory.getFurnitures();
     }
 
     /**
@@ -73,7 +88,19 @@ public class FurnitureTrackerManager
      */
     public Furniture[] loadTruck() throws WrongLocationException, TruckLoadException
     {
-        return new Furniture[0];
+        if (truck.getLocation().equals(factory)) {
+            if (truck.toArray().length < 10) {
+                // ???
+            } else {
+                throw new TruckLoadException("Unable to load new furniture onto full truck");
+//                GUI.displayError("The truck cannot be loaded because it is full", false);
+            }
+        } else {
+            throw new WrongLocationException("Unable to load truck at non-factory location");
+//            GUI.displayError("The truck can only be loaded at the factory", false);
+        }
+
+        return null;
     }
 
     /**
@@ -84,7 +111,7 @@ public class FurnitureTrackerManager
      * @throws TruckLoadException ???
      * @return ???
      */
-    public Furniture[] unloadTruck(Store store) throws  WrongLocationException, TruckLoadException
+    public Furniture[] unloadTruck(Store store) throws WrongLocationException, TruckLoadException
     {
         return new Furniture[0];
     }
@@ -96,6 +123,7 @@ public class FurnitureTrackerManager
      */
     public void addFurnitureToFactory(Furniture furniture)
     {
+        factory.addFurniture(furniture);
     }
 
     /**
@@ -105,6 +133,11 @@ public class FurnitureTrackerManager
      */
     public void dispatchTruck() throws FurnitureTrackerNotInitializedException
     {
+        if (initialized) {
+
+        } else {
+            throw new FurnitureTrackerNotInitializedException("Action attempted before tracker initialized");
+        }
     }
 
     /**
@@ -175,5 +208,10 @@ public class FurnitureTrackerManager
     public Store getStore4()
     {
         return store4;
+    }
+
+    public boolean isInitialized()
+    {
+        return initialized;
     }
 }
