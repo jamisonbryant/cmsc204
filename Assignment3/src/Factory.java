@@ -64,9 +64,4 @@ public class Factory extends Location implements FactoryInterface
     {
         return queue.isEmpty();
     }
-
-    public String getName()
-    {
-        return name;
-    }
 }

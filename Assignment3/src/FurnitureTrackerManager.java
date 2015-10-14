@@ -19,6 +19,9 @@ public class FurnitureTrackerManager
     private Store store4;
     private LinkedList<Location> locations;
 
+    /**
+     * Creates a new Furniture Tracker Manager
+     */
     public FurnitureTrackerManager()
     {
         // Initialize stores
@@ -36,7 +39,7 @@ public class FurnitureTrackerManager
     }
 
     /**
-     * Creates a new furniture tracker
+     * Initializes the tracker with a furniture file
      *
      * @param file Furniture data file
      */
@@ -59,7 +62,7 @@ public class FurnitureTrackerManager
 
                     // Add furniture to factory
                     factory.addFurniture(f);
-                } catch(ArrayIndexOutOfBoundsException e) {
+                } catch (ArrayIndexOutOfBoundsException e) {
                     System.err.println("Error: Exception occurred while parsing file");
                     e.printStackTrace();
                     GUI.displayError("An error occurred while parsing the file", true);
@@ -78,9 +81,9 @@ public class FurnitureTrackerManager
     /**
      * Loads a piece of furniture onto the truck from the store
      *
-     * @throws WrongLocationException If the truck is not at the factory when this method is called
-     * @throws TruckLoadException If the truck is full when this method is called
      * @return Furniture on the truck after loading
+     * @throws WrongLocationException If the truck is not at the factory when this method is called
+     * @throws TruckLoadException     If the truck is full when this method is called
      */
     public Furniture[] loadTruck() throws WrongLocationException, TruckLoadException
     {
@@ -103,9 +106,9 @@ public class FurnitureTrackerManager
      * Unloads a piece of furniture from the truck into a store
      *
      * @param store The store to unload the truck into
-     * @throws WrongLocationException If the truck is not at a store when this method is called
-     * @throws TruckLoadException If the truck is empty when this method is called
      * @return Furniture on the track after unloading
+     * @throws WrongLocationException If the truck is not at a store when this method is called
+     * @throws TruckLoadException     If the truck is empty when this method is called
      */
     public Furniture[] unloadTruck(Store store) throws WrongLocationException, TruckLoadException
     {
@@ -147,7 +150,6 @@ public class FurnitureTrackerManager
         }
     }
 
-    //<editor-fold desc="[Getters/Setters] ...">
     /**
      * Returns the manager's truck object
      *
@@ -163,7 +165,10 @@ public class FurnitureTrackerManager
      *
      * @return Factory object
      */
-    public Factory getFactory() { return factory; }
+    public Factory getFactory()
+    {
+        return factory;
+    }
 
     /**
      * Returns the first of the manager's store objects
@@ -176,41 +181,14 @@ public class FurnitureTrackerManager
     }
 
     /**
-     * Returns the second of the manager's store objects
-     *
-     * @return 2nd store object
-     */
-    public Store getStore2()
-    {
-        return store2;
-    }
-
-    /**
-     * Returns the third of the manager's store objects
-     *
-     * @return 3rd store object
-     */
-    public Store getStore3()
-    {
-        return store3;
-    }
-
-    /**
-     * Returns the fourth of the manager's store objects
-     *
-     * @return 4th store object
-     */
-    public Store getStore4()
-    {
-        return store4;
-    }
-
-    /**
      * Returns tracker's truck's location
      *
      * @return Truck location
      */
-    public Location getTruckLocation() { return truck.getLocation(); }
+    public Location getTruckLocation()
+    {
+        return truck.getLocation();
+    }
 
     /**
      * Returns an array of the furniture in a factory
@@ -218,14 +196,20 @@ public class FurnitureTrackerManager
      * @param factory Factory to get furniture of
      * @return Furniture in factory
      */
-    public Furniture[] getFurnitures(Factory factory) { return factory.getFurnitures(); }
+    public Furniture[] getFurnitures(Factory factory)
+    {
+        return factory.getFurnitures();
+    }
 
     /**
      * Returns tracker's initialization state
      *
      * @return True if tracker initialized, false otherwise
      */
-    public boolean isInitialized() { return initialized; }
+    public boolean isInitialized()
+    {
+        return initialized;
+    }
 
     /**
      * Returns tracker's location list
@@ -236,9 +220,7 @@ public class FurnitureTrackerManager
     {
         return locations;
     }
-    //</editor-fold>
 
-    //<editor-fold desc="[Convenience Methods] ...">
     /**
      * Returns the index of the truck's current location in the location list
      *
@@ -248,9 +230,7 @@ public class FurnitureTrackerManager
     {
         return locations.indexOf(getTruckLocation());
     }
-    //</editor-fold>
 
-    //<editor-fold desc="[Not Yet Implemented] ...">
     /**
      * Adds a piece of furniture to the factory
      *
@@ -260,5 +240,5 @@ public class FurnitureTrackerManager
     {
         factory.addFurniture(furniture);
     }
-    //</editor-fold>
 }
+

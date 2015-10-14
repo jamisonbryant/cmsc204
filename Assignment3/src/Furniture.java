@@ -33,11 +33,21 @@ public class Furniture
         this.material = material;
     }
 
+    /**
+     * Returns the name of the furniture
+     *
+     * @return Furniture name
+     */
     public String getName()
     {
         return name;
     }
 
+    /**
+     * Returns a string representation of the piece of furniture
+     *
+     * @return String representation
+     */
     public String toString()
     {
         return this.name;

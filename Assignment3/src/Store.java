@@ -7,6 +7,9 @@ import java.lang.reflect.Array;
  */
 public class Store extends Location implements StoreInterface
 {
+    /**
+     * List that serves as the backbone of the store queue
+     */
     private MyQueue<Furniture> queue;
 
     /**
@@ -57,7 +60,6 @@ public class Store extends Location implements StoreInterface
         return false;
     }
 
-    //<editor-fold desc="[Getters/Setters] ...">
     /**
      * Returns store name
      *
@@ -67,5 +69,4 @@ public class Store extends Location implements StoreInterface
     {
         return name;
     }
-    //</editor-fold>
 }

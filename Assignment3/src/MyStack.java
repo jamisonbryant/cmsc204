@@ -7,8 +7,14 @@ import java.util.Stack;
  */
 public class MyStack<T> implements StackInterface<T>
 {
+    /**
+     * Stack that serves as backbone of MyStack
+     */
     private Stack<T> stack;
 
+    /**
+     * Creates a new MyStack
+     */
     public MyStack()
     {
         stack = new Stack<T>();

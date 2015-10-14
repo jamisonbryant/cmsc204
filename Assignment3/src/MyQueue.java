@@ -8,8 +8,14 @@ import java.util.LinkedList;
  */
 public class MyQueue<T> implements QueueInterface<T>
 {
+    /**
+     * List that serves as backbone of MyQueue
+     */
     private LinkedList<T> queue;
 
+    /**
+     * Creates a new MyQueue
+     */
     public MyQueue()
     {
         queue = new LinkedList<T>();

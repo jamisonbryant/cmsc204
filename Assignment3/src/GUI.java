@@ -3,17 +3,31 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.TableColumn;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.LinkedList;
 
 /**
- * Application GUI class
+ * Application GUI
  *
  * @author Jamison Bryant (jbryan46@montgomerycollege.edu) for CMSC 204 (R. Alexander) M/W 1PM-3PM
  */
 public class GUI extends JFrame
 {
+    /**
+     * GUI's instance of a furniture tracker manager
+     */
     private FurnitureTrackerManager tracker;
+
+    /**
+     * Table that represents the furniture currently in various locations
+     */
     private JTable furnitureTable;
+
+    /**
+     * The label that indicates the truck's current location
+     *
+     * Note: Were there more thorough support for Unicode on Windows, we could potentially do something fun here by
+     * using the delivery truck emoji ("\uD83D\uDE9A") instead of just a "T". However, lacking the proper Unicode fonts
+     * leads the emoji to be displayed as a blank box, thereby obscuring its meaning.
+     */
     private static String truckLabel = " (T)";
 
     /**
@@ -39,6 +53,7 @@ public class GUI extends JFrame
 
         // Create table
         furnitureTable = new JTable(10, 1 + tracker.getLocations().size());
+        furnitureTable.setEnabled(false);
         furnitureTable.getColumnModel().getColumn(0).setHeaderValue("Truck");
 
         for (int i = 1; i < furnitureTable.getColumnCount(); i++) {
@@ -151,6 +166,11 @@ public class GUI extends JFrame
         }
     }
 
+    /**
+     * Loads a piece of furniture onto the truck
+     *
+     * @throws FurnitureTrackerNotInitializedException If the tracker hasn't been initialized when this method is called
+     */
     private void loadFurniture() throws FurnitureTrackerNotInitializedException
     {
         if (tracker.isInitialized()) {
@@ -179,6 +199,11 @@ public class GUI extends JFrame
         }
     }
 
+    /**
+     * Unloads a piece of furniture from the truck
+     *
+     * @throws FurnitureTrackerNotInitializedException If the tracker hasn't been initialized when this method is called
+     */
     private void unloadFurniture() throws FurnitureTrackerNotInitializedException
     {
         if (tracker.isInitialized()) {
@@ -210,6 +235,11 @@ public class GUI extends JFrame
         }
     }
 
+    /**
+     * Moves the truck to the next location
+     *
+     * @throws FurnitureTrackerNotInitializedException If the tracker hasn't been initialized when this method is called
+     */
     private void driveTruck() throws FurnitureTrackerNotInitializedException
     {
         if (tracker.isInitialized()) {
@@ -220,6 +250,11 @@ public class GUI extends JFrame
         }
     }
 
+    /**
+     * Adds a user-defined piece of furniture to the factory
+     *
+     * @throws FurnitureTrackerNotInitializedException If the tracker hasn't been initialized when this method is called
+     */
     private void addFurniture() throws FurnitureTrackerNotInitializedException
     {
         if (tracker.isInitialized()) {
@@ -248,11 +283,15 @@ public class GUI extends JFrame
         }
     }
 
+    /**
+     * Handles events triggered by UI controls
+     */
     public class ActionHandler implements ActionListener
     {
         @Override
         public void actionPerformed(ActionEvent e)
         {
+            // Parse action command
             switch (e.getActionCommand())
             {
                 case "create_simulation":
@@ -305,7 +344,6 @@ public class GUI extends JFrame
         }
     }
 
-    //<editor-fold desc="[Convenience Methods] ...">
     /**
      * Displays an error message in a dialog box
      *
@@ -347,5 +385,4 @@ public class GUI extends JFrame
             furnitureTable.setValueAt("", i, column);
         }
     }
-    //</editor-fold>
 }

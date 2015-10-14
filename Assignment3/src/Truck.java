@@ -10,15 +10,30 @@ import java.util.EmptyStackException;
  */
 public class Truck implements TruckInterface
 {
+    /**
+     * Stack that serves as the backbone of the truck stack
+     */
     private MyStack stack;
+
+    /**
+     * Current location of the truck
+     */
     private Location location;
 
+    /**
+     * Creates a new Truck object
+     */
     public Truck()
     {
         stack = new MyStack();
         location = null;
     }
 
+    /**
+     * Creates a new Truck object with an initial Location
+     *
+     * @param location Initial location
+     */
     public Truck(Location location)
     {
         stack = new MyStack();
@@ -75,6 +90,11 @@ public class Truck implements TruckInterface
         return location;
     }
 
+    /**
+     * Sets the truck's location
+     *
+     * @param location Location to set
+     */
     public void setLocation(Location location)
     {
         this.location = location;
