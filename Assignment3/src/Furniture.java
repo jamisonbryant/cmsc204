@@ -38,61 +38,8 @@ public class Furniture
         return name;
     }
 
-    public void setName(String name)
-    {
-        this.name = name;
-    }
-
-    public String getMaterial()
-    {
-        return material;
-    }
-
-    public void setMaterial(String material)
-    {
-        this.material = material;
-    }
-
-    public String getColor()
-    {
-        return color;
-    }
-
-    public void setColor(String color)
-    {
-        this.color = color;
-    }
-
-    /**
-     * Returns a string representation of the furniture object
-     *
-     * @return String representation
-     */
     public String toString()
     {
-        String label = "";
-
-        if (material != null) {
-            label += material + " ";
-        } else {
-            label += "Unknown ";
-            System.err.println("Warning: Furniture material not specified");
-        }
-
-        if (name != null) {
-            label += name + " ";
-        } else {
-            label += "Unknown ";
-            System.err.println("Warning: Furniture name not specified");
-        }
-
-        if (color != null) {
-            label += "(" + color + ")";
-        } else {
-            label += "(Unknown)";
-            System.err.println("Warning: Furniture color not specified");
-        }
-
-        return label;
+        return this.name;
     }
 }

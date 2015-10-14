@@ -148,8 +148,6 @@ public class GUI extends JFrame
 
             // Set truck location
             setTruckLabel(0);
-        } else {
-            System.out.println("Notice: File choosing cancelled by user");
         }
     }
 
@@ -171,11 +169,10 @@ public class GUI extends JFrame
             }
 
             // Update factory column
-            int c = 1;
-            clearColumn(c);
+            clearColumn(1);
 
             for (Furniture f : tracker.getFactory().getFurnitures()) {
-                furnitureTable.setValueAt(f.getName(), s++, c);
+                furnitureTable.setValueAt(f.getName(), s++, 1);
             }
         } else {
             throw new FurnitureTrackerNotInitializedException("Error: Action attempted before tracker initialized");
@@ -226,7 +223,26 @@ public class GUI extends JFrame
     private void addFurniture() throws FurnitureTrackerNotInitializedException
     {
         if (tracker.isInitialized()) {
+            // Display furniture form
+            JTextField nameField = new JTextField();
+            JTextField colorField = new JTextField();
+            JTextField materialField = new JTextField();
+            Object[] labels = { "Name", nameField, "Color", colorField, "Material", materialField };
+            int response = JOptionPane.showConfirmDialog(null, labels, "Add Furniture", JOptionPane.OK_CANCEL_OPTION);
 
+            if (response == JOptionPane.OK_OPTION) {
+                // Add furniture to factory
+                tracker.getFactory().addFurniture(
+                        new Furniture(nameField.getText(), colorField.getText(), materialField.getText()));
+
+                // Update factory column
+                int r = 0;
+                clearColumn(1);
+
+                for (Furniture f : tracker.getFactory().getFurnitures()) {
+                    furnitureTable.setValueAt(f.getName(), r++, 1);
+                }
+            }
         } else {
             throw new FurnitureTrackerNotInitializedException("Error: Action attempted before tracker initialized");
         }

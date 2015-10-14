@@ -104,7 +104,20 @@ public class FurnitureTrackerManagerTest
     @Test
     public void testLoadTruckSTUDENT()
     {
-        fail("not implemented yet");
+        Furniture[] load = null;
+
+        try {
+            load = frnTrackerManager.loadTruck();
+            load = frnTrackerManager.loadTruck();
+            load = frnTrackerManager.loadTruck();
+
+            assertEquals(load[1].color.compareTo("Maple"), 0);
+            assertEquals(load[2].color.compareTo("Black"), 0);
+        } catch (WrongLocationException e) {
+            fail("Should not have thrown a WrongLocationException");
+        } catch (TruckLoadException e) {
+            fail("Should not have thrown a TruckLoadException");
+        }
     }
 
     @Test
@@ -134,7 +147,29 @@ public class FurnitureTrackerManagerTest
     @Test
     public void testUnloadTruckSTUDENT()
     {
-        fail("not implemented yet");
+        Furniture[] load = null;
+
+        try {
+            frnTrackerManager.loadTruck();
+            frnTrackerManager.loadTruck();
+            frnTrackerManager.loadTruck();
+            frnTrackerManager.loadTruck();
+            frnTrackerManager.loadTruck();
+            frnTrackerManager.loadTruck();
+            frnTrackerManager.dispatchTruck();
+            load = frnTrackerManager.unloadTruck(store1);
+            load = frnTrackerManager.unloadTruck(store1);
+
+            assertEquals(load[2].color, "Black");
+            assertEquals(load[3].color, "Cherry");
+        } catch (WrongLocationException e) {
+            fail("Should not have thrown a WrongLocationException");
+            e.printStackTrace();
+        } catch (TruckLoadException e) {
+            fail("Should not have thrown a TruckLoadException");
+        } catch (FurnitureTrackerNotInitializedException e) {
+            fail("Should not have thrown a FurnitureTrackerNotInitializedException");
+        }
     }
 
     @Test
@@ -184,7 +219,14 @@ public class FurnitureTrackerManagerTest
     @Test
     public void testAddVehicleToFactorySTUDENT()
     {
-        fail("not implemented yet");
+        String name = "Dresser";
+        String color = "Cedar";
+        String material = "Wood";
+        Furniture dresser = new Furniture(name, color, material);
+        frnTrackerManager.addFurnitureToFactory(dresser);
+        Furniture[] frnList = factory.getFurnitures();
+
+        assertEquals(frnList[6].color.compareTo("Cedar"), 0);
     }
 
 }
