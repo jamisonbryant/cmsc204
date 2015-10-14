@@ -3,7 +3,7 @@
   generalizations="true" realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
   <class id="1" language="java" name="FurnitureTrackerNotInitializedException" project="Assignment3" 
     file="/Assignment3/src/FurnitureTrackerNotInitializedException.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="81" width="248" x="226" y="53"/>    
+    <position height="81" width="248" x="295" y="141"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -12,7 +12,7 @@
   </class>  
   <class id="2" language="java" name="Furniture" project="Assignment3" file="/Assignment3/src/Furniture.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="189" width="167" x="514" y="53"/>    
+    <position height="189" width="167" x="583" y="141"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -21,7 +21,7 @@
   </class>  
   <class id="3" language="java" name="Store" project="Assignment3" file="/Assignment3/src/Store.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="153" width="161" x="1672" y="1293"/>    
+    <position height="153" width="161" x="1770" y="1381"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -30,7 +30,7 @@
   </class>  
   <interface id="4" language="java" name="StoreInterface" project="Assignment3" 
     file="/Assignment3/src/StoreInterface.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="117" width="161" x="1592" y="1504"/>    
+    <position height="117" width="161" x="1833" y="1592"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -39,7 +39,7 @@
   </interface>  
   <class id="5" language="java" name="MyStack" project="Assignment3" file="/Assignment3/src/MyStack.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="207" width="112" x="1960" y="1046"/>    
+    <position height="207" width="112" x="1810" y="1134"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -48,7 +48,7 @@
   </class>  
   <class id="6" language="java" name="FurnitureTrackerManager" project="Assignment3" 
     file="/Assignment3/src/FurnitureTrackerManager.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="333" width="209" x="1484" y="444"/>    
+    <position height="333" width="209" x="1625" y="532"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -57,7 +57,7 @@
   </class>  
   <class id="7" language="java" name="GUI" project="Assignment3" file="/Assignment3/src/GUI.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="297" width="200" x="1096" y="53"/>    
+    <position height="297" width="200" x="1625" y="141"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -66,7 +66,7 @@
   </class>  
   <class id="8" language="java" name="Location" project="Assignment3" file="/Assignment3/src/Location.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="117" width="103" x="1775" y="1046"/>    
+    <position height="117" width="103" x="1625" y="1134"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -75,7 +75,7 @@
   </class>  
   <class id="9" language="java" name="GUI.ActionHandler" project="Assignment3" file="/Assignment3/src/GUI.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="99" width="194" x="1096" y="444"/>    
+    <position height="99" width="194" x="1307" y="532"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -84,7 +84,7 @@
   </class>  
   <class id="10" language="java" name="Factory" project="Assignment3" file="/Assignment3/src/Factory.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="171" width="161" x="1899" y="1293"/>    
+    <position height="171" width="161" x="1543" y="1381"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -93,7 +93,7 @@
   </class>  
   <class id="11" language="java" name="Launcher" project="Assignment3" file="/Assignment3/src/Launcher.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="99" width="113" x="721" y="53"/>    
+    <position height="99" width="113" x="790" y="141"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -102,7 +102,7 @@
   </class>  
   <class id="12" language="java" name="WrongLocationException" project="Assignment3" 
     file="/Assignment3/src/WrongLocationException.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="81" width="182" x="874" y="53"/>    
+    <position height="81" width="182" x="943" y="141"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -111,7 +111,7 @@
   </class>  
   <class id="13" language="java" name="TruckLoadException" project="Assignment3" 
     file="/Assignment3/src/TruckLoadException.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="81" width="160" x="1336" y="53"/>    
+    <position height="81" width="160" x="1165" y="141"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -120,7 +120,7 @@
   </class>  
   <class id="14" language="java" name="FurnitureTrackerManagerTest" project="Assignment3" 
     file="/Assignment3/src/FurnitureTrackerManagerTest.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="351" width="224" x="1796" y="53"/>    
+    <position height="351" width="224" x="2158" y="141"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -129,7 +129,7 @@
   </class>  
   <class id="15" language="java" name="MyQueue" project="Assignment3" file="/Assignment3/src/MyQueue.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="207" width="128" x="1793" y="1504"/>    
+    <position height="207" width="128" x="1665" y="1592"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -138,7 +138,7 @@
   </class>  
   <interface id="16" language="java" name="FurnitureTrackerManagerInterface" project="Assignment3" 
     file="/Assignment3/src/FurnitureTrackerManagerInterface.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="297" width="220" x="1536" y="53"/>    
+    <position height="297" width="220" x="1365" y="141"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -147,7 +147,7 @@
   </interface>  
   <interface id="17" language="java" name="FactoryInterface" project="Assignment3" 
     file="/Assignment3/src/FactoryInterface.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="135" width="161" x="1961" y="1504"/>    
+    <position height="135" width="161" x="1464" y="1592"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -156,7 +156,7 @@
   </interface>  
   <interface id="18" language="java" name="StackInterface" project="Assignment3" 
     file="/Assignment3/src/StackInterface.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="153" width="129" x="2100" y="1293"/>    
+    <position height="153" width="129" x="1971" y="1381"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -165,7 +165,7 @@
   </interface>  
   <interface id="19" language="java" name="QueueInterface" project="Assignment3" 
     file="/Assignment3/src/QueueInterface.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="153" width="133" x="1793" y="1751"/>    
+    <position height="153" width="133" x="1665" y="1839"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -174,7 +174,7 @@
   </interface>  
   <class id="20" language="java" name="Truck" project="Assignment3" file="/Assignment3/src/Truck.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="189" width="175" x="1796" y="817"/>    
+    <position height="189" width="175" x="1835" y="905"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -183,7 +183,7 @@
   </class>  
   <interface id="21" language="java" name="TruckInterface" project="Assignment3" 
     file="/Assignment3/src/TruckInterface.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="117" width="175" x="2112" y="1046"/>    
+    <position height="117" width="175" x="1962" y="1134"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -191,211 +191,211 @@
     </display>  
   </interface>  
   <association id="22">    
-    <bendpoint x="1765" y="444"/>    
-    <bendpoint x="1765" y="817"/>    
-    <bendpoint x="1744" y="1046"/>    
-    <end type="SOURCE" refId="14" navigable="false">      
+    <bendpoint x="1594" y="905"/>    
+    <bendpoint x="1594" y="1134"/>    
+    <end type="SOURCE" refId="6" navigable="false">      
       <attribute id="23" name="store3"/>      
       <multiplicity id="24" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="25">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="26" name="queue"/>      
-      <multiplicity id="27" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="15" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="28">    
-    <bendpoint x="1556" y="817"/>    
-    <bendpoint x="1556" y="1046"/>    
+  <realization id="25">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <realization id="26">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="17"/>  
+  </realization>  
+  <association id="27">    
+    <bendpoint x="1573" y="905"/>    
+    <bendpoint x="1573" y="1134"/>    
     <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="29" name="store1"/>      
-      <multiplicity id="30" minimum="0" maximum="1"/>    
+      <attribute id="28" name="store2"/>      
+      <multiplicity id="29" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <nesting id="31">    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="9"/>  
-  </nesting>  
-  <association id="32">    
-    <bendpoint x="2001" y="444"/>    
-    <bendpoint x="2001" y="817"/>    
-    <bendpoint x="1929" y="1046"/>    
+  <association id="30">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="31" name="truck"/>      
+      <multiplicity id="32" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="33">    
     <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="33" name="store4"/>      
-      <multiplicity id="34" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="35">    
-    <bendpoint x="1744" y="817"/>    
-    <bendpoint x="1908" y="1046"/>    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="36" name="factory"/>      
-      <multiplicity id="37" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="10" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="38">    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="39" name="tracker"/>      
-      <multiplicity id="40" minimum="0" maximum="1"/>    
+      <attribute id="34" name="frnTrackerManager"/>      
+      <multiplicity id="35" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="41">    
-    <bendpoint x="1702" y="817"/>    
+  <realization id="36">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="18"/>  
+  </realization>  
+  <association id="37">    
+    <bendpoint x="2167" y="532"/>    
+    <bendpoint x="2167" y="905"/>    
+    <bendpoint x="2167" y="1134"/>    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="38" name="store3"/>      
+      <multiplicity id="39" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="40">    
+    <bendpoint x="1634" y="905"/>    
     <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="42" name="locations"/>      
-      <multiplicity id="43" minimum="0" maximum="2147483647"/>    
+      <attribute id="41" name="locations"/>      
+      <multiplicity id="42" minimum="0" maximum="2147483647"/>    
     </end>    
     <end type="TARGET" refId="8" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <nesting id="43">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="9"/>  
+  </nesting>  
   <association id="44">    
-    <bendpoint x="1619" y="817"/>    
-    <bendpoint x="1619" y="1046"/>    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="45" name="store3"/>      
+    <bendpoint x="2230" y="532"/>    
+    <bendpoint x="2230" y="905"/>    
+    <bendpoint x="2230" y="1134"/>    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="45" name="store4"/>      
       <multiplicity id="46" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="47">    
-    <bendpoint x="1723" y="444"/>    
-    <bendpoint x="1681" y="817"/>    
-    <bendpoint x="1681" y="1046"/>    
+    <bendpoint x="2005" y="532"/>    
     <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="48" name="store1"/>      
+      <attribute id="48" name="truck"/>      
       <multiplicity id="49" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
+    <end type="TARGET" refId="20" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="50">    
-    <bendpoint x="1744" y="444"/>    
-    <bendpoint x="1723" y="817"/>    
-    <bendpoint x="1723" y="1046"/>    
-    <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="51" name="store2"/>      
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="51" name="queue"/>      
       <multiplicity id="52" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="53">    
-    <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="54" name="queue"/>      
-      <multiplicity id="55" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="15" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="56">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="8"/>  
-  </generalization>  
-  <association id="57">    
-    <end type="SOURCE" refId="20" navigable="false">      
-      <attribute id="58" name="location"/>      
-      <multiplicity id="59" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="60">    
-    <end type="SOURCE" refId="10"/>    
-    <end type="TARGET" refId="17"/>  
-  </realization>  
-  <generalization id="61">    
-    <end type="SOURCE" refId="10"/>    
-    <end type="TARGET" refId="8"/>  
-  </generalization>  
-  <association id="62">    
-    <bendpoint x="1577" y="817"/>    
-    <bendpoint x="1577" y="1046"/>    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="63" name="store4"/>      
-      <multiplicity id="64" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="65">    
-    <end type="SOURCE" refId="20"/>    
-    <end type="TARGET" refId="21"/>  
-  </realization>  
-  <realization id="66">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="4"/>  
-  </realization>  
-  <association id="67">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="68" name="truck"/>      
-      <multiplicity id="69" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="20" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="70">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="18"/>  
-  </realization>  
-  <association id="71">    
-    <end type="SOURCE" refId="20" navigable="false">      
-      <attribute id="72" name="stack"/>      
-      <multiplicity id="73" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="74">    
-    <bendpoint x="1805" y="444"/>    
-    <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="75" name="truck"/>      
-      <multiplicity id="76" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="20" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="77">    
+  <realization id="53">    
     <end type="SOURCE" refId="15"/>    
     <end type="TARGET" refId="19"/>  
   </realization>  
-  <association id="78">    
-    <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="79" name="frnTrackerManager"/>      
-      <multiplicity id="80" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="81">    
-    <bendpoint x="2317" y="444"/>    
-    <bendpoint x="2317" y="817"/>    
-    <bendpoint x="2317" y="1046"/>    
-    <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="82" name="factory"/>      
-      <multiplicity id="83" minimum="0" maximum="1"/>    
+  <association id="54">    
+    <bendpoint x="1552" y="905"/>    
+    <bendpoint x="1552" y="1134"/>    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="55" name="factory"/>      
+      <multiplicity id="56" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="10" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="84">    
-    <bendpoint x="1598" y="817"/>    
-    <bendpoint x="1598" y="1046"/>    
+  <generalization id="57">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <association id="58">    
+    <bendpoint x="1531" y="532"/>    
+    <bendpoint x="1531" y="905"/>    
+    <bendpoint x="1531" y="1134"/>    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="59" name="factory"/>      
+      <multiplicity id="60" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="61">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="62" name="queue"/>      
+      <multiplicity id="63" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="64">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="65" name="tracker"/>      
+      <multiplicity id="66" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="67">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="21"/>  
+  </realization>  
+  <generalization id="68">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="8"/>  
+  </generalization>  
+  <association id="69">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="70" name="stack"/>      
+      <multiplicity id="71" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="72">    
+    <end type="SOURCE" refId="20" navigable="false">      
+      <attribute id="73" name="location"/>      
+      <multiplicity id="74" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="75">    
+    <bendpoint x="2188" y="532"/>    
+    <bendpoint x="2188" y="905"/>    
+    <bendpoint x="2188" y="1134"/>    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="76" name="store2"/>      
+      <multiplicity id="77" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="78">    
+    <bendpoint x="1758" y="905"/>    
+    <bendpoint x="1758" y="1134"/>    
     <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="85" name="store2"/>      
+      <attribute id="79" name="store4"/>      
+      <multiplicity id="80" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="81">    
+    <bendpoint x="1779" y="905"/>    
+    <bendpoint x="1779" y="1134"/>    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="82" name="store1"/>      
+      <multiplicity id="83" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="84">    
+    <bendpoint x="2209" y="532"/>    
+    <bendpoint x="2209" y="905"/>    
+    <bendpoint x="2209" y="1134"/>    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="85" name="store1"/>      
       <multiplicity id="86" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
