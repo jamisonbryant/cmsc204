@@ -1,3 +1,5 @@
+import java.lang.reflect.Array;
+
 /**
  * The store data object
  *
@@ -5,6 +7,8 @@
  */
 public class Store extends Location implements StoreInterface
 {
+    private MyQueue<Furniture> queue;
+
     /**
      * Creates a new Store object
      *
@@ -13,6 +17,7 @@ public class Store extends Location implements StoreInterface
     Store(String name)
     {
         super(name);
+        queue = new MyQueue<Furniture>();
     }
 
     /**
@@ -22,7 +27,7 @@ public class Store extends Location implements StoreInterface
      */
     public void addFurniture(Furniture furniture)
     {
-
+        queue.enqueue(furniture);
     }
 
     /**
@@ -32,7 +37,13 @@ public class Store extends Location implements StoreInterface
      */
     public Furniture[] getFurnitures()
     {
-        return new Furniture[0];
+        Furniture[] array = (Furniture[]) Array.newInstance(Furniture.class, queue.size());
+
+        for (int i = 0; i < queue.size(); i++) {
+            Array.set(array, i, (Furniture) queue.getElementAt(i));
+        }
+
+        return array;
     }
 
     /**
@@ -42,6 +53,19 @@ public class Store extends Location implements StoreInterface
      */
     public boolean full()
     {
+        // TODO: What conditions cause the store to be full?
         return false;
     }
+
+    //<editor-fold desc="[Getters/Setters] ...">
+    /**
+     * Returns store name
+     *
+     * @return Store name
+     */
+    public String getName()
+    {
+        return name;
+    }
+    //</editor-fold>
 }

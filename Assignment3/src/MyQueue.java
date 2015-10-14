@@ -33,8 +33,31 @@ public class MyQueue<T> implements QueueInterface<T>
     public T dequeue()
     {
         // Return last item
-        return queue.removeFirst();
+        return queue.poll();
     }
+
+    /**
+     * Adds an item to the queue
+     *
+     * @param item Item to add
+     * @return True if successful, false otherwise
+     */
+    public boolean enqueue(T item)
+    {
+        return queue.offer(item);
+    }
+
+    /**
+     * Returns the element at an index of the queue
+     *
+     * @param index Index of element to get
+     * @return Element at index
+     */
+    public T getElementAt(int index)
+    {
+        return queue.get(index);
+    }
+
 
     /**
      * Returns the size of the queue
@@ -47,21 +70,6 @@ public class MyQueue<T> implements QueueInterface<T>
     }
 
     /**
-     * Adds an item to the queue
-     *
-     * @param item Item to add
-     * @return True if successful, false otherwise
-     */
-    public boolean enqueue(T item)
-    {
-        // Add item to queue
-        queue.add(item);
-
-        // TODO: What conditions cause this method to fail?
-        return true;
-    }
-
-    /**
      * Converts the queue to an array
      *
      * @return Queue as an array
@@ -69,10 +77,5 @@ public class MyQueue<T> implements QueueInterface<T>
     public T[] toArray()
     {
         return (T[]) queue.toArray();
-    }
-
-    public T getElementAt(int index)
-    {
-        return queue.get(index);
     }
 }

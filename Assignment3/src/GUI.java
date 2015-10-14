@@ -3,6 +3,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.TableColumn;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.LinkedList;
 
 /**
  * Application GUI class
@@ -13,12 +14,16 @@ public class GUI extends JFrame
 {
     private FurnitureTrackerManager tracker;
     private JTable furnitureTable;
+    private static String truckLabel = " (T)";
 
     /**
      * Creates GUI and sets up controls
      */
     public GUI()
     {
+        // Create tracker
+        tracker = new FurnitureTrackerManager();
+
         // Create main window
         JFrame window = new JFrame("Furniture Tracker");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -33,13 +38,12 @@ public class GUI extends JFrame
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
         // Create table
-        furnitureTable = new JTable(10, 6);
+        furnitureTable = new JTable(10, 1 + tracker.getLocations().size());
         furnitureTable.getColumnModel().getColumn(0).setHeaderValue("Truck");
-        furnitureTable.getColumnModel().getColumn(1).setHeaderValue("Factory");
-        furnitureTable.getColumnModel().getColumn(2).setHeaderValue("Wal-Mart");
-        furnitureTable.getColumnModel().getColumn(3).setHeaderValue("Sam's Club");
-        furnitureTable.getColumnModel().getColumn(4).setHeaderValue("BJ's");
-        furnitureTable.getColumnModel().getColumn(5).setHeaderValue("Big Lots");
+
+        for (int i = 1; i < furnitureTable.getColumnCount(); i++) {
+            furnitureTable.getColumnModel().getColumn(i).setHeaderValue(tracker.getLocations().get(i - 1).name);
+        }
 
         // Create buttons
         JPanel topButtonPanel = new JPanel();
@@ -88,97 +92,35 @@ public class GUI extends JFrame
 
         // Show window
         window.setVisible(true);
-
-        // Create tracker
-        tracker = new FurnitureTrackerManager();
     }
 
     /**
-     * Displays an error message in a dialog box
+     * Sets the location of the truck label
      *
-     * @param message Message to display
-     * @param exit Exit application after message acknowledged
+     * @param column Column to set label on (0 = factory, 1 - n = stores)
      */
-    public static void displayError(String message, boolean exit)
+    private void setTruckLabel(int column)
     {
-        JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);
+        int numLocations = tracker.getLocations().size();
 
-        if (exit) {
-            System.exit(1);
-        }
-    }
-
-    /**
-     * Displays a warning message in a dialog box
-     *
-     * @param message Message to display
-     * @param exit Exit application after message acknowledged
-     */
-    public static void displayWarning(String message, boolean exit)
-    {
-        JOptionPane.showMessageDialog(null, message, "Warning", JOptionPane.WARNING_MESSAGE);
-
-        if (exit) {
-            System.exit(1);
-        }
-    }
-
-    /**
-     * Clears the contents of a column of the table
-     *
-     * @param column Index of column to clear
-     */
-    private void clearColumn(int column)
-    {
-        for (int i = 0; i < furnitureTable.getRowCount(); i++) {
-            furnitureTable.setValueAt("", i, column);
-        }
-    }
-
-    private int getTruckLocation()
-    {
-        String truckLabel = " (T)";
-
-        // Reset all column headers
-        for (int i = 1; i < furnitureTable.getColumnCount(); i++) {
-            TableColumn c = furnitureTable.getColumnModel().getColumn(i);
-            String header = c.getHeaderValue().toString();
-
-            if (header.contains(truckLabel)) {
-                return i;
-            }
+        // Reset column headers
+        for (int i = 0; i < numLocations; i++) {
+            TableColumn c = furnitureTable.getColumnModel().getColumn(i + 1);
+            c.setHeaderValue(tracker.getLocations().get(i).name);
         }
 
-        return -1;
-    }
-
-    /**
-     * Updates a column header with the truck's location
-     *
-     * @param column Index of column to update
-     */
-    private void setTruckLocation(int column)
-    {
-        String truckLabel = " (T)";
-
-        // Reset all column headers
-        for (int i = 1; i < furnitureTable.getColumnCount(); i++) {
-            TableColumn c = furnitureTable.getColumnModel().getColumn(i);
-            String header = c.getHeaderValue().toString();
-
-            if (header.contains(truckLabel)) {
-                c.setHeaderValue(header.substring(0, header.length() - 4));
-            }
-        }
-
-        // Update requested column header
-        if (column > furnitureTable.getColumnCount() - 1) {
-            column = column % furnitureTable.getColumnCount() + 1;
-        }
-
-        TableColumn c = furnitureTable.getColumnModel().getColumn(column);
-        c.setHeaderValue(c.getHeaderValue() + truckLabel);
+        // Set truck label
+        TableColumn c = furnitureTable.getColumnModel().getColumn(column + 1);
+        c.setHeaderValue(tracker.getLocations().get(column).name + truckLabel);
         furnitureTable.getTableHeader().repaint();
+    }
+
+    /**
+     * Moves the truck label to the next location
+     */
+    private void moveTruckLabel()
+    {
+        setTruckLabel(tracker.getLocationIndex());
     }
 
     /**
@@ -205,7 +147,7 @@ public class GUI extends JFrame
             }
 
             // Set truck location
-            setTruckLocation(1);
+            setTruckLabel(0);
         } else {
             System.out.println("Notice: File choosing cancelled by user");
         }
@@ -216,7 +158,7 @@ public class GUI extends JFrame
         if (tracker.isInitialized()) {
             // Load furniture onto truck
             Truck truck = tracker.getTruck();
-            truck.uploadFurniture(truck.getLocation().removeFurniture());
+            truck.uploadFurniture(tracker.getFactory().removeFurniture());
 
             // Update truck column
             int r1 = 0;
@@ -234,25 +176,50 @@ public class GUI extends JFrame
                 furnitureTable.setValueAt(f.getName(), r2++, 1);
             }
         } else {
-            throw new FurnitureTrackerNotInitializedException("Action attempted before tracker initialized");
+            throw new FurnitureTrackerNotInitializedException("Error: Action attempted before tracker initialized");
         }
     }
 
     private void unloadFurniture() throws FurnitureTrackerNotInitializedException
     {
         if (tracker.isInitialized()) {
+            int r;
 
+            // Remove furniture from truck
+            r = 0;
+            Truck truck = tracker.getTruck();
+            Furniture f = truck.offloadFurniture();
+
+            // Add furniture to store
+            ((Store) truck.getLocation()).addFurniture(f);
+
+            // Update truck column
+            clearColumn(0);
+
+            for (Furniture f2 : truck.toArray()) {
+                furnitureTable.setValueAt(f.getName(), r++, 0);
+            }
+
+            // Update store column
+            r = 0;
+            int c = tracker.getLocationIndex();
+            clearColumn(c);
+
+            for (Furniture f2 : ((Store) truck.getLocation()).getFurnitures()) {
+                furnitureTable.setValueAt(f.getName(), r++, c);
+            }
         } else {
-            throw new FurnitureTrackerNotInitializedException("Action attempted before tracker initialized");
+            throw new FurnitureTrackerNotInitializedException("Error: Action attempted before tracker initialized");
         }
     }
 
     private void driveTruck() throws FurnitureTrackerNotInitializedException
     {
         if (tracker.isInitialized()) {
-            setTruckLocation(getTruckLocation() + 1);
+            tracker.dispatchTruck();
+            moveTruckLabel();
         } else {
-            throw new FurnitureTrackerNotInitializedException("Action attempted before tracker initialized");
+            throw new FurnitureTrackerNotInitializedException("Error: Action attempted before tracker initialized");
         }
     }
 
@@ -261,7 +228,7 @@ public class GUI extends JFrame
         if (tracker.isInitialized()) {
 
         } else {
-            throw new FurnitureTrackerNotInitializedException("Action attempted before tracker initialized");
+            throw new FurnitureTrackerNotInitializedException("Error: Action attempted before tracker initialized");
         }
     }
 
@@ -321,4 +288,48 @@ public class GUI extends JFrame
             }
         }
     }
+
+    //<editor-fold desc="[Convenience Methods] ...">
+    /**
+     * Displays an error message in a dialog box
+     *
+     * @param message Message to display
+     * @param exit Exit application after message acknowledged
+     */
+    public static void displayError(String message, boolean exit)
+    {
+        JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);
+
+        if (exit) {
+            System.exit(1);
+        }
+    }
+
+    /**
+     * Displays a warning message in a dialog box
+     *
+     * @param message Message to display
+     * @param exit Exit application after message acknowledged
+     */
+    public static void displayWarning(String message, boolean exit)
+    {
+        JOptionPane.showMessageDialog(null, message, "Warning", JOptionPane.WARNING_MESSAGE);
+
+        if (exit) {
+            System.exit(1);
+        }
+    }
+
+    /**
+     * Clears the contents of a column of the table
+     *
+     * @param column Index of column to clear
+     */
+    private void clearColumn(int column)
+    {
+        for (int i = 0; i < furnitureTable.getRowCount(); i++) {
+            furnitureTable.setValueAt("", i, column);
+        }
+    }
+    //</editor-fold>
 }

@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.io.*;
+import java.util.Arrays;
+import java.util.LinkedList;
 
 /**
  * Application data class
@@ -10,22 +12,27 @@ public class FurnitureTrackerManager
 {
     private boolean initialized;
     private Factory factory;
-    private Factory location;
     private Truck truck;
     private Store store1;
     private Store store2;
     private Store store3;
     private Store store4;
+    private LinkedList<Location> locations;
 
     public FurnitureTrackerManager()
     {
-        factory = new Factory("Factory");
-        location = factory;
-        truck = new Truck(location);
+        // Initialize stores
         store1 = new Store("Wal-Mart");
         store2 = new Store("Sam's Club");
         store3 = new Store("BJ's");
         store4 = new Store("Big Lots");
+
+        // Initialize locations
+        factory = new Factory("Factory");
+        locations = new LinkedList<Location>(Arrays.asList(factory, store1, store2, store3, store4));
+
+        // Initialize truck
+        truck = new Truck(factory);
     }
 
     /**
@@ -69,87 +76,73 @@ public class FurnitureTrackerManager
     }
 
     /**
-     * Returns an array of the furniture in a factory
+     * Loads a piece of furniture onto the truck from the store
      *
-     * @param factory Factory to get furniture of
-     * @return Furniture in factory
-     */
-    public Furniture[] getFurnitures(Factory factory)
-    {
-        return factory.getFurnitures();
-    }
-
-    /**
-     * ???
-     *
-     * @throws WrongLocationException ???
-     * @throws TruckLoadException ???
-     * @return ???
+     * @throws WrongLocationException If the truck is not at the factory when this method is called
+     * @throws TruckLoadException If the truck is full when this method is called
+     * @return Furniture on the truck after loading
      */
     public Furniture[] loadTruck() throws WrongLocationException, TruckLoadException
     {
+        // Check if truck is at factory
         if (truck.getLocation().equals(factory)) {
+            // Check if truck is not full
             if (truck.toArray().length < 10) {
-                // ???
+                // Add furniture to truck
+                truck.uploadFurniture(factory.removeFurniture());
+                return truck.toArray();
             } else {
-                throw new TruckLoadException("Unable to load new furniture onto full truck");
-//                GUI.displayError("The truck cannot be loaded because it is full", false);
+                throw new TruckLoadException("Error: Cannot load furniture onto full truck");
             }
         } else {
-            throw new WrongLocationException("Unable to load truck at non-factory location");
-//            GUI.displayError("The truck can only be loaded at the factory", false);
+            throw new WrongLocationException("Error: Cannot load truck at non-factory location");
         }
-
-        return null;
     }
 
     /**
-     * Unloads the manager's truck into one of the manager's stores
+     * Unloads a piece of furniture from the truck into a store
      *
      * @param store The store to unload the truck into
-     * @throws WrongLocationException ???
-     * @throws TruckLoadException ???
-     * @return ???
+     * @throws WrongLocationException If the truck is not at a store when this method is called
+     * @throws TruckLoadException If the truck is empty when this method is called
+     * @return Furniture on the track after unloading
      */
     public Furniture[] unloadTruck(Store store) throws WrongLocationException, TruckLoadException
     {
-        return new Furniture[0];
+        // Check if truck is not at factory
+        if (!truck.getLocation().equals(factory)) {
+            // Check if truck is not empty
+            if (truck.toArray().length != 0) {
+                // Remove furniture from truck
+                truck.offloadFurniture();
+                return truck.toArray();
+            } else {
+                throw new TruckLoadException("Error: Cannot unload furniture from empty truck");
+            }
+        } else {
+            throw new WrongLocationException("Error: Cannot unload furniture at non-store location");
+        }
     }
 
     /**
-     * Adds a piece of furniture to the manager's factory
-     *
-     * @param furniture Piece of furniture to add
-     */
-    public void addFurnitureToFactory(Furniture furniture)
-    {
-        factory.addFurniture(furniture);
-    }
-
-    /**
-     * Moves the manager's truck to the next location
+     * Moves the truck to the next location
      *
      * @throws FurnitureTrackerNotInitializedException If furniture tracker is not initialized
      */
     public void dispatchTruck() throws FurnitureTrackerNotInitializedException
     {
         if (initialized) {
-
+            if (getLocationIndex() + 1 < locations.size()) {
+                truck.setLocation(locations.get(getLocationIndex() + 1));
+            } else {
+                truck.setLocation(locations.get(0));
+            }
         } else {
             throw new FurnitureTrackerNotInitializedException("Action attempted before tracker initialized");
         }
     }
 
-    /**
-     * Returns the manager's truck's current location
-     *
-     * @return Truck location
-     */
-    public Factory getTruckLocation()
-    {
-        return location;
-    }
-
+    //<editor-fold desc="[Getters/Setters] ...">
     /**
      * Returns the manager's truck object
      *
@@ -165,10 +158,7 @@ public class FurnitureTrackerManager
      *
      * @return Factory object
      */
-    public Factory getFactory()
-    {
-        return factory;
-    }
+    public Factory getFactory() { return factory; }
 
     /**
      * Returns the first of the manager's store objects
@@ -210,8 +200,60 @@ public class FurnitureTrackerManager
         return store4;
     }
 
-    public boolean isInitialized()
+    /**
+     * Returns tracker's truck's location
+     *
+     * @return Truck location
+     */
+    public Location getTruckLocation() { return truck.getLocation(); }
+
+    /**
+     * Returns an array of the furniture in a factory
+     *
+     * @param factory Factory to get furniture of
+     * @return Furniture in factory
+     */
+    public Furniture[] getFurnitures(Factory factory) { return factory.getFurnitures(); }
+
+    /**
+     * Returns tracker's initialization state
+     *
+     * @return True if tracker initialized, false otherwise
+     */
+    public boolean isInitialized() { return initialized; }
+
+    /**
+     * Returns tracker's location list
+     *
+     * @return Location list
+     */
+    public LinkedList<Location> getLocations()
     {
-        return initialized;
+        return locations;
     }
+    //</editor-fold>
+
+    //<editor-fold desc="[Convenience Methods] ...">
+    /**
+     * Returns the index of the truck's current location in the location list
+     *
+     * @return Location index
+     */
+    public int getLocationIndex()
+    {
+        return locations.indexOf(getTruckLocation());
+    }
+    //</editor-fold>
+
+    //<editor-fold desc="[Not Yet Implemented] ...">
+    /**
+     * Adds a piece of furniture to the factory
+     *
+     * @param furniture Piece of furniture to add
+     */
+    public void addFurnitureToFactory(Furniture furniture)
+    {
+        factory.addFurniture(furniture);
+    }
+    //</editor-fold>
 }

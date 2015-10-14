@@ -11,7 +11,7 @@ import java.util.EmptyStackException;
 public class Truck implements TruckInterface
 {
     private MyStack stack;
-    private Factory location;
+    private Location location;
 
     public Truck()
     {
@@ -19,7 +19,7 @@ public class Truck implements TruckInterface
         location = null;
     }
 
-    public Truck(Factory location)
+    public Truck(Location location)
     {
         stack = new MyStack();
         this.location = location;
@@ -69,12 +69,12 @@ public class Truck implements TruckInterface
     /**
      * Sets the truck's current location
      */
-    public Factory getLocation()
+    public Location getLocation()
     {
         return location;
     }
 
-    public void setLocation(Factory location)
+    public void setLocation(Location location)
     {
         this.location = location;
     }
