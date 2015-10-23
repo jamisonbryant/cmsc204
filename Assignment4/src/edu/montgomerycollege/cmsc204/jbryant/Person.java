@@ -16,6 +16,22 @@ public class Person implements PersonInterface
     private String phone;
     private String address;
 
+    /**
+     * Creates a new Person
+     *
+     * @param f First name
+     * @param l Last name
+     * @param p Phone number
+     * @param a Street address
+     */
+    public Person(String f, String l, String p, String a)
+    {
+        fname = f;
+        lname = l;
+        phone = p;
+        address = a;
+    }
+
     @Override
     public String getFname()
     {

@@ -1,5 +1,8 @@
 package edu.montgomerycollege.cmsc204.jmeyers;
 
+import edu.montgomerycollege.cmsc204.jbryant.error.InvalidKeyException;
+import edu.montgomerycollege.cmsc204.jbryant.error.KeyInUseException;
+
 import java.io.File;
 import java.util.ArrayList;
 /** 
@@ -39,7 +42,7 @@ public interface AddressBookInterface <PersonInterface> {
 	 * @return true if the String s is in the form (XXX)XXX-XXXX, where X is a digit, false if not
 	 * @throws InvalidKeyException if key is invalid
 	 */
-	public boolean isValidKey(String s) throws InvalidKeyException;
+	public boolean isValidKey(String s) throws InvalidKeyException, InvalidKeyException;
 	
 	/**
 	 * Return the Person object based on the key (phone number)
