@@ -3,7 +3,7 @@ package edu.montgomerycollege.cmsc204.jbryant.error;
 /**
  * Key In Use Exception Class
  *
- * Thrown when a person being added to the address book has the same phone number as an existing person.
+ * Thrown when a Person being added to the address book has the same phone number as an existing Person.
  *
  * @author Jamison Bryant (jbryan46@montgomerycollege.edu)
  */

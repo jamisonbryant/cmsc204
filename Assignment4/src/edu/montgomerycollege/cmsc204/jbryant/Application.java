@@ -11,7 +11,7 @@ import java.io.File;
 
 /**
  * Application Class
- *
+ * <p>
  * The entry point/launcher of the application.
  *
  * @author Jamison Bryant (jbryan46@montgomerycollege.edu)
@@ -23,9 +23,6 @@ public class Application
      */
     private AddressBookUtility manager;
 
-    /**
-     * Instantiates application
-     */
     public Application()
     {
         // Instantiate data manager

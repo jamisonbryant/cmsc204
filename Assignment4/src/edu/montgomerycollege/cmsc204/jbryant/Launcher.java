@@ -2,7 +2,7 @@ package edu.montgomerycollege.cmsc204.jbryant;
 
 /**
  * Launcher Class
- *
+ * <p>
  * Launches the application.
  *
  * @author Jamison Bryant (jbryan46@montgomerycollege.edu)

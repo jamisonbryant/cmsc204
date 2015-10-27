@@ -4,16 +4,31 @@ import edu.montgomerycollege.cmsc204.jmeyers.PersonInterface;
 
 /**
  * Person Model
- *
+ * <p>
  * The primary data element of the application.
  *
  * @author Jamison Bryant (jbryan46@montgomerycollege.edu)
  */
 public class Person implements PersonInterface
 {
+    /**
+     * First name (single word)
+     */
     private String fname;
+
+    /**
+     * Last name (single word)
+     */
     private String lname;
+
+    /**
+     * Phone number (format: (XXX)XXX-XXXX where X is a number)
+     */
     private String phone;
+
+    /**
+     * Address
+     */
     private String address;
 
     /**
@@ -32,30 +47,66 @@ public class Person implements PersonInterface
         address = a;
     }
 
+    /**
+     * Returns this Person's first name
+     *
+     * @return First name
+     */
     @Override
     public String getFname()
     {
         return fname;
     }
 
+    /**
+     * Returns this Person's last name
+     *
+     * @return Last name
+     */
     @Override
     public String getLname()
     {
         return lname;
     }
 
+    /**
+     * Returns this Person's phone number
+     *
+     * @return Phone number
+     */
     @Override
     public String getPhone()
     {
         return phone;
     }
 
+    /**
+     * Returns this Person's address
+     *
+     * @return Address
+     */
     @Override
     public String getAddress()
     {
         return address;
     }
 
+    /**
+     * Returns this Person's key
+     *
+     * @return Key
+     */
+    @Override
+    public String getKey()
+    {
+        return phone;
+    }
+
+    /**
+     * Returns if a given Person is identical to the current Person
+     * @param p Person object
+     * @return True if Persons are identical, false otherwise
+     */
     @Override
     public boolean equals(PersonInterface p)
     {
@@ -63,12 +114,11 @@ public class Person implements PersonInterface
                 p.getAddress().equals(address));
     }
 
-    @Override
-    public String getKey()
-    {
-        return phone;
-    }
-
+    /**
+     * Calculates and returns the hash code for this Person
+     *
+     * @return Hash code
+     */
     public int hashCode()
     {
         int p1 = 23;

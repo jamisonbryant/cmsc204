@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 
 /**
  * Hash Table Class
- *
+ * <p>
  * The data structure of the application.
  *
  * @author Jamison Bryant (jbryan46@montgomerycollege.edu)
@@ -19,20 +19,26 @@ public class HashTable implements HashTableInterface
 {
     HashMap<Integer, LinkedList<Person>> persons = new HashMap<Integer, LinkedList<Person>>();
 
+    /**
+     * Adds a given Person to the data structure
+     *
+     * @param p Person to add
+     * @return 0 if successful, -1 otherwise
+     */
     @Override
     public int add(PersonInterface p)
     {
         // Check if hash map contains hash code
         int hashCode = p.hashCode();
         if (persons.containsKey(hashCode)) {
-//            // Add person to existing bucket in hash map
+//            // Add Person to existing bucket in hash map
 //            LinkedList<Person> l = persons.get(hashCode);
 //            l.add((Person) p);
 
             // Return negative number to indicate failure
             return -1;
         } else {
-            // Add person to new bucket in hash map
+            // Add Person to new bucket in hash map
             LinkedList<Person> l = new LinkedList<Person>();
             l.add((Person) p);
             persons.put(hashCode, l);
@@ -41,6 +47,12 @@ public class HashTable implements HashTableInterface
         return 0;
     }
 
+    /**
+     * Returns if the data structure contains a given Person
+     *
+     * @param pi Person to search for
+     * @return True if Person found, false otherwise
+     */
     @Override
     public boolean contains(PersonInterface pi)
     {
@@ -60,6 +72,12 @@ public class HashTable implements HashTableInterface
         return false;
     }
 
+    /**
+     * Returns the Person associated with a given key
+     *
+     * @param key Key of Person to fetch
+     * @return Person object if found, null otherwise
+     */
     @Override
     public PersonInterface getValue(String key)
     {
@@ -79,6 +97,12 @@ public class HashTable implements HashTableInterface
         return null;
     }
 
+    /**
+     * Returns if the data structure contains a given key
+     *
+     * @param key The key of a Person object
+     * @return True if key found, false otherwise
+     */
     @Override
     public boolean contains(String key)
     {
@@ -98,6 +122,11 @@ public class HashTable implements HashTableInterface
         return false;
     }
 
+    /**
+     * Returns a sorted ArrayList of the Persons in the data structure
+     *
+     * @return Sorted ArrayList of Persons
+     */
     @Override
     public ArrayList<String> sort()
     {

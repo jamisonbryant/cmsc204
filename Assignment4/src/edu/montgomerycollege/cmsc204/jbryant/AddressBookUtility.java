@@ -3,7 +3,6 @@ package edu.montgomerycollege.cmsc204.jbryant;
 import edu.montgomerycollege.cmsc204.jbryant.error.InvalidKeyException;
 import edu.montgomerycollege.cmsc204.jbryant.error.KeyInUseException;
 import edu.montgomerycollege.cmsc204.jmeyers.AddressBookInterface;
-import edu.montgomerycollege.cmsc204.jmeyers.PersonInterface;
 
 import javax.swing.*;
 import java.io.*;
@@ -19,6 +18,9 @@ import java.util.regex.Pattern;
  */
 public class AddressBookUtility implements AddressBookInterface
 {
+    /**
+     * Data structure
+     */
     private HashTable index;
 
     public AddressBookUtility()
@@ -26,13 +28,26 @@ public class AddressBookUtility implements AddressBookInterface
         index = new HashTable();
     }
 
+    /**
+     * Returns if the address book contains a given Person
+     *
+     * @param p Person object
+     * @return True if address book contains Person, false otherwise
+     */
     @Override
     public boolean contains(Object p)
     {
-        // Return if index contains person
+        // Return if index contains Person
         return index.contains((Person) p);
     }
 
+    /**
+     * Returns if the address book contains a given key
+     *
+     * @param key Key of Person object
+     * @return True if address book contains key, false otherwise
+     * @throws InvalidKeyException If given key is invalid
+     */
     @Override
     public boolean contains(String key) throws InvalidKeyException
     {
@@ -46,6 +61,13 @@ public class AddressBookUtility implements AddressBookInterface
         }
     }
 
+    /**
+     * Returns if a given key is valid
+     *
+     * @param key Key to validate
+     * @return True if key is valid, throws exception otherwise
+     * @throws InvalidKeyException If given key is invalid
+     */
     @Override
     public boolean isValidKey(String key) throws InvalidKeyException
     {
@@ -62,6 +84,13 @@ public class AddressBookUtility implements AddressBookInterface
         }
     }
 
+    /**
+     * Searches for a given Person in the address book and (if found) returns the Person's name
+     *
+     * @param key Key for a Person object
+     * @return Name (last, first) if found, null otherwise
+     * @throws InvalidKeyException If the given key is invalid
+     */
     @Override
     public String reverseLookup(String key) throws InvalidKeyException
     {
@@ -77,6 +106,12 @@ public class AddressBookUtility implements AddressBookInterface
         return null;
     }
 
+    /**
+     * Reads a given file of Persons into the address book
+     *
+     * @param f File to read from
+     * @return True if successful
+     */
     @Override
     public boolean readFile(File f) {
         // Read file line by line
@@ -86,7 +121,7 @@ public class AddressBookUtility implements AddressBookInterface
                 String[] deets = line.split(" ");
                 Person p = new Person(deets[0], deets[1], deets[2], deets[3]);
 
-                // Add person to index
+                // Add Person to index
                 index.add(p);
             }
         } catch (IOException e) {
@@ -104,6 +139,16 @@ public class AddressBookUtility implements AddressBookInterface
         return true;
     }
 
+    /**
+     * Adds a new Person with given information to the address book
+     *
+     * @param f Person's first name
+     * @param l Person's last name
+     * @param p Person's phone number
+     * @param a Person's address
+     * @throws InvalidKeyException If the created Person's key is invalid
+     * @throws KeyInUseException If the created Person's key is the same as an existing Person's key
+     */
     @Override
     public void add(String f, String l, String p, String a) throws InvalidKeyException, KeyInUseException
     {
@@ -112,7 +157,7 @@ public class AddressBookUtility implements AddressBookInterface
 
         // Check if key is valid
         if (isValidKey(person.getKey())) {
-            // Add person to index
+            // Add Person to index
             int result = index.add(person);
 
             // If unsuccessful, throw exception
@@ -124,6 +169,12 @@ public class AddressBookUtility implements AddressBookInterface
         }
     }
 
+    /**
+     * Writes the Persons in the address book to a file
+     *
+     * @param f File to write to
+     * @return True if successful
+     */
     @Override
     public boolean writeToFile(File f)
     {
@@ -143,6 +194,6 @@ public class AddressBookUtility implements AddressBookInterface
             System.exit(1);
         }
 
-        return false;
+        return true;
     }
 }
