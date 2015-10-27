@@ -59,7 +59,8 @@ public class Person implements PersonInterface
     @Override
     public boolean equals(PersonInterface p)
     {
-        return p.equals(this);
+        return (p.getFname().equals(fname) && p.getLname().equals(lname) && p.getPhone().equals(phone) &&
+                p.getAddress().equals(address));
     }
 
     @Override
@@ -79,13 +80,18 @@ public class Person implements PersonInterface
         // Parse phone number
         if (phone.length() == 13) {
             areaCode = Integer.parseInt(phone.substring(1, 4));
-            exchangeCode = Integer.parseInt(phone.substring(6, 9));
-            extensionCode = Integer.parseInt(phone.substring(8));
+            exchangeCode = Integer.parseInt(phone.substring(5, 8));
+            extensionCode = Integer.parseInt(phone.substring(9));
         } else {
             System.err.println("Invalid phone number " + phone + ". Expecting format (XXX)XXX-XXXX");
         }
 
         // Calculate hash code
         return Math.abs(p1 * (areaCode + p2 * exchangeCode) + extensionCode);
+    }
+
+    public String toString()
+    {
+        return fname + " " + lname + " " + phone + " " + address;
     }
 }

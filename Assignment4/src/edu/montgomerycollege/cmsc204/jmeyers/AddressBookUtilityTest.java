@@ -16,8 +16,10 @@ import org.junit.Test;
 
 
 public class AddressBookUtilityTest {
+    private AddressBookUtility myAddressBook;
 	private AddressBookUtility addressBook;
 	PersonInterface p1, p2, p3, p4, p5, p6;
+    PersonInterface me, mySister, myMom, myDad;
 	PrintWriter output;
 	File newFile, outFile;
 
@@ -40,14 +42,26 @@ public class AddressBookUtilityTest {
 		//STUDENT - create an additional address book object and add
 		// Person objects that will be different from those above
 		// use these in the STUDENT test below
-		
+		myAddressBook = new AddressBookUtility();
+        me = new Person("Jamison", "Bryant", "(123)456-7890", "MD");
+        mySister = new Person("Jenna", "Bryant", "(321)456-7890", "MD");
+        myMom = new Person("Gin", "Bryant", "(123)654-7890", "MD");
+        myDad = new Person("Ross", "Bryant", "(321)654-7890", "MD");
+
+        myAddressBook.add(me.getFname(), me.getLname(), me.getPhone(), me.getAddress());
+        myAddressBook.add(mySister.getFname(), mySister.getLname(), mySister.getPhone(), mySister.getAddress());
+        myAddressBook.add(myMom.getFname(), myMom.getLname(), myMom.getPhone(), myMom.getAddress());
+        myAddressBook.add(myDad.getFname(), myDad.getLname(), myDad.getPhone(), myDad.getAddress());
 	}
 
 	@After
 	public void tearDown() throws Exception {
 		addressBook = null;
 		p1 = p2 = p3 = p4 = p5 = p6 = null;
+
 		//STUDENT - teardown your address book objects and Person objects
+        myAddressBook = null;
+        me = mySister = myMom = myDad = null;
 	}
 
 	@Test
@@ -84,7 +98,22 @@ public class AddressBookUtilityTest {
 	
 	@Test
 	public void testContainsStringSTUDENT() {
-		fail("Not yet implemented");
+        try {
+            assertEquals(true, myAddressBook.contains("(123)456-7890"));
+            assertEquals(true, myAddressBook.contains("(321)456-7890"));
+            assertEquals(true, myAddressBook.contains("(123)654-7890"));
+            assertEquals(true, myAddressBook.contains("(321)654-7890"));
+        } catch (InvalidKeyException e) {
+            // TODO Auto-generated catch block
+            fail("This should not have raised an InvalidKeyException");
+        }
+        try {
+            myAddressBook.contains("311-293-2920");
+            fail("This should have raised an InvalidKeyException ");
+        } catch (InvalidKeyException e) {
+            // TODO Auto-generated catch block
+            // correct
+        }
 	}
 
 	@Test
@@ -187,7 +216,49 @@ public class AddressBookUtilityTest {
 
 	@Test
 	public void testAddSTUDENT() {
-		fail("Not yet implemented");
+        try {
+            assertEquals(true, myAddressBook.contains("(123)456-7890"));
+            assertEquals(true, myAddressBook.contains("(321)456-7890"));
+            assertEquals(true, myAddressBook.contains("(123)654-7890"));
+            assertEquals(true, myAddressBook.contains("(321)654-7890"));
+        } catch (InvalidKeyException e) {
+            // TODO Auto-generated catch block
+            fail("Should have not raised an InvalidKeyException");
+        }
+
+        try {
+            myAddressBook.add("Burnie", "Burns", "(929)199-0193", "TX");
+            assertEquals(true, myAddressBook.contains("(929)199-0193"));
+            assertEquals(true, myAddressBook.contains("(123)456-7890"));
+            assertEquals(true, myAddressBook.contains("(321)456-7890"));
+            assertEquals(true, myAddressBook.contains("(123)654-7890"));
+            assertEquals(true, myAddressBook.contains("(321)654-7890"));
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            fail("Should not have raised an exception");
+        }
+
+        try {
+            myAddressBook.add("Burnie", "Burns", "(9291990193", "TX");
+            fail("Should have raised an InvalidKeyException");
+        } catch (InvalidKeyException e) {
+            // TODO Auto-generated catch block
+            // correct
+        } catch (KeyInUseException e) {
+            // TODO Auto-generated catch block
+            fail("Should have raised an InvalidKeyException");
+        }
+
+        try {
+            myAddressBook.add("Gavin", "Free", "(929)199-0193", "TX");
+            fail("Should have raised an KeyInUseException");
+        } catch (InvalidKeyException e) {
+            // TODO Auto-generated catch block
+            fail("Should have raised an KeyInUseException");
+        } catch (KeyInUseException e) {
+            // TODO Auto-generated catch block
+            // correct
+        }
 	}
 	
 	@Test
@@ -225,7 +296,13 @@ public class AddressBookUtilityTest {
 	
 	@Test
 	public void testIsValidKeySTUDENT() {
-		fail("Not yet implemented");
+        try {
+            assertEquals(true, myAddressBook.isValidKey("(123)456-7890"));
+            assertEquals(true, myAddressBook.isValidKey("(987)654-3210"));
+        } catch (InvalidKeyException e) {
+            // TODO Auto-generated catch block
+            fail("Should have not raised an InvalidKeyException");
+        }
 	}
 	
 	@Test

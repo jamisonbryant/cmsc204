@@ -3,12 +3,10 @@ package edu.montgomerycollege.cmsc204.jbryant;
 import edu.montgomerycollege.cmsc204.jbryant.error.InvalidKeyException;
 import edu.montgomerycollege.cmsc204.jbryant.error.KeyInUseException;
 import edu.montgomerycollege.cmsc204.jmeyers.AddressBookInterface;
+import edu.montgomerycollege.cmsc204.jmeyers.PersonInterface;
 
 import javax.swing.*;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -52,7 +50,7 @@ public class AddressBookUtility implements AddressBookInterface
     public boolean isValidKey(String key) throws InvalidKeyException
     {
         // Check if key is valid
-        Pattern p = Pattern.compile("\\((\\d{3})\\)(\\d{3})-(\\d{4})");
+        Pattern p = Pattern.compile("\\(\\d{3}\\)\\d{3}-\\d{4}");
         Matcher m = p.matcher(key);
 
         if (m.find()) {
@@ -67,9 +65,13 @@ public class AddressBookUtility implements AddressBookInterface
     @Override
     public String reverseLookup(String key) throws InvalidKeyException
     {
-        if (index.contains(key)) {
-            Person p = (Person) index.getValue(key);
-            return p.getLname() + ", " + p.getFname();
+        if (isValidKey(key)) {
+            if (index.contains(key)) {
+                Person p = (Person) index.getValue(key);
+                return p.getLname() + ", " + p.getFname();
+            }
+        } else {
+            throw new InvalidKeyException();
         }
 
         return null;
@@ -92,7 +94,7 @@ public class AddressBookUtility implements AddressBookInterface
             System.err.println(e.getMessage());
 
             // Display error message
-            JOptionPane.showMessageDialog(null, "Sorry, the application has encountered an error and needs to close.",
+            JOptionPane.showMessageDialog(null, "The application has encountered an error and needs to close.",
                     "Fatal Error", JOptionPane.ERROR_MESSAGE);
 
             // Exit application
@@ -123,7 +125,24 @@ public class AddressBookUtility implements AddressBookInterface
     }
 
     @Override
-    public boolean writeToFile(File f) {
+    public boolean writeToFile(File f)
+    {
+        try (PrintWriter pw = new PrintWriter(f.getAbsoluteFile(), "UTF-8")) {
+            for (String s : index.sort()) {
+                pw.write(s + "\n");
+            }
+        } catch (FileNotFoundException | UnsupportedEncodingException e) {
+            // Print exception to console
+            System.err.println(e.getMessage());
+
+            // Display error message
+            JOptionPane.showMessageDialog(null, "The application has encountered an error and needs to close.",
+                    "Fatal Error", JOptionPane.ERROR_MESSAGE);
+
+            // Exit application
+            System.exit(1);
+        }
+
         return false;
     }
 }

@@ -83,9 +83,8 @@ public class HashTable implements HashTableInterface
     public boolean contains(String key)
     {
         // Iterate over hash map
-        Iterator i = persons.entrySet().iterator();
-        while (i.hasNext()) {
-            Map.Entry pair = (Map.Entry) i.next();
+        for (Object o : persons.entrySet()) {
+            Map.Entry pair = (Map.Entry) o;
             LinkedList<Person> l = (LinkedList<Person>) pair.getValue();
 
             // Iterate over current bucket
@@ -100,16 +99,24 @@ public class HashTable implements HashTableInterface
     }
 
     @Override
-    public ArrayList sort()
+    public ArrayList<String> sort()
     {
-        return null;
-    }
+        // Get dump of hash table
+        ArrayList<String> a = new ArrayList<String>();
 
-    private boolean isValidKey(String key) throws InvalidKeyException
-    {
-        // Check if key is valid
-        Pattern p = Pattern.compile("\\((\\d{3})\\)(\\d{3})-(\\d{4})");
-        Matcher m = p.matcher(key);
-        return m.find();
+        for (Object o : persons.entrySet()) {
+            Map.Entry pair = (Map.Entry) o;
+            LinkedList<Person> l = (LinkedList<Person>) pair.getValue();
+
+            // Iterate over current bucket
+            for (Person p : l) {
+                a.add(p.toString());
+            }
+        }
+
+        // Sort dump
+        Collections.sort(a);
+
+        return a;
     }
 }
