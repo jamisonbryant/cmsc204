@@ -14,7 +14,7 @@ import java.io.File;
  * <p>
  * The entry point/launcher of the application.
  *
- * @author Jamison Bryant (jbryan46@montgomerycollege.edu)
+ * @author Jamison Bryant (jbryan46@montgomerycollege.edu) - CMSC 204 M/W 1:00 PM - 2:30 PM (R. Alexander)
  */
 public class Application
 {

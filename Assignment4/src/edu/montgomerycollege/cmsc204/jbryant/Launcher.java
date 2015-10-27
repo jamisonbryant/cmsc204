@@ -5,7 +5,7 @@ package edu.montgomerycollege.cmsc204.jbryant;
  * <p>
  * Launches the application.
  *
- * @author Jamison Bryant (jbryan46@montgomerycollege.edu)
+ * @author Jamison Bryant (jbryan46@montgomerycollege.edu) - CMSC 204 M/W 1:00 PM - 2:30 PM (R. Alexander)
  */
 public class Launcher
 {
