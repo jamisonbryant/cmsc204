@@ -59,13 +59,13 @@ public class Person implements PersonInterface
     @Override
     public boolean equals(PersonInterface p)
     {
-        return false;
+        return p.equals(this);
     }
 
     @Override
     public String getKey()
     {
-        return null;
+        return phone;
     }
 
     public int hashCode()
