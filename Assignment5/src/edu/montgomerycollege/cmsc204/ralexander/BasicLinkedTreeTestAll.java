@@ -44,7 +44,7 @@ public class BasicLinkedTreeTestAll
     @Test
     public void testAdd()
     {
-        assertEquals("Hello", linkedTreeString.getRootData());
+        assertEquals("Hello", linkedTreeString.getRootNode());
 
         linkedTreeString.add("End");
 
@@ -84,10 +84,10 @@ public class BasicLinkedTreeTestAll
     @Test
     public void testGetRootData()
     {
-        assertEquals("Hello", linkedTreeString.getRootData());
+        assertEquals("Hello", linkedTreeString.getRootNode());
 
         linkedTreeString.add("Apple");
-        assertEquals("Hello", linkedTreeString.getRootData());
+        assertEquals("Hello", linkedTreeString.getRootNode());
     }
 
 
@@ -141,7 +141,7 @@ public class BasicLinkedTreeTestAll
     public void testRemoveNodeWithTwoChildren()
     {
         ArrayList<String> list;
-        assertEquals("Hello", linkedTreeString.getRootData());
+        assertEquals("Hello", linkedTreeString.getRootNode());
 
         linkedTreeString.add("End");
         linkedTreeString.add("Begin");
@@ -173,7 +173,7 @@ public class BasicLinkedTreeTestAll
     public void testRemoveRoot()
     {
         ArrayList<String> list;
-        assertEquals("Hello", linkedTreeString.getRootData());
+        assertEquals("Hello", linkedTreeString.getRootNode());
 
         linkedTreeString.add("End");
         linkedTreeString.add("Begin");
@@ -206,7 +206,7 @@ public class BasicLinkedTreeTestAll
     public void testRemoveLeaf()
     {
         ArrayList<String> list;
-        assertEquals("Hello", linkedTreeString.getRootData());
+        assertEquals("Hello", linkedTreeString.getRootNode());
 
         linkedTreeString.add("End");
         linkedTreeString.add("Begin");
@@ -236,7 +236,7 @@ public class BasicLinkedTreeTestAll
     public void testRemoveNodeWithOneChild()
     {
         ArrayList<String> list;
-        assertEquals("Hello", linkedTreeString.getRootData());
+        assertEquals("Hello", linkedTreeString.getRootNode());
 
         linkedTreeString.add("End");
         linkedTreeString.add("Begin");

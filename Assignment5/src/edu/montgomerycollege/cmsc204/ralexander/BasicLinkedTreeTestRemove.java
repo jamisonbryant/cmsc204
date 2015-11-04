@@ -4,8 +4,6 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 import edu.montgomerycollege.cmsc204.jbryant.BasicLinkedTree;
 import org.junit.After;
@@ -48,7 +46,7 @@ public class BasicLinkedTreeTestRemove
     public void testRemoveNodeWithTwoChildren()
     {
         ArrayList<String> list;
-        assertEquals("Hello", linkedTreeString.getRootData());
+        assertEquals("Hello", linkedTreeString.getRootNode());
         try {
             linkedTreeString.add("End");
             linkedTreeString.add("Begin");
@@ -71,7 +69,7 @@ public class BasicLinkedTreeTestRemove
     public void testRemoveRoot()
     {
         ArrayList<String> list;
-        assertEquals("Hello", linkedTreeString.getRootData());
+        assertEquals("Hello", linkedTreeString.getRootNode());
         try {
             linkedTreeString.add("End");
             linkedTreeString.add("Begin");
@@ -95,7 +93,7 @@ public class BasicLinkedTreeTestRemove
     public void testRemoveLeaf()
     {
         ArrayList<String> list;
-        assertEquals("Hello", linkedTreeString.getRootData());
+        assertEquals("Hello", linkedTreeString.getRootNode());
         try {
             linkedTreeString.add("End");
             linkedTreeString.add("Begin");
@@ -119,7 +117,7 @@ public class BasicLinkedTreeTestRemove
     public void testRemoveNodeWithOneChild()
     {
         ArrayList<String> list;
-        assertEquals("Hello", linkedTreeString.getRootData());
+        assertEquals("Hello", linkedTreeString.getRootNode());
         try {
             linkedTreeString.add("End");
             linkedTreeString.add("Begin");

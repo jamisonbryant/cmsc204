@@ -1,7 +1,5 @@
 package edu.montgomerycollege.cmsc204.jbryant;
 
-import edu.montgomerycollege.cmsc204.ralexander.BSTreeTest;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -12,18 +10,65 @@ import java.util.Comparator;
  */
 public class BSTree<T>
 {
+    /**
+     * Number of nodes in tree
+     */
     private int size;
-    private String rootData;
 
+    /**
+     * ???
+     */
+    private String rootNode;
+
+    /**
+     * Creates a new tree
+     *
+     * @param comparator Comparator for comparing nodes in tree
+     */
     public BSTree(Comparator comparator) {}
 
-    public void add(T node) {}
+    /**
+     * Adds a node to the tree
+     *
+     * @param node Node to add
+     */
+    public void add(T node)
+    {
+        // Increment tree size
+        size++;
+    }
 
-    public void remove(T node) {}
+    /**
+     * Removes a node from the tree
+     *
+     * @param node Node to remove
+     */
+    public void remove(T node)
+    {
+        // Decrement tree size
+        size--;
+    }
 
+    /**
+     * Returns a copy of the tree as an ArrayList
+     *
+     * @return Tree as ArrayList
+     */
+    public ArrayList<String> toArrayList() { return null; }
+
+    //<editor-fold desc="[Getters/Setters]">
+    /**
+     * Returns the number of nodes in the tree
+     *
+     * @return Number of nodes
+     */
     public int getSize() { return size; }
 
-    public String getRootData() { return rootData; }
-
-    public ArrayList<String> toArrayList() { return null; }
+    /**
+     * Returns the root node of the tree
+     *
+     * @return Root node
+     */
+    public String getRootNode() { return rootNode; }
+    //</editor-fold>
 }

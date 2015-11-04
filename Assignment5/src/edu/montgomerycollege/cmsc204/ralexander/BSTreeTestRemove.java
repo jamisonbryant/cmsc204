@@ -4,8 +4,6 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 import edu.montgomerycollege.cmsc204.jbryant.BSTree;
 import org.junit.After;
@@ -48,7 +46,7 @@ public class BSTreeTestRemove
     public void testRemoveNodeWithTwoChildren()
     {
         ArrayList<String> list;
-        assertEquals("Hello", linkedTreeString.getRootData());
+        assertEquals("Hello", linkedTreeString.getRootNode());
 
         linkedTreeString.add("End");
         linkedTreeString.add("Begin");
@@ -75,7 +73,7 @@ public class BSTreeTestRemove
     public void testRemoveRoot()
     {
         ArrayList<String> list;
-        assertEquals("Hello", linkedTreeString.getRootData());
+        assertEquals("Hello", linkedTreeString.getRootNode());
 
         linkedTreeString.add("End");
         linkedTreeString.add("Begin");
@@ -84,7 +82,7 @@ public class BSTreeTestRemove
 
         //remove root, replaces it with rightmost child of left subtree
         linkedTreeString.remove("Hello");
-        assertEquals("End", linkedTreeString.getRootData());
+        assertEquals("End", linkedTreeString.getRootNode());
         list = linkedTreeString.toArrayList();
         assertEquals("Begin", list.get(0));
         assertEquals("End", list.get(1));
@@ -104,7 +102,7 @@ public class BSTreeTestRemove
     public void testRemoveLeaf()
     {
         ArrayList<String> list;
-        assertEquals("Hello", linkedTreeString.getRootData());
+        assertEquals("Hello", linkedTreeString.getRootNode());
 
         linkedTreeString.add("End");
         linkedTreeString.add("Begin");
@@ -132,7 +130,7 @@ public class BSTreeTestRemove
     public void testRemoveNodeWithOneChild()
     {
         ArrayList<String> list;
-        assertEquals("Hello", linkedTreeString.getRootData());
+        assertEquals("Hello", linkedTreeString.getRootNode());
 
         linkedTreeString.add("End");
         linkedTreeString.add("Begin");

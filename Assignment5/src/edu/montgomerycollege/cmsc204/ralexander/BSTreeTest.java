@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.GregorianCalendar;
 
 import edu.montgomerycollege.cmsc204.jbryant.BSTree;
 import org.junit.After;
@@ -54,9 +53,9 @@ public class BSTreeTest
     @Test
     public void testGetRootDataString()
     {
-        assertEquals("Hello", linkedTreeString.getRootData());
+        assertEquals("Hello", linkedTreeString.getRootNode());
         linkedTreeString.add("Apple");
-        assertEquals("Hello", linkedTreeString.getRootData());
+        assertEquals("Hello", linkedTreeString.getRootNode());
     }
 
     @Test

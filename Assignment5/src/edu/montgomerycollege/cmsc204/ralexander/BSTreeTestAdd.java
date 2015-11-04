@@ -4,8 +4,6 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 import edu.montgomerycollege.cmsc204.jbryant.BSTree;
 import org.junit.After;
@@ -47,7 +45,7 @@ public class BSTreeTestAdd
     @Test
     public void testAddString()
     {
-        assertEquals("Hello", linkedTreeString.getRootData());
+        assertEquals("Hello", linkedTreeString.getRootNode());
         try {
             linkedTreeString.add("End");
         } catch (Exception e) {

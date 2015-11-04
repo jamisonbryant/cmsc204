@@ -9,16 +9,67 @@ import java.util.ArrayList;
  */
 public class BasicLinkedTree<T>
 {
-    private String rootData;
+    /**
+     * Number of nodes in tree
+     */
     private int size;
 
-    public void add(T node) {}
+    /**
+     * ???
+     */
+    private String rootNode;
 
-    public void remove(T node) {}
+    /**
+     * Creates a new tree
+     */
+    public BasicLinkedTree()
+    {
+        size = 0;
+        rootNode = null;
+    }
 
+    /**
+     * Adds a node to the tree
+     *
+     * @param node Node to add
+     */
+    public void add(T node)
+    {
+        // Increment tree size
+        size++;
+    }
+
+    /**
+     * Removes a node from the tree
+     *
+     * @param node Node to remove
+     */
+    public void remove(T node)
+    {
+        // Decrement tree size
+        size--;
+    }
+
+    /**
+     * Returns a copy of the tree as an ArrayList
+     *
+     * @return Tree as ArrayList
+     */
     public ArrayList<String> toArrayList() { return null; }
 
-    public String getRootData() { return rootData; }
-
+    //<editor-fold desc="[Getters/Setters]">
+    /**
+     * Returns the number of nodes in the tree
+     *
+     * @return Number of nodes
+     */
     public int getSize() { return size; }
+
+    /**
+     * Returns the root node of the tree
+     *
+     * @return Root node
+     */
+    public String getRootNode() { return rootNode; }
+    //</editor-fold>
 }
