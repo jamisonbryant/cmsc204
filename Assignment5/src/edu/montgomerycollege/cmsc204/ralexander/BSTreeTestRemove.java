@@ -1,5 +1,6 @@
 package edu.montgomerycollege.cmsc204.ralexander;
 
+import edu.montgomerycollege.cmsc204.jbryant.BSTree;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,5 +1,6 @@
 package edu.montgomerycollege.cmsc204.ralexander;
 
+import edu.montgomerycollege.cmsc204.jbryant.BasicLinkedTree;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
