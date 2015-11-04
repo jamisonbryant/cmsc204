@@ -1,26 +1,24 @@
 package edu.montgomerycollege.cmsc204.ralexander;
 
-import static org.junit.Assert.*;
-
-import java.util.ArrayList;
-import java.util.Comparator;
-
-import edu.montgomerycollege.cmsc204.jbryant.BasicLinkedTree;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 
-public class BasicLinkedTreeTestRemove
-{
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
+
+public class BasicLinkedTreeTestRemove {
     BasicLinkedTree<String> linkedTreeString;
     BasicLinkedTree<Double> linkedTreeDouble;
     StringComparator comparator;
     DoubleComparator comparatorD;
 
     @Before
-    public void setUp() throws Exception
-    {
+    public void setUp() throws Exception {
         linkedTreeString = new BasicLinkedTree<String>();
         linkedTreeString.add("Hello");
         linkedTreeString.add("World");
@@ -34,8 +32,7 @@ public class BasicLinkedTreeTestRemove
     }
 
     @After
-    public void tearDown() throws Exception
-    {
+    public void tearDown() throws Exception {
         linkedTreeString = null;
         linkedTreeDouble = null;
         comparator = null;
@@ -43,10 +40,9 @@ public class BasicLinkedTreeTestRemove
 
 
     @Test
-    public void testRemoveNodeWithTwoChildren()
-    {
+    public void testRemoveNodeWithTwoChildren() {
         ArrayList<String> list;
-        assertEquals("Hello", linkedTreeString.getRootNode());
+        assertEquals("Hello", linkedTreeString.getRootData());
         try {
             linkedTreeString.add("End");
             linkedTreeString.add("Begin");
@@ -66,10 +62,9 @@ public class BasicLinkedTreeTestRemove
     }
 
     @Test
-    public void testRemoveRoot()
-    {
+    public void testRemoveRoot() {
         ArrayList<String> list;
-        assertEquals("Hello", linkedTreeString.getRootNode());
+        assertEquals("Hello", linkedTreeString.getRootData());
         try {
             linkedTreeString.add("End");
             linkedTreeString.add("Begin");
@@ -90,10 +85,9 @@ public class BasicLinkedTreeTestRemove
     }
 
     @Test
-    public void testRemoveLeaf()
-    {
+    public void testRemoveLeaf() {
         ArrayList<String> list;
-        assertEquals("Hello", linkedTreeString.getRootNode());
+        assertEquals("Hello", linkedTreeString.getRootData());
         try {
             linkedTreeString.add("End");
             linkedTreeString.add("Begin");
@@ -114,10 +108,9 @@ public class BasicLinkedTreeTestRemove
     }
 
     @Test
-    public void testRemoveNodeWithOneChild()
-    {
+    public void testRemoveNodeWithOneChild() {
         ArrayList<String> list;
-        assertEquals("Hello", linkedTreeString.getRootNode());
+        assertEquals("Hello", linkedTreeString.getRootData());
         try {
             linkedTreeString.add("End");
             linkedTreeString.add("Begin");
@@ -139,24 +132,20 @@ public class BasicLinkedTreeTestRemove
 
     }
 
-    private class StringComparator implements Comparator<String>
-    {
+    private class StringComparator implements Comparator<String> {
 
         @Override
-        public int compare(String arg0, String arg1)
-        {
+        public int compare(String arg0, String arg1) {
             // TODO Auto-generated method stub
             return arg0.compareTo(arg1);
         }
 
     }
 
-    private class DoubleComparator implements Comparator<Double>
-    {
+    private class DoubleComparator implements Comparator<Double> {
 
         @Override
-        public int compare(Double arg0, Double arg1)
-        {
+        public int compare(Double arg0, Double arg1) {
             // TODO Auto-generated method stub
             return arg0.compareTo(arg1);
         }

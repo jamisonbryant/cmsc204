@@ -1,26 +1,24 @@
 package edu.montgomerycollege.cmsc204.ralexander;
 
-import static org.junit.Assert.*;
-
-import java.util.ArrayList;
-import java.util.Comparator;
-
-import edu.montgomerycollege.cmsc204.jbryant.BSTree;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 
-public class BSTreeTestRemove
-{
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
+
+public class BSTreeTestRemove {
     BSTree<String> linkedTreeString;
     BSTree<Double> linkedTreeDouble;
     StringComparator comparator;
     DoubleComparator comparatorD;
 
     @Before
-    public void setUp() throws Exception
-    {
+    public void setUp() throws Exception {
         comparator = new StringComparator();
         linkedTreeString = new BSTree<String>(comparator);
         linkedTreeString.add("Hello");
@@ -33,8 +31,7 @@ public class BSTreeTestRemove
     }
 
     @After
-    public void tearDown() throws Exception
-    {
+    public void tearDown() throws Exception {
         linkedTreeString = null;
         linkedTreeDouble = null;
         comparator = null;
@@ -43,10 +40,9 @@ public class BSTreeTestRemove
 
 
     @Test
-    public void testRemoveNodeWithTwoChildren()
-    {
+    public void testRemoveNodeWithTwoChildren() {
         ArrayList<String> list;
-        assertEquals("Hello", linkedTreeString.getRootNode());
+        assertEquals("Hello", linkedTreeString.getRootData());
 
         linkedTreeString.add("End");
         linkedTreeString.add("Begin");
@@ -64,16 +60,14 @@ public class BSTreeTestRemove
     }
 
     @Test
-    public void testRemoveNodeWithTwoChildrenSTUDENT()
-    {
+    public void testRemoveNodeWithTwoChildrenSTUDENT() {
         fail("Not yet implemented");
     }
 
     @Test
-    public void testRemoveRoot()
-    {
+    public void testRemoveRoot() {
         ArrayList<String> list;
-        assertEquals("Hello", linkedTreeString.getRootNode());
+        assertEquals("Hello", linkedTreeString.getRootData());
 
         linkedTreeString.add("End");
         linkedTreeString.add("Begin");
@@ -82,7 +76,7 @@ public class BSTreeTestRemove
 
         //remove root, replaces it with rightmost child of left subtree
         linkedTreeString.remove("Hello");
-        assertEquals("End", linkedTreeString.getRootNode());
+        assertEquals("End", linkedTreeString.getRootData());
         list = linkedTreeString.toArrayList();
         assertEquals("Begin", list.get(0));
         assertEquals("End", list.get(1));
@@ -93,16 +87,14 @@ public class BSTreeTestRemove
     }
 
     @Test
-    public void testRemoveRootSTUDENT()
-    {
+    public void testRemoveRootSTUDENT() {
         fail("Not yet implemented");
     }
 
     @Test
-    public void testRemoveLeaf()
-    {
+    public void testRemoveLeaf() {
         ArrayList<String> list;
-        assertEquals("Hello", linkedTreeString.getRootNode());
+        assertEquals("Hello", linkedTreeString.getRootData());
 
         linkedTreeString.add("End");
         linkedTreeString.add("Begin");
@@ -121,16 +113,14 @@ public class BSTreeTestRemove
     }
 
     @Test
-    public void testRemoveLeafSTUDENT()
-    {
+    public void testRemoveLeafSTUDENT() {
         fail("Not yet implemented");
     }
 
     @Test
-    public void testRemoveNodeWithOneChild()
-    {
+    public void testRemoveNodeWithOneChild() {
         ArrayList<String> list;
-        assertEquals("Hello", linkedTreeString.getRootNode());
+        assertEquals("Hello", linkedTreeString.getRootData());
 
         linkedTreeString.add("End");
         linkedTreeString.add("Begin");
@@ -149,29 +139,24 @@ public class BSTreeTestRemove
     }
 
     @Test
-    public void testRemoveNodeWithOneChildSTUDENT()
-    {
+    public void testRemoveNodeWithOneChildSTUDENT() {
         fail("Not yet implemented");
     }
 
-    private class StringComparator implements Comparator<String>
-    {
+    private class StringComparator implements Comparator<String> {
 
         @Override
-        public int compare(String arg0, String arg1)
-        {
+        public int compare(String arg0, String arg1) {
             // TODO Auto-generated method stub
             return arg0.compareTo(arg1);
         }
 
     }
 
-    private class DoubleComparator implements Comparator<Double>
-    {
+    private class DoubleComparator implements Comparator<Double> {
 
         @Override
-        public int compare(Double arg0, Double arg1)
-        {
+        public int compare(Double arg0, Double arg1) {
             // TODO Auto-generated method stub
             return arg0.compareTo(arg1);
         }

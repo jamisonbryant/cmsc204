@@ -1,22 +1,21 @@
 package edu.montgomerycollege.cmsc204.ralexander;
 
-import static org.junit.Assert.*;
-
-import java.util.ArrayList;
-
-import edu.montgomerycollege.cmsc204.jbryant.BasicLinkedTree;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class BasicLinkedTreeTestAll
-{
+import java.util.ArrayList;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
+
+public class BasicLinkedTreeTestAll {
     BasicLinkedTree<String> linkedTreeString;
     BasicLinkedTree<Double> linkedTreeDouble;
 
     @Before
-    public void setUp() throws Exception
-    {
+    public void setUp() throws Exception {
         linkedTreeString = new BasicLinkedTree<String>();
         linkedTreeString.add("Hello");
         linkedTreeString.add("World");
@@ -26,15 +25,13 @@ public class BasicLinkedTreeTestAll
     }
 
     @After
-    public void tearDown() throws Exception
-    {
+    public void tearDown() throws Exception {
         linkedTreeString = null;
         linkedTreeDouble = null;
     }
 
     @Test
-    public void testGetSize()
-    {
+    public void testGetSize() {
         assertEquals(2, linkedTreeString.getSize());
     }
 
@@ -42,9 +39,8 @@ public class BasicLinkedTreeTestAll
      * Test that nodes are added level by level from left to right
      */
     @Test
-    public void testAdd()
-    {
-        assertEquals("Hello", linkedTreeString.getRootNode());
+    public void testAdd() {
+        assertEquals("Hello", linkedTreeString.getRootData());
 
         linkedTreeString.add("End");
 
@@ -72,8 +68,7 @@ public class BasicLinkedTreeTestAll
      * Use the test above as an example.  Use the linkedTreeDouble
      */
     @Test
-    public void testAddSTUDENT()
-    {
+    public void testAddSTUDENT() {
         fail("Not yet implemented");
     }
 
@@ -82,12 +77,11 @@ public class BasicLinkedTreeTestAll
      * the same
      */
     @Test
-    public void testGetRootData()
-    {
-        assertEquals("Hello", linkedTreeString.getRootNode());
+    public void testGetRootData() {
+        assertEquals("Hello", linkedTreeString.getRootData());
 
         linkedTreeString.add("Apple");
-        assertEquals("Hello", linkedTreeString.getRootNode());
+        assertEquals("Hello", linkedTreeString.getRootData());
     }
 
 
@@ -96,8 +90,7 @@ public class BasicLinkedTreeTestAll
      * the root remains the same.  Use the linkedTreeDouble tree
      */
     @Test
-    public void testGetRootSTUDENT()
-    {
+    public void testGetRootSTUDENT() {
         fail("Not yet implemented");
     }
 
@@ -107,8 +100,7 @@ public class BasicLinkedTreeTestAll
      * Arraylist in NLR (Preorder) traversal order
      */
     @Test
-    public void testToArrayTree()
-    {
+    public void testToArrayTree() {
         ArrayList<String> list;
 
         linkedTreeString.add("End");
@@ -128,8 +120,7 @@ public class BasicLinkedTreeTestAll
      * (Preorder) traversal order.  Use the linkedTreeDouble tree
      */
     @Test
-    public void testToArraySTUDENT()
-    {
+    public void testToArraySTUDENT() {
         fail("Not yet implemented");
     }
 
@@ -138,10 +129,9 @@ public class BasicLinkedTreeTestAll
      * Test to remove node with 2 children
      */
     @Test
-    public void testRemoveNodeWithTwoChildren()
-    {
+    public void testRemoveNodeWithTwoChildren() {
         ArrayList<String> list;
-        assertEquals("Hello", linkedTreeString.getRootNode());
+        assertEquals("Hello", linkedTreeString.getRootData());
 
         linkedTreeString.add("End");
         linkedTreeString.add("Begin");
@@ -161,8 +151,7 @@ public class BasicLinkedTreeTestAll
      * Use the linkedTreeDouble tree
      */
     @Test
-    public void testRemoveNodeWithTwoChildrenSTUDENT()
-    {
+    public void testRemoveNodeWithTwoChildrenSTUDENT() {
         fail("Not yet implemented");
     }
 
@@ -170,10 +159,9 @@ public class BasicLinkedTreeTestAll
      * Test to remove root of tree
      */
     @Test
-    public void testRemoveRoot()
-    {
+    public void testRemoveRoot() {
         ArrayList<String> list;
-        assertEquals("Hello", linkedTreeString.getRootNode());
+        assertEquals("Hello", linkedTreeString.getRootData());
 
         linkedTreeString.add("End");
         linkedTreeString.add("Begin");
@@ -194,8 +182,7 @@ public class BasicLinkedTreeTestAll
      * Use the linkedTreeDouble tree
      */
     @Test
-    public void testRemoveRootSTUDENT()
-    {
+    public void testRemoveRootSTUDENT() {
         fail("Not yet implemented");
     }
 
@@ -203,10 +190,9 @@ public class BasicLinkedTreeTestAll
      * test to remove a node with node children (leaf)
      */
     @Test
-    public void testRemoveLeaf()
-    {
+    public void testRemoveLeaf() {
         ArrayList<String> list;
-        assertEquals("Hello", linkedTreeString.getRootNode());
+        assertEquals("Hello", linkedTreeString.getRootData());
 
         linkedTreeString.add("End");
         linkedTreeString.add("Begin");
@@ -224,8 +210,7 @@ public class BasicLinkedTreeTestAll
      * Use the linkedTreeDouble tree
      */
     @Test
-    public void testRemoveLeafSTUDENT()
-    {
+    public void testRemoveLeafSTUDENT() {
         fail("Not yet implemented");
     }
 
@@ -233,10 +218,9 @@ public class BasicLinkedTreeTestAll
      * test to remove a node with 1 child
      */
     @Test
-    public void testRemoveNodeWithOneChild()
-    {
+    public void testRemoveNodeWithOneChild() {
         ArrayList<String> list;
-        assertEquals("Hello", linkedTreeString.getRootNode());
+        assertEquals("Hello", linkedTreeString.getRootData());
 
         linkedTreeString.add("End");
         linkedTreeString.add("Begin");
@@ -259,8 +243,7 @@ public class BasicLinkedTreeTestAll
      * Use the linkedTreeDouble tree
      */
     @Test
-    public void testRemoveNodeWithOneChildSTUDENT()
-    {
+    public void testRemoveNodeWithOneChildSTUDENT() {
         fail("Not yet implemented");
     }
 }

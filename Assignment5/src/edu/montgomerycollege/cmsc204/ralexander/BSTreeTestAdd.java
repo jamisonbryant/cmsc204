@@ -1,26 +1,24 @@
 package edu.montgomerycollege.cmsc204.ralexander;
 
-import static org.junit.Assert.*;
-
-import java.util.ArrayList;
-import java.util.Comparator;
-
-import edu.montgomerycollege.cmsc204.jbryant.BSTree;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 
-public class BSTreeTestAdd
-{
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
+
+public class BSTreeTestAdd {
     BSTree<String> linkedTreeString;
     BSTree<Double> linkedTreeDouble;
     StringComparator comparator;
     DoubleComparator comparatorD;
 
     @Before
-    public void setUp() throws Exception
-    {
+    public void setUp() throws Exception {
         comparator = new StringComparator();
         linkedTreeString = new BSTree<String>(comparator);
         linkedTreeString.add("Hello");
@@ -33,8 +31,7 @@ public class BSTreeTestAdd
     }
 
     @After
-    public void tearDown() throws Exception
-    {
+    public void tearDown() throws Exception {
         linkedTreeString = null;
         linkedTreeDouble = null;
         comparator = null;
@@ -43,9 +40,8 @@ public class BSTreeTestAdd
 
 
     @Test
-    public void testAddString()
-    {
-        assertEquals("Hello", linkedTreeString.getRootNode());
+    public void testAddString() {
+        assertEquals("Hello", linkedTreeString.getRootData());
         try {
             linkedTreeString.add("End");
         } catch (Exception e) {
@@ -76,30 +72,25 @@ public class BSTreeTestAdd
 
 
     @Test
-    public void testAddSTUDENT()
-    {
+    public void testAddSTUDENT() {
         fail("Not yet implemented");
     }
 
 
-    private class StringComparator implements Comparator<String>
-    {
+    private class StringComparator implements Comparator<String> {
 
         @Override
-        public int compare(String arg0, String arg1)
-        {
+        public int compare(String arg0, String arg1) {
             // TODO Auto-generated method stub
             return arg0.compareTo(arg1);
         }
 
     }
 
-    private class DoubleComparator implements Comparator<Double>
-    {
+    private class DoubleComparator implements Comparator<Double> {
 
         @Override
-        public int compare(Double arg0, Double arg1)
-        {
+        public int compare(Double arg0, Double arg1) {
             // TODO Auto-generated method stub
             return arg0.compareTo(arg1);
         }

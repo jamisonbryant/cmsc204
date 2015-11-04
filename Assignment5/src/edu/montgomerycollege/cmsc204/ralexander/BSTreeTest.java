@@ -1,26 +1,25 @@
 package edu.montgomerycollege.cmsc204.ralexander;
 
-import static org.junit.Assert.*;
-
-import java.util.ArrayList;
-import java.util.Comparator;
-
 import edu.montgomerycollege.cmsc204.jbryant.BSTree;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 
-public class BSTreeTest
-{
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
+
+public class BSTreeTest {
     BSTree<String> linkedTreeString;
     BSTree<Double> linkedTreeDouble;
     StringComparator comparator;
     DoubleComparator comparatorD;
 
     @Before
-    public void setUp() throws Exception
-    {
+    public void setUp() throws Exception {
         comparator = new StringComparator();
         linkedTreeString = new BSTree<String>(comparator);
         linkedTreeString.add("Hello");
@@ -35,8 +34,7 @@ public class BSTreeTest
     }
 
     @After
-    public void tearDown() throws Exception
-    {
+    public void tearDown() throws Exception {
         linkedTreeString = null;
         linkedTreeDouble = null;
         comparator = null;
@@ -44,30 +42,26 @@ public class BSTreeTest
     }
 
     @Test
-    public void testGetSize()
-    {
+    public void testGetSize() {
         assertEquals(2, linkedTreeString.getSize());
     }
 
 
     @Test
-    public void testGetRootDataString()
-    {
-        assertEquals("Hello", linkedTreeString.getRootNode());
+    public void testGetRootDataString() {
+        assertEquals("Hello", linkedTreeString.getRootData());
         linkedTreeString.add("Apple");
-        assertEquals("Hello", linkedTreeString.getRootNode());
+        assertEquals("Hello", linkedTreeString.getRootData());
     }
 
     @Test
-    public void testGetRootDataSTUDENT()
-    {
+    public void testGetRootDataSTUDENT() {
         fail("Not yet implemented");
     }
 
 
     @Test
-    public void testToArrayTree()
-    {
+    public void testToArrayTree() {
         ArrayList<String> list;
 
         linkedTreeString.add("End");
@@ -84,30 +78,25 @@ public class BSTreeTest
 
 
     @Test
-    public void testToArrayTreeSTUDENT()
-    {
+    public void testToArrayTreeSTUDENT() {
         fail("Not yet implemented");
     }
 
 
-    private class StringComparator implements Comparator<String>
-    {
+    private class StringComparator implements Comparator<String> {
 
         @Override
-        public int compare(String arg0, String arg1)
-        {
+        public int compare(String arg0, String arg1) {
             // TODO Auto-generated method stub
             return arg0.compareTo(arg1);
         }
 
     }
 
-    private class DoubleComparator implements Comparator<Double>
-    {
+    private class DoubleComparator implements Comparator<Double> {
 
         @Override
-        public int compare(Double arg0, Double arg1)
-        {
+        public int compare(Double arg0, Double arg1) {
             // TODO Auto-generated method stub
             return arg0.compareTo(arg1);
         }
