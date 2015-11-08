@@ -1,5 +1,7 @@
 package edu.montgomerycollege.cmsc204.jbryant;
 
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
+
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -90,8 +92,59 @@ public class BasicLinkedTree<T>
      */
     public void remove(T node)
     {
-        // Decrement tree size
-        size--;
+        ArrayList<TreeNode> list = new ArrayList<TreeNode>();
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+
+        // If root node null, return
+        if (rootNode == null) return;
+
+        // Add root to stack
+        stack.push(rootNode);
+
+        // Traverse stack
+        while (!stack.empty()) {
+            // Pop node and add to list
+            TreeNode<T> n = stack.pop();
+
+            // Check if node matches query
+            if (n.getData().equals(node)) {
+                // Check which (if any) child nodes node has
+                if (n.hasLeftChild() && n.hasRightChild()) {
+                    // Node has BOTH left child node AND right child node
+                    System.out.println("Node: " + n.getData() + ", left/right");
+                } else if (n.hasLeftChild() ^ n.hasRightChild()) {
+                    // Node has EITHER left child node OR right child node, but not both
+                    if (n.hasLeftChild()) {
+                        System.out.println("Node: " + n.getData() + ", left");
+                    } else {
+                        System.out.println("Node: " + n.getData() + ", right");
+                    }
+                } else {
+                    // Node has NEITHER left child node NOR right child node
+                    TreeNode<T> parent = getParent(node);
+
+                    if (parent != null) {
+                        if (parent.getLeftChild().getData().equals(node)) {
+                            parent.setLeftChild(null);
+                        } else {
+                            parent.setRightChild(null);
+                        }
+                    }
+                }
+            }
+
+            // Check if node has right child
+            if (n.hasRightChild()) {
+                // Push right child onto stack
+                stack.push(n.getRightChild());
+            }
+
+            // Check if node has left child
+            if (n.hasLeftChild()) {
+                // Push left node onto stack
+                stack.push(n.getLeftChild());
+            }
+        }
     }
 
     /**
@@ -131,6 +184,40 @@ public class BasicLinkedTree<T>
 
         // Return preordered list
         return list;
+    }
+
+    private TreeNode<T> getParent(T node)
+    {
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        stack.push(rootNode);
+
+        // Traverse stack
+        while (!stack.empty()) {
+            // Pop node and add to list
+            TreeNode<T> n = stack.pop();
+            TreeNode<T> l = n.getLeftChild();
+            TreeNode<T> r = n.getRightChild();
+
+            // Check if node matches query
+            if (l.getData().equals(node) || r.getData().equals(node)) {
+                // Return parent
+                return n;
+            }
+
+            // Check if node has right child
+            if (n.hasRightChild()) {
+                // Push right child onto stack
+                stack.push(n.getRightChild());
+            }
+
+            // Check if node has left child
+            if (n.hasLeftChild()) {
+                // Push left node onto stack
+                stack.push(n.getLeftChild());
+            }
+        }
+
+        return null;
     }
 
     //<editor-fold desc="[Getters/Setters]">
