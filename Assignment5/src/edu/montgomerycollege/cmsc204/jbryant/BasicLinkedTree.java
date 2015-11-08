@@ -1,7 +1,5 @@
 package edu.montgomerycollege.cmsc204.jbryant;
 
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
-
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -92,58 +90,135 @@ public class BasicLinkedTree<T>
      */
     public void remove(T node)
     {
-        ArrayList<TreeNode> list = new ArrayList<TreeNode>();
-        Stack<TreeNode> stack = new Stack<TreeNode>();
+        // Convert tree to node list
+        ArrayList<TreeNode<T>> nodes = toNodeList();
 
-        // If root node null, return
-        if (rootNode == null) return;
-
-        // Add root to stack
-        stack.push(rootNode);
-
-        // Traverse stack
-        while (!stack.empty()) {
-            // Pop node and add to list
-            TreeNode<T> n = stack.pop();
-
-            // Check if node matches query
+        // Search for node in list
+        for (TreeNode<T> n : nodes) {
             if (n.getData().equals(node)) {
-                // Check which (if any) child nodes node has
-                if (n.hasLeftChild() && n.hasRightChild()) {
-                    // Node has BOTH left child node AND right child node
-                    System.out.println("Node: " + n.getData() + ", left/right");
-                } else if (n.hasLeftChild() ^ n.hasRightChild()) {
-                    // Node has EITHER left child node OR right child node, but not both
-                    if (n.hasLeftChild()) {
-                        System.out.println("Node: " + n.getData() + ", left");
+                // Check if node has children
+                if (n.hasRightChild() && n.hasLeftChild()) {
+                    // Remove node w/ left and right children
+                    TreeNode<T> minimum;
+
+                    if (n == rootNode) {
+                        minimum = getParent(getMinimum(n.getLeftChild())).getRightChild();
                     } else {
-                        System.out.println("Node: " + n.getData() + ", right");
+                        minimum = getMinimum(n);
+                    }
+
+                    // Delete minimum node
+                    T data = minimum.getData();
+                    remove(data);
+
+                    // Swap node data with minimum node data
+                    n.setData(minimum.getData());
+                } else if (n.hasRightChild() ^ n.hasLeftChild()) {
+                    // Remove node w/ left OR right children but not both
+                    TreeNode<T> parent = getParent(n);
+                    TreeNode<T> successor = getSuccessor(n);
+
+                    // Check if parent/successor found (they should be)
+                    if (parent != null && successor != null) {
+                        // Check if node has right child
+                        if (parent.hasRightChild()) {
+                            // Check if right child is equal to given node
+                            if (parent.getRightChild().getData().equals(node)) {
+                                // Update node
+                                parent.setRightChild(successor);
+                            }
+                        }
+
+                        // Check if node has left child
+                        if (parent.hasLeftChild()) {
+                            // Check if left child is equals to given node
+                            if (parent.getLeftChild().getData().equals(node)) {
+                                // Update node
+                                parent.setLeftChild(successor);
+                            }
+                        }
                     }
                 } else {
-                    // Node has NEITHER left child node NOR right child node
-                    TreeNode<T> parent = getParent(node);
+                    // Remove node w/ no children
+                    TreeNode<T> parent = getParent(n);
 
+                    // Check if parent found (it should be)
                     if (parent != null) {
-                        if (parent.getLeftChild().getData().equals(node)) {
-                            parent.setLeftChild(null);
-                        } else {
-                            parent.setRightChild(null);
+                        // Check if node has right child
+                        if (parent.hasRightChild()) {
+                            // Check if right child is equal to given node
+                            if (parent.getRightChild().getData().equals(node)) {
+                                // Delete node
+                                parent.setRightChild(null);
+                            }
+                        }
+
+                        // Check if node has left child
+                        if (parent.hasLeftChild()) {
+                            // Check if left child is equals to given node
+                            if (parent.getLeftChild().getData().equals(node)) {
+                                // Delete node
+                                parent.setLeftChild(null);
+                            }
                         }
                     }
                 }
-            }
 
+            }
+        }
+    }
+
+    private TreeNode<T> getMinimum(TreeNode<T> node)
+    {
+        if (node == null) return null;
+
+        if (node.hasLeftChild()) {
+            return getMinimum(node.getLeftChild());
+        } else {
+            return node;
+        }
+    }
+
+    private TreeNode<T> getParent(TreeNode<T> node)
+    {
+        if (node == null) return null;
+
+        // Convert tree to node list
+        ArrayList<TreeNode<T>> nodes = toNodeList();
+
+        // Iterate over node list
+        for (TreeNode<T> n : nodes) {
             // Check if node has right child
             if (n.hasRightChild()) {
-                // Push right child onto stack
-                stack.push(n.getRightChild());
+                // Check if right child is equal to given node
+                if (n.getRightChild().equals(node)) {
+                    // Return node
+                    return n;
+                }
             }
 
             // Check if node has left child
             if (n.hasLeftChild()) {
-                // Push left node onto stack
-                stack.push(n.getLeftChild());
+                // Check if left child is equals to given node
+                if (n.getLeftChild().equals(node)) {
+                    // Return node
+                    return n;
+                }
             }
+        }
+
+        // Return null (given node not found)
+        return null;
+    }
+
+    private TreeNode<T> getSuccessor(TreeNode<T> node)
+    {
+        if (node == null) return null;
+
+        if (node.hasRightChild()) {
+            return node.getRightChild();
+        } else {
+            return node.getLeftChild();
         }
     }
 
@@ -155,7 +230,7 @@ public class BasicLinkedTree<T>
     public ArrayList<T> toArrayList()
     {
         ArrayList<T> list = new ArrayList<T>();
-        Stack<TreeNode> stack = new Stack<TreeNode>();
+        Stack<TreeNode<T>> stack = new Stack<TreeNode<T>>();
 
         // If root node null, return empty list
         if (rootNode == null) return list;
@@ -182,42 +257,47 @@ public class BasicLinkedTree<T>
             }
         }
 
-        // Return preordered list
+        // Return list
         return list;
     }
 
-    private TreeNode<T> getParent(T node)
+    /**
+     * Returns a copy of the tree as an ArrayList
+     *
+     * @return Tree as ArrayList
+     */
+    public ArrayList<TreeNode<T>> toNodeList()
     {
-        Stack<TreeNode> stack = new Stack<TreeNode>();
+        ArrayList<TreeNode<T>> list = new ArrayList<TreeNode<T>>();
+        Stack<TreeNode<T>> stack = new Stack<TreeNode<T>>();
+
+        // If root node null, return empty list
+        if (rootNode == null) return list;
+
+        // Add root to stack
         stack.push(rootNode);
 
         // Traverse stack
         while (!stack.empty()) {
             // Pop node and add to list
-            TreeNode<T> n = stack.pop();
-            TreeNode<T> l = n.getLeftChild();
-            TreeNode<T> r = n.getRightChild();
-
-            // Check if node matches query
-            if (l.getData().equals(node) || r.getData().equals(node)) {
-                // Return parent
-                return n;
-            }
+            TreeNode<T> node = stack.pop();
+            list.add(node);
 
             // Check if node has right child
-            if (n.hasRightChild()) {
+            if (node.hasRightChild()) {
                 // Push right child onto stack
-                stack.push(n.getRightChild());
+                stack.push(node.getRightChild());
             }
 
             // Check if node has left child
-            if (n.hasLeftChild()) {
+            if (node.hasLeftChild()) {
                 // Push left node onto stack
-                stack.push(n.getLeftChild());
+                stack.push(node.getLeftChild());
             }
         }
 
-        return null;
+        // Return list
+        return list;
     }
 
     //<editor-fold desc="[Getters/Setters]">

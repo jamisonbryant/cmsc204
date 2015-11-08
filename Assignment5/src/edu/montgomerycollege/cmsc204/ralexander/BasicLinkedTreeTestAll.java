@@ -184,8 +184,22 @@ public class BasicLinkedTreeTestAll {
      * Use the linkedTreeDouble tree
      */
     @Test
-    public void testRemoveNodeWithTwoChildrenSTUDENT() {
-        fail("Not yet implemented");
+    public void testRemoveNodeWithTwoChildrenSTUDENT()
+    {
+        ArrayList<Double> list;
+        assertEquals(3.14, linkedTreeDouble.getRootData(), 0.00);
+
+        linkedTreeDouble.add(4.56);
+        linkedTreeDouble.add(92.9);
+        linkedTreeDouble.add(1093.2);
+
+        //remove left of root
+        linkedTreeDouble.remove(10.11);
+        list = linkedTreeDouble.toArrayList();
+        assertEquals(3.14, list.get(0), 0.00);
+        assertEquals(92.9, list.get(1), 0.00);
+        assertEquals(1093.2, list.get(2), 0.00);
+        assertEquals(4.56, list.get(3), 0.00);
     }
 
     /**
@@ -207,7 +221,6 @@ public class BasicLinkedTreeTestAll {
         assertEquals("World", list.get(1));
         assertEquals("Begin", list.get(2));
         assertEquals("End", list.get(3));
-
     }
 
     /**
@@ -215,8 +228,22 @@ public class BasicLinkedTreeTestAll {
      * Use the linkedTreeDouble tree
      */
     @Test
-    public void testRemoveRootSTUDENT() {
-        fail("Not yet implemented");
+    public void testRemoveRootSTUDENT()
+    {
+        ArrayList<Double> list;
+        assertEquals(3.14, linkedTreeDouble.getRootData(), 0.00);
+
+        linkedTreeDouble.add(4.56);
+        linkedTreeDouble.add(92.9);
+        linkedTreeDouble.add(1093.2);
+
+        //remove root, replaces it with rightmost child of left subtree
+        linkedTreeDouble.remove(3.14);
+        list = linkedTreeDouble.toArrayList();
+        assertEquals(1093.2, list.get(0), 0.00);
+        assertEquals(10.11, list.get(1), 0.00);
+        assertEquals(92.9, list.get(2), 0.00);
+        assertEquals(4.56, list.get(3), 0.00);
     }
 
     /**
@@ -243,8 +270,20 @@ public class BasicLinkedTreeTestAll {
      * Use the linkedTreeDouble tree
      */
     @Test
-    public void testRemoveLeafSTUDENT() {
-        fail("Not yet implemented");
+    public void testRemoveLeafSTUDENT()
+    {
+        ArrayList<Double> list;
+        assertEquals(3.14, linkedTreeDouble.getRootData(), 0.00);
+
+        linkedTreeDouble.add(4.56);
+        linkedTreeDouble.add(92.9);
+
+        //remove leaf
+        linkedTreeDouble.remove(92.9);
+        list = linkedTreeDouble.toArrayList();
+        assertEquals(3.14, list.get(0), 0.00);
+        assertEquals(10.11, list.get(1), 0.00);
+        assertEquals(4.56, list.get(2), 0.00);
     }
 
     /**
@@ -268,7 +307,6 @@ public class BasicLinkedTreeTestAll {
         assertEquals("Begin", list.get(2));
         assertEquals("Middle", list.get(3));
         assertEquals("Very End", list.get(4));
-
     }
 
     /**
@@ -276,7 +314,23 @@ public class BasicLinkedTreeTestAll {
      * Use the linkedTreeDouble tree
      */
     @Test
-    public void testRemoveNodeWithOneChildSTUDENT() {
-        fail("Not yet implemented");
+    public void testRemoveNodeWithOneChildSTUDENT()
+    {
+        ArrayList<Double> list;
+        assertEquals(3.14, linkedTreeDouble.getRootData(), 0.00);
+
+        linkedTreeDouble.add(4.56);
+        linkedTreeDouble.add(92.9);
+        linkedTreeDouble.add(1093.2);
+        linkedTreeDouble.add(Math.E);
+
+        //remove leaf
+        linkedTreeDouble.remove(4.56);
+        list = linkedTreeDouble.toArrayList();
+        assertEquals(3.14, list.get(0), 0.00);
+        assertEquals(10.11, list.get(1), 0.00);
+        assertEquals(92.9, list.get(2), 0.00);
+        assertEquals(1093.2, list.get(3), 0.00);
+        assertEquals(Math.E, list.get(4), 0.00);
     }
 }
