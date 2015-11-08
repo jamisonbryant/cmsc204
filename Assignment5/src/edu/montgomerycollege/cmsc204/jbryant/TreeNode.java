@@ -33,6 +33,18 @@ public class TreeNode<T>
     }
 
     /**
+     * Creates a new Tree Node with data
+     *
+     * @param data Node data
+     */
+    public TreeNode(T data)
+    {
+        this.data = data;
+        leftChild = null;
+        rightChild = null;
+    }
+
+    /**
      * Creates a copy of a Tree Node
      *
      * @param node Node to copy
@@ -45,13 +57,23 @@ public class TreeNode<T>
     }
 
     /**
-     * Returns if the node has child nodes
+     * Returns if the node has a left child node
      *
-     * @return True if child nodes set, false otherwise
+     * @return True if left child node not null, false otherwise
      */
-    public boolean hasChildNodes()
+    public boolean hasLeftChild()
     {
-        return !(leftChild == null && rightChild == null);
+        return leftChild != null;
+    }
+
+    /**
+     * Returns if the node has a right child node
+     *
+     * @return True if right child node not null, false otherwise
+     */
+    public boolean hasRightChild()
+    {
+        return rightChild != null;
     }
 
     //<editor-fold desc="[Getters/Setters]">

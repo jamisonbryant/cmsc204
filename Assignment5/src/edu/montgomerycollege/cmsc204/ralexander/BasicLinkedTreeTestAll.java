@@ -23,6 +23,8 @@ public class BasicLinkedTreeTestAll {
 
         //STUDENT: use the following tree for STUDENT tests
         linkedTreeDouble = new BasicLinkedTree<Double>();
+        linkedTreeDouble.add(3.14);
+        linkedTreeDouble.add(10.11);
     }
 
     @After
@@ -50,7 +52,6 @@ public class BasicLinkedTreeTestAll {
         assertEquals("World", list.get(1));
         assertEquals("End", list.get(2));
 
-
         linkedTreeString.add("Apple");
         linkedTreeString.add("Banana");
 
@@ -69,8 +70,26 @@ public class BasicLinkedTreeTestAll {
      * Use the test above as an example.  Use the linkedTreeDouble
      */
     @Test
-    public void testAddSTUDENT() {
-        fail("Not yet implemented");
+    public void testAddSTUDENT()
+    {
+        assertEquals(3.14, linkedTreeDouble.getRootData(), 0.00);
+
+        linkedTreeDouble.add(12.34);
+
+        ArrayList<Double> list = linkedTreeDouble.toArrayList();
+        assertEquals(3.14, list.get(0), 0.00);
+        assertEquals(10.11, list.get(1), 0.00);
+        assertEquals(12.34, list.get(2), 0.00);
+
+        linkedTreeDouble.add(-133.0);
+        linkedTreeDouble.add(0.01);
+
+        list = linkedTreeDouble.toArrayList();
+        assertEquals(3.14, list.get(0), 0.00);
+        assertEquals(10.11, list.get(1), 0.00);
+        assertEquals(-133.0, list.get(2), 0.00);
+        assertEquals(0.01, list.get(3), 0.00);
+        assertEquals(12.34, list.get(4), 0.00);
     }
 
     /**
@@ -92,7 +111,10 @@ public class BasicLinkedTreeTestAll {
      */
     @Test
     public void testGetRootSTUDENT() {
-        fail("Not yet implemented");
+        assertEquals(3.14, linkedTreeDouble.getRootData(), 0.00);
+
+        linkedTreeDouble.add(99.99);
+        assertEquals(3.14, linkedTreeDouble.getRootData(), 0.00);
     }
 
 
@@ -122,9 +144,19 @@ public class BasicLinkedTreeTestAll {
      */
     @Test
     public void testToArraySTUDENT() {
-        fail("Not yet implemented");
-    }
+        ArrayList<Double> list;
 
+        linkedTreeDouble.add(4.56);
+        linkedTreeDouble.add(92.9);
+        linkedTreeDouble.add(1093.2);
+
+        list = linkedTreeDouble.toArrayList();
+        assertEquals(3.14, list.get(0), 0.00);
+        assertEquals(10.11, list.get(1), 0.00);
+        assertEquals(92.9, list.get(2), 0.00);
+        assertEquals(1093.2, list.get(3), 0.00);
+        assertEquals(4.56, list.get(4), 0.00);
+    }
 
     /**
      * Test to remove node with 2 children

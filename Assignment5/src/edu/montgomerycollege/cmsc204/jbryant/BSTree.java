@@ -52,18 +52,6 @@ public class BSTree<T>
      */
     public void remove(T node)
     {
-        // Check if root node has child nodes
-        if (rootNode != null && !rootNode.hasChildNodes()) {
-            // Check if root node equals given node
-            if (node.equals(rootNode)) {
-                // Set root node to null
-                rootNode = null;
-            } else {
-                // Throw exception
-                throw new RuntimeException("Node being removed was not found in tree");
-            }
-        }
-
         // Decrement tree size
         size--;
     }

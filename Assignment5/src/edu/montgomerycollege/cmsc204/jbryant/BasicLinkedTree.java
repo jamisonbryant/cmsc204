@@ -1,6 +1,7 @@
 package edu.montgomerycollege.cmsc204.jbryant;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 /**
  * Basic Linked Tree class
@@ -35,15 +36,51 @@ public class BasicLinkedTree<T>
      */
     public void add(T node)
     {
-        // Check if root node is null
-        if (rootNode == null) {
-            // Set root node to new node
-            rootNode = new TreeNode<T>();
-            rootNode.setData(node);
-        }
+        // Create new node from given data
+        TreeNode<T> newNode = new TreeNode<T>(node);
 
         // Increment tree size
         size++;
+
+        // Check if root node is null
+        if (rootNode == null) {
+            // Set root node to new node
+            rootNode = newNode;
+        } else if(!rootNode.hasLeftChild()) {
+            // Set root left child node to new node
+            rootNode.setLeftChild(newNode);
+        } else if (!rootNode.hasRightChild()) {
+            // Set root right child node to new node
+            rootNode.setRightChild(newNode);
+        } else {
+            // Add node to tree using Myers-Kartchner Tree Balancing algorithm
+            String binaryString = Integer.toBinaryString(size);
+
+            // Drop leading 1 from binary string
+            binaryString = binaryString.substring(1);
+
+            // Get dummy node for use during traversal
+            TreeNode<T> dummyNode = rootNode;
+
+            // Traverse tree according to new string
+            for (char c : binaryString.substring(0, binaryString.length() - 1).toCharArray()) {
+                // Check if character is 0 or 1
+                if (c == '0') {
+                    dummyNode = dummyNode.getLeftChild();
+                } else if (c == '1') {
+                    dummyNode = dummyNode.getRightChild();
+                }
+            }
+
+            // Get last character of binary string
+            char c = binaryString.charAt(binaryString.length() - 1);
+
+            if (c == '0') {
+                dummyNode.setLeftChild(newNode);
+            } else if (c == '1') {
+                dummyNode.setRightChild(newNode);
+            }
+        }
     }
 
     /**
@@ -53,18 +90,6 @@ public class BasicLinkedTree<T>
      */
     public void remove(T node)
     {
-        // Check if root node has child nodes
-        if (rootNode != null && !rootNode.hasChildNodes()) {
-            // Check if root node equals given node
-            if (node.equals(rootNode)) {
-                // Set root node to null
-                rootNode = null;
-            } else {
-                // Throw exception
-                throw new RuntimeException("Node being removed was not found in tree");
-            }
-        }
-
         // Decrement tree size
         size--;
     }
@@ -74,7 +99,39 @@ public class BasicLinkedTree<T>
      *
      * @return Tree as ArrayList
      */
-    public ArrayList<String> toArrayList() { return null; }
+    public ArrayList<T> toArrayList()
+    {
+        ArrayList<T> list = new ArrayList<T>();
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+
+        // If root node null, return empty list
+        if (rootNode == null) return list;
+
+        // Add root to stack
+        stack.push(rootNode);
+
+        // Traverse stack
+        while (!stack.empty()) {
+            // Pop node and add to list
+            TreeNode<T> node = stack.pop();
+            list.add(node.getData());
+
+            // Check if node has right child
+            if (node.hasRightChild()) {
+                // Push right child onto stack
+                stack.push(node.getRightChild());
+            }
+
+            // Check if node has left child
+            if (node.hasLeftChild()) {
+                // Push left node onto stack
+                stack.push(node.getLeftChild());
+            }
+        }
+
+        // Return preordered list
+        return list;
+    }
 
     //<editor-fold desc="[Getters/Setters]">
     /**
