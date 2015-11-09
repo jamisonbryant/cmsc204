@@ -169,6 +169,12 @@ public class BasicLinkedTree<T>
         return this;
     }
 
+    /**
+     * Returns the maximum node of a given BST
+     *
+     * @param node Binary search tree to search
+     * @return Maximum node in tree
+     */
     protected TreeNode<T> getMaximum(TreeNode<T> node)
     {
         if (node == null) return null;
@@ -180,6 +186,12 @@ public class BasicLinkedTree<T>
         }
     }
 
+    /**
+     * Returns the parent of a given node in a BST
+     *
+     * @param node Child node to search for
+     * @return Parent node of given node
+     */
     protected TreeNode<T> getParent(TreeNode<T> node)
     {
         if (node == null) return null;
@@ -212,6 +224,12 @@ public class BasicLinkedTree<T>
         return null;
     }
 
+    /**
+     * Returns the successor of a given node in a BST
+     *
+     * @param node Parent node to search for
+     * @return Successor (child) node of given node
+     */
     private TreeNode<T> getSuccessor(TreeNode<T> node)
     {
         if (node == null) return null;
@@ -224,7 +242,7 @@ public class BasicLinkedTree<T>
     }
 
     /**
-     * Returns a copy of the tree as an ArrayList
+     * Returns a copy of the tree as an ArrayList of generics
      *
      * @return Tree as ArrayList
      */
@@ -263,7 +281,7 @@ public class BasicLinkedTree<T>
     }
 
     /**
-     * Returns a copy of the tree as an ArrayList
+     * Returns a copy of the tree as an ArrayList of TreeNodes
      *
      * @return Tree as ArrayList
      */

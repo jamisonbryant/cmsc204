@@ -16,17 +16,28 @@ public class BSTree<T> extends BasicLinkedTree<T>
      */
     private Comparator<T> comparator;
 
+    /**
+     * Creates a new BSTree
+     *
+     * @param comparator Comparator for BST to use when inserting
+     */
     public BSTree(Comparator<T> comparator)
     {
         this.comparator = comparator;
     }
 
-    public BSTree<T> add(T data)
+    /**
+     * Adds a node to the BST
+     *
+     * @param node Node to add
+     * @return BST with the node added
+     */
+    public BSTree<T> add(T node)
     {
         if (rootNode == null) {
-            rootNode = new TreeNode<T>(data);
+            rootNode = new TreeNode<T>(node);
         } else {
-            rootNode = insert(rootNode, data);
+            rootNode = insert(rootNode, node);
         }
 
         size++;
@@ -50,6 +61,13 @@ public class BSTree<T> extends BasicLinkedTree<T>
         return traverse(rootNode, list);
     }
 
+    /**
+     * Inserts a node into a given BST
+     *
+     * @param tree Tree to insert node into
+     * @param data Node to insert into tree
+     * @return BST with node inserted
+     */
     private TreeNode<T> insert(TreeNode<T> tree, T data)
     {
         // Compare data values
@@ -76,11 +94,13 @@ public class BSTree<T> extends BasicLinkedTree<T>
         return tree;
     }
 
-//    private TreeNode<T> delete(TreeNode<T> tree, T data)
-//    {
-//        return tree;
-//    }
-
+    /**
+     * Places BST nodes in a list according to inorder algorithm
+     *
+     * @param node BST to traverse
+     * @param list List to place nodes in
+     * @return List with ordered nodes
+     */
     private ArrayList<T> traverse(TreeNode<T> node, ArrayList<T> list) {
         // Check if given node is null
         if (node == null) return null;
