@@ -33,6 +33,7 @@ public class BasicLinkedTree<T>
      * Adds a node to the tree
      *
      * @param node Node to add
+     * @return BST with node inserted
      */
     public BasicLinkedTree<T> add(T node)
     {
@@ -89,6 +90,7 @@ public class BasicLinkedTree<T>
      * Removes a node from the tree
      *
      * @param node Node to remove
+     * @return BST with node removed
      */
     public BasicLinkedTree<T> remove(T node)
     {
