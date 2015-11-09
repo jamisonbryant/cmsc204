@@ -83,16 +83,16 @@ public class BSTreeTest {
     public void testToArrayTreeSTUDENT() {
         ArrayList<Double> list;
 
-        linkedTreeDouble.add(103.29);
+        linkedTreeDouble.add(83.75);
         linkedTreeDouble.add(93.29);
-        linkedTreeDouble.add(9.9);
+        linkedTreeDouble.add(7.9);
 
         list = linkedTreeDouble.toArrayList();
-        assertEquals(93.29, list.get(0), 0.00);
-        assertEquals(103.29, list.get(1), 0.00);
-        assertEquals(3.14, list.get(2), 0.00);
-        assertEquals(9.9, list.get(3), 0.00);
-        assertEquals(10.11, list.get(4), 0.00);
+        assertEquals(3.14, list.get(0), 0.00);
+        assertEquals(7.9, list.get(1), 0.00);
+        assertEquals(10.11, list.get(2), 0.00);
+        assertEquals(83.75, list.get(3), 0.00);
+        assertEquals(93.29, list.get(4), 0.00);
     }
 
 

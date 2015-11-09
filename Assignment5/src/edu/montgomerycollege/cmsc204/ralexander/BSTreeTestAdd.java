@@ -29,6 +29,8 @@ public class BSTreeTestAdd {
         //for the student tests
         comparatorD = new DoubleComparator();
         linkedTreeDouble = new BSTree<Double>(comparatorD);
+        linkedTreeDouble.add(3.14);
+        linkedTreeDouble.add(10.11);
     }
 
     @After
@@ -75,7 +77,34 @@ public class BSTreeTestAdd {
 
     @Test
     public void testAddSTUDENT() {
-        fail("Not yet implemented");
+        assertEquals(3.14, linkedTreeDouble.getRootData(), 0.00);
+
+        try {
+            linkedTreeDouble.add(29.39);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            fail("Should not have thrown an exception");
+        }
+
+        ArrayList<Double> list = linkedTreeDouble.toArrayList();
+        assertEquals(3.14, list.get(0), 0.00);
+        assertEquals(10.11, list.get(1), 0.00);
+        assertEquals(29.39, list.get(2), 0.00);
+
+        try {
+            linkedTreeDouble.add(5.4);
+            linkedTreeDouble.add(6.7);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            fail("Should not have thrown an exception");
+        }
+
+        list = linkedTreeDouble.toArrayList();
+        assertEquals(3.14, list.get(0), 0.00);
+        assertEquals(5.4, list.get(1), 0.00);
+        assertEquals(6.7, list.get(2), 0.00);
+        assertEquals(10.11, list.get(3), 0.00);
+        assertEquals(29.39, list.get(4), 0.00);
     }
 
 
