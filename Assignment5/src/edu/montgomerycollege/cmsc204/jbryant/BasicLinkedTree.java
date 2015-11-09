@@ -95,26 +95,23 @@ public class BasicLinkedTree<T>
         // Convert tree to node list
         ArrayList<TreeNode<T>> nodes = toNodeList();
 
+        // Decrement tree size
+        size--;
+
         // Search for node in list
         for (TreeNode<T> n : nodes) {
             if (n.getData().equals(node)) {
                 // Check if node has children
                 if (n.hasRightChild() && n.hasLeftChild()) {
                     // Remove node w/ left and right children
-                    TreeNode<T> minimum;
-
-                    if (n == rootNode) {
-                        minimum = getParent(getMinimum(n.getLeftChild())).getRightChild();
-                    } else {
-                        minimum = getMinimum(n);
-                    }
+                    TreeNode<T> maximum = getMaximum(n.getLeftChild());
 
                     // Delete minimum node
-                    T data = minimum.getData();
+                    T data = maximum.getData();
                     remove(data);
 
                     // Swap node data with minimum node data
-                    n.setData(minimum.getData());
+                    n.setData(maximum.getData());
                 } else if (n.hasRightChild() ^ n.hasLeftChild()) {
                     // Remove node w/ left OR right children but not both
                     TreeNode<T> parent = getParent(n);
@@ -172,12 +169,12 @@ public class BasicLinkedTree<T>
         return this;
     }
 
-    protected TreeNode<T> getMinimum(TreeNode<T> node)
+    protected TreeNode<T> getMaximum(TreeNode<T> node)
     {
         if (node == null) return null;
 
-        if (node.hasLeftChild()) {
-            return getMinimum(node.getLeftChild());
+        if (node.hasRightChild()) {
+            return getMaximum(node.getRightChild());
         } else {
             return node;
         }

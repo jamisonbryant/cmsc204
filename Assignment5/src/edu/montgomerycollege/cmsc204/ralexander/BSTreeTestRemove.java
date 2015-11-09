@@ -28,7 +28,8 @@ public class BSTreeTestRemove {
         //STUDENT: Use the linkedTreeDouble and the comparatorD
         comparatorD = new DoubleComparator();
         linkedTreeDouble = new BSTree<Double>(comparatorD);
-
+        linkedTreeDouble.add(3.14);
+        linkedTreeDouble.add(10.11);
     }
 
     @After
@@ -62,7 +63,22 @@ public class BSTreeTestRemove {
 
     @Test
     public void testRemoveNodeWithTwoChildrenSTUDENT() {
-        fail("Not yet implemented");
+        ArrayList<Double> list;
+        assertEquals(3.14, linkedTreeDouble.getRootData(), 0.00);
+
+        linkedTreeDouble.add(1.23);
+        linkedTreeDouble.add(4.56);
+        linkedTreeDouble.add(7.89);
+        linkedTreeDouble.add(9.01);
+
+        //remove left of root
+        linkedTreeDouble.remove(3.14);
+        list = linkedTreeDouble.toArrayList();
+        assertEquals(1.23, list.get(0), 0.00);
+        assertEquals(4.56, list.get(1), 0.00);
+        assertEquals(7.89, list.get(2), 0.00);
+        assertEquals(9.01, list.get(3), 0.00);
+        assertEquals(10.11, list.get(4), 0.00);
     }
 
     @Test
@@ -89,7 +105,23 @@ public class BSTreeTestRemove {
 
     @Test
     public void testRemoveRootSTUDENT() {
-        fail("Not yet implemented");
+        ArrayList<Double> list;
+        assertEquals(3.14, linkedTreeDouble.getRootData(), 0.00);
+
+        linkedTreeDouble.add(1.23);
+        linkedTreeDouble.add(4.56);
+        linkedTreeDouble.add(7.89);
+        linkedTreeDouble.add(9.01);
+
+        //remove root, replaces it with rightmost child of left subtree
+        linkedTreeDouble.remove(3.14);
+        assertEquals(1.23, linkedTreeDouble.getRootData(), 0.00);
+        list = linkedTreeDouble.toArrayList();
+        assertEquals(1.23, list.get(0), 0.00);
+        assertEquals(4.56, list.get(1), 0.00);
+        assertEquals(7.89, list.get(2), 0.00);
+        assertEquals(9.01, list.get(3), 0.00);
+        assertEquals(10.11, list.get(4), 0.00);
     }
 
     @Test
@@ -114,8 +146,24 @@ public class BSTreeTestRemove {
     }
 
     @Test
-    public void testRemoveLeafSTUDENT() {
-        fail("Not yet implemented");
+    public void testRemoveLeafSTUDENT()
+    {
+        ArrayList<Double> list;
+        assertEquals(3.14, linkedTreeDouble.getRootData(), 0.00);
+
+        linkedTreeDouble.add(1.23);
+        linkedTreeDouble.add(4.56);
+        linkedTreeDouble.add(7.89);
+        linkedTreeDouble.add(9.01);
+
+        //remove leaf
+        linkedTreeDouble.remove(1.23);
+        list = linkedTreeDouble.toArrayList();
+        assertEquals(3.14, list.get(0), 0.00);
+        assertEquals(4.56, list.get(1), 0.00);
+        assertEquals(7.89, list.get(2), 0.00);
+        assertEquals(9.01, list.get(3), 0.00);
+        assertEquals(10.11, list.get(4), 0.00);
     }
 
     @Test
@@ -141,7 +189,22 @@ public class BSTreeTestRemove {
 
     @Test
     public void testRemoveNodeWithOneChildSTUDENT() {
-        fail("Not yet implemented");
+        ArrayList<Double> list;
+        assertEquals(3.14, linkedTreeDouble.getRootData(), 0.00);
+
+        linkedTreeDouble.add(1.23);
+        linkedTreeDouble.add(4.56);
+        linkedTreeDouble.add(7.89);
+        linkedTreeDouble.add(9.01);
+
+        //remove leaf
+        linkedTreeDouble.remove(1.23);
+        list = linkedTreeDouble.toArrayList();
+        assertEquals(3.14, list.get(0), 0.00);
+        assertEquals(4.56, list.get(1), 0.00);
+        assertEquals(7.89, list.get(2), 0.00);
+        assertEquals(9.01, list.get(3), 0.00);
+        assertEquals(10.11, list.get(4), 0.00);
     }
 
     private class StringComparator implements Comparator<String> {

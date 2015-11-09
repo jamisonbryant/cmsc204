@@ -34,14 +34,6 @@ public class BSTree<T> extends BasicLinkedTree<T>
         return this;
     }
 
-    public BSTree<T> remove(T data)
-    {
-        rootNode = delete(rootNode, data);
-        size--;
-
-        return this;
-    }
-
     /**
      * Returns a copy of the tree as an ArrayList
      *
@@ -84,10 +76,10 @@ public class BSTree<T> extends BasicLinkedTree<T>
         return tree;
     }
 
-    private TreeNode<T> delete(TreeNode<T> tree, T data)
-    {
-        return tree;
-    }
+//    private TreeNode<T> delete(TreeNode<T> tree, T data)
+//    {
+//        return tree;
+//    }
 
     private ArrayList<T> traverse(TreeNode<T> node, ArrayList<T> list) {
         // Check if given node is null
