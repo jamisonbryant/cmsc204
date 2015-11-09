@@ -29,8 +29,8 @@ public class BSTreeTest {
         // for your student tests
         comparatorD = new DoubleComparator();
         linkedTreeDouble = new BSTree<Double>(comparatorD);
-
-
+        linkedTreeDouble.add(3.14);
+        linkedTreeDouble.add(10.11);
     }
 
     @After
@@ -56,7 +56,9 @@ public class BSTreeTest {
 
     @Test
     public void testGetRootDataSTUDENT() {
-        fail("Not yet implemented");
+        assertEquals(3.14, linkedTreeDouble.getRootData(), 0.00);
+        linkedTreeDouble.add(1.23);
+        assertEquals(3.14, linkedTreeDouble.getRootData(), 0.00);
     }
 
 
@@ -79,28 +81,34 @@ public class BSTreeTest {
 
     @Test
     public void testToArrayTreeSTUDENT() {
-        fail("Not yet implemented");
+        ArrayList<Double> list;
+
+        linkedTreeDouble.add(103.29);
+        linkedTreeDouble.add(93.29);
+        linkedTreeDouble.add(9.9);
+
+        list = linkedTreeDouble.toArrayList();
+        assertEquals(93.29, list.get(0), 0.00);
+        assertEquals(103.29, list.get(1), 0.00);
+        assertEquals(3.14, list.get(2), 0.00);
+        assertEquals(9.9, list.get(3), 0.00);
+        assertEquals(10.11, list.get(4), 0.00);
     }
 
 
     private class StringComparator implements Comparator<String> {
-
         @Override
         public int compare(String arg0, String arg1) {
             // TODO Auto-generated method stub
             return arg0.compareTo(arg1);
         }
-
     }
 
     private class DoubleComparator implements Comparator<Double> {
-
         @Override
         public int compare(Double arg0, Double arg1) {
             // TODO Auto-generated method stub
             return arg0.compareTo(arg1);
         }
-
     }
-
 }

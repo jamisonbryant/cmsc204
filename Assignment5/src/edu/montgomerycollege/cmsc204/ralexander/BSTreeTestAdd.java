@@ -43,12 +43,14 @@ public class BSTreeTestAdd {
     @Test
     public void testAddString() {
         assertEquals("Hello", linkedTreeString.getRootData());
+
         try {
             linkedTreeString.add("End");
         } catch (Exception e) {
             // TODO Auto-generated catch block
             fail("Should not have thrown an exception");
         }
+
         ArrayList<String> list = linkedTreeString.toArrayList();
         assertEquals("End", list.get(0));
         assertEquals("Hello", list.get(1));
@@ -68,7 +70,6 @@ public class BSTreeTestAdd {
         assertEquals("End", list.get(2));
         assertEquals("Hello", list.get(3));
         assertEquals("World", list.get(4));
-
     }
 
 

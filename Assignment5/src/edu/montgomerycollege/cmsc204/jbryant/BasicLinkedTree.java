@@ -13,12 +13,12 @@ public class BasicLinkedTree<T>
     /**
      * Number of nodes in tree
      */
-    private int size;
+    protected int size;
 
     /**
      * Root node of the tree
      */
-    private TreeNode<T> rootNode;
+    protected TreeNode<T> rootNode;
 
     /**
      * Creates a new tree
@@ -34,7 +34,7 @@ public class BasicLinkedTree<T>
      *
      * @param node Node to add
      */
-    public void add(T node)
+    public BasicLinkedTree<T> add(T node)
     {
         // Create new node from given data
         TreeNode<T> newNode = new TreeNode<T>(node);
@@ -81,6 +81,8 @@ public class BasicLinkedTree<T>
                 dummyNode.setRightChild(newNode);
             }
         }
+
+        return this;
     }
 
     /**
@@ -88,7 +90,7 @@ public class BasicLinkedTree<T>
      *
      * @param node Node to remove
      */
-    public void remove(T node)
+    public BasicLinkedTree<T> remove(T node)
     {
         // Convert tree to node list
         ArrayList<TreeNode<T>> nodes = toNodeList();
@@ -166,9 +168,11 @@ public class BasicLinkedTree<T>
 
             }
         }
+
+        return this;
     }
 
-    private TreeNode<T> getMinimum(TreeNode<T> node)
+    protected TreeNode<T> getMinimum(TreeNode<T> node)
     {
         if (node == null) return null;
 
@@ -179,7 +183,7 @@ public class BasicLinkedTree<T>
         }
     }
 
-    private TreeNode<T> getParent(TreeNode<T> node)
+    protected TreeNode<T> getParent(TreeNode<T> node)
     {
         if (node == null) return null;
 

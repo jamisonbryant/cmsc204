@@ -2,58 +2,44 @@ package edu.montgomerycollege.cmsc204.jbryant;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Stack;
 
 /**
  * Binary Search Tree class
  *
  * @author Jamison Bryant (jbryan46@montgomerycollege.edu) - CMSC 204 w/ R. Alexander M/W 1:00PM - 2:40PM
  */
-public class BSTree<T>
+public class BSTree<T> extends BasicLinkedTree<T>
 {
     /**
-     * Number of nodes in tree
+     * Comparator for comparing nodes
      */
-    private int size;
+    private Comparator<T> comparator;
 
-    /**
-     * Root node of the tree
-     */
-    private TreeNode<T> rootNode;
-
-    /**
-     * Creates a new tree
-     *
-     * @param comparator Comparator for comparing nodes in tree
-     */
-    public BSTree(Comparator comparator) {}
-
-    /**
-     * Adds a node to the tree
-     *
-     * @param node Node to add
-     */
-    public void add(T node)
+    public BSTree(Comparator<T> comparator)
     {
-        // Check if root node is null
-        if (rootNode == null) {
-            // Set root node to new node
-            rootNode = new TreeNode<T>();
-            rootNode.setData(node);
-        }
-
-        // Increment tree size
-        size++;
+        this.comparator = comparator;
     }
 
-    /**
-     * Removes a node from the tree
-     *
-     * @param node Node to remove
-     */
-    public void remove(T node)
+    public BSTree<T> add(T data)
     {
-        // Decrement tree size
+        if (rootNode == null) {
+            rootNode = new TreeNode<T>(data);
+        } else {
+            rootNode = insert(rootNode, data);
+        }
+
+        size++;
+
+        return this;
+    }
+
+    public BSTree<T> remove(T data)
+    {
+        rootNode = delete(rootNode, data);
         size--;
+
+        return this;
     }
 
     /**
@@ -61,42 +47,60 @@ public class BSTree<T>
      *
      * @return Tree as ArrayList
      */
-    public ArrayList<String> toArrayList() { return null; }
+    public ArrayList<T> toArrayList()
+    {
+        ArrayList<T> list = new ArrayList<T>();
 
-    //<editor-fold desc="[Getters/Setters]">
-    /**
-     * Returns the number of nodes in the tree
-     *
-     * @return Number of nodes
-     */
-    public int getSize() { return size; }
+        // If root node null, return empty list
+        if (rootNode == null) return list;
 
-    /**
-     * Sets the size of the tree
-     *
-     * @param size Size to set
-     */
-    public void setSize(int size) { this.size = size; }
+        // Return list
+        return traverse(rootNode, list);
+    }
 
-    /**
-     * Returns the root node of the tree
-     *
-     * @return Root node
-     */
-    public TreeNode<T> getRoot() { return rootNode; }
+    private TreeNode<T> insert(TreeNode<T> tree, T data)
+    {
+        // Compare data values
+        if (comparator.compare(data, tree.getData()) < 0) {
+            // Check if tree has left child
+            if (tree.hasLeftChild()) {
+                // Call insertion algorithm on left child
+                insert(tree.getLeftChild(), data);
+            } else {
+                // Insert node into tree as left child
+                tree.setLeftChild(new TreeNode<T>(data));
+            }
+        } else {
+            // Check if tree has right child
+            if (tree.hasRightChild()) {
+                // Call insertion algorithm on right child
+                insert(tree.getRightChild(), data);
+            } else {
+                // Insert node into tree as right child
+                tree.setRightChild(new TreeNode<T>(data));
+            }
+        }
 
-    /**
-     * Sets the root node of the tree (creates a deep copy of the given node)
-     *
-     * @param rootNode Node to set
-     */
-    public void setRoot(TreeNode<T> rootNode) { this.rootNode = new TreeNode<T>(rootNode); }
+        return tree;
+    }
 
-    /**
-     * Returns the data of the root node
-     *
-     * @return Root node data
-     */
-    public T getRootData() { return rootNode.getData(); }
-    //</editor-fold>
+    private TreeNode<T> delete(TreeNode<T> tree, T data)
+    {
+        return tree;
+    }
+
+    private ArrayList<T> traverse(TreeNode<T> node, ArrayList<T> list) {
+        // Check if given node is null
+        if (node == null) return null;
+
+        // Traverse node left subtree
+        traverse(node.getLeftChild(), list);
+
+        list.add(node.getData());
+
+        // Traverse node right subtree
+        traverse(node.getRightChild(), list);
+
+        return list;
+    }
 }

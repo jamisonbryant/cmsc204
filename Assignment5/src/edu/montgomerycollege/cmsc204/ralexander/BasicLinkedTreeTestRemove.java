@@ -134,22 +134,18 @@ public class BasicLinkedTreeTestRemove {
     }
 
     private class StringComparator implements Comparator<String> {
-
         @Override
         public int compare(String arg0, String arg1) {
             // TODO Auto-generated method stub
             return arg0.compareTo(arg1);
         }
-
     }
 
     private class DoubleComparator implements Comparator<Double> {
-
         @Override
         public int compare(Double arg0, Double arg1) {
             // TODO Auto-generated method stub
             return arg0.compareTo(arg1);
         }
-
     }
 }
