@@ -1,5 +1,7 @@
 package edu.montgomerycollege.cmsc204.jkartchner;
 
+import edu.montgomerycollege.cmsc204.jbryant.Friend;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;

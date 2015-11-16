@@ -1,6 +1,4 @@
-package edu.montgomerycollege.cmsc204.jkartchner;
-
-import java.io.FileNotFoundException;
+package edu.montgomerycollege.cmsc204.jbryant;
 
 import javax.swing.*;
 

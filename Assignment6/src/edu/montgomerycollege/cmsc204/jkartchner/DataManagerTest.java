@@ -12,6 +12,8 @@ import java.util.Vector;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
+import edu.montgomerycollege.cmsc204.jbryant.DataManager;
+import edu.montgomerycollege.cmsc204.jbryant.Friend;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
