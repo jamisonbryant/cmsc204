@@ -2,6 +2,11 @@ package edu.montgomerycollege.cmsc204.jbryant;
 
 import javax.swing.*;
 
+/**
+ * Driver Frame Class
+ *
+ * @author Jamison Bryant for R. Alexander's CMSC 204 M/W 1:00PM - 2:40PM
+ */
 public class DriverFrame extends JFrame
 {
     public DriverFrame() throws Exception

@@ -2,6 +2,8 @@ package edu.montgomerycollege.cmsc204.jbryant;
 
 /**
  * Friend Class
+ *
+ * @author Jamison Bryant for R. Alexander's CMSC 204 M/W 1:00PM - 2:40PM
  */
 public class Friend implements Comparable<Friend>
 {

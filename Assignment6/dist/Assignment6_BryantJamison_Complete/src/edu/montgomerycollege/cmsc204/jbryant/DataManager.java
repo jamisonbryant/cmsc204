@@ -9,6 +9,8 @@ import java.util.Vector;
 
 /**
  * Data Manager Class
+ *
+ * @author Jamison Bryant for R. Alexander's CMSC 204 M/W 1:00PM - 2:40PM
  */
 public class DataManager implements DataManagerInterface
 {
@@ -61,7 +63,7 @@ public class DataManager implements DataManagerInterface
     public ArrayList<String> listFriends(String profile)
     {
         Friend friend = null;
-        
+
         for (Friend f : graph.vertexSet()) {
             if (f.toString().equals(profile)) {
                 friend = f;
