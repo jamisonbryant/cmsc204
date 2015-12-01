@@ -29,3 +29,7 @@ tramp
 .idea/
 *.iml
 out/
+
+## Assignment 6
+friends.txt
+participants.txt

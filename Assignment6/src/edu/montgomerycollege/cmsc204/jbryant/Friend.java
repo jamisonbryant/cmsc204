@@ -57,5 +57,9 @@ public class Friend implements Comparable<Friend>
     }
 
     @Override
-    public int compareTo(Friend f) { return toString().compareTo(f.toString()); }
+    public int compareTo(Friend f)
+    {
+        return lname.compareTo(f.getLname());
+//        return fname.compareTo(f.getFname());
+    }
 }

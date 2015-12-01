@@ -23,38 +23,45 @@ public class DataManager implements DataManagerInterface
     @Override
     public ArrayList<String> friendsOfFriends(String profile)
     {
-        ArrayList<String> allFriends = new ArrayList<String>();
+        String[] parts = profile.split(" of ");
+        String[] names = parts[0].split(" ");
 
-        for (String s : listFriends(profile)) {
-            ArrayList<String> friends = listFriends(s);
-
-            for (String f : friends) {
-                if (!allFriends.contains(f)) {
-                    allFriends.add(f);
-                }
-            }
-        }
-
-        return allFriends;
+        return friendsOfFriends(names[0], names[1], parts[1]);
     }
 
     @Override
     public ArrayList<String> friendsOfFriends(String fname, String lname, String hometown)
     {
-        Friend friend = new Friend(fname, lname, hometown);
-        ArrayList<String> allFriends = new ArrayList<String>();
+        Friend me = new Friend(fname, lname, hometown);
+        ArrayList<String> myFriends = listFriends(me);
+        ArrayList<String> myFriendsOfFriends = new ArrayList<String>();
 
-        for (String s : listFriends(friend.toString())) {
-            ArrayList<String> friends = listFriends(s);
+        for (String myFriend : myFriends) {
+            ArrayList<String> myFriendsFriends = listFriends(myFriend);
 
-            for (String f : friends) {
-                if (!allFriends.contains(f)) {
-                    allFriends.add(f);
+            for (String myFriendsFriend : myFriendsFriends) {
+                if (!myFriendsFriend.equals(me.toString())) {
+                    if (!myFriends.contains(myFriendsFriend) && !myFriendsOfFriends.contains(myFriendsFriend)) {
+                        if (myFriendsOfFriends.isEmpty()) {
+                            myFriendsOfFriends.add(myFriendsFriend);
+                        } else {
+                            for (int i = 0; i < myFriendsOfFriends.size(); i++) {
+                                if (myFriendsOfFriends.get(i).compareTo(myFriendsFriend) > 0) {
+                                    myFriendsOfFriends.add(i, myFriendsFriend);
+                                    break;
+                                }
+                            }
+
+                            if (!myFriendsOfFriends.contains(myFriendsFriend)) {
+                                myFriendsOfFriends.add(myFriendsFriend);
+                            }
+                        }
+                    }
                 }
             }
         }
 
-        return allFriends;
+        return myFriendsOfFriends;
     }
 
     @Override
@@ -77,42 +84,26 @@ public class DataManager implements DataManagerInterface
                 if (!a.contains(e.getFriend2().toString())) {
                     a.add(e.getFriend2().toString());
                 }
-            } else {
+            } else if (e.getFriend2().equals(friend)) {
                 if (!a.contains(e.getFriend1().toString())) {
                     a.add(e.getFriend1().toString());
                 }
             }
-
         }
 
-        return a;
+        return sortFriends(a);
     }
 
     @Override
     public ArrayList<String> listFriends(String fname, String lname, String hometown)
     {
-        Friend f = new Friend(fname, lname, hometown);
-        TreeSet<Edge<Friend, Friend>> h = (TreeSet<Edge<Friend, Friend>>) graph.edgesOf(f);
-        ArrayList<String> a = new ArrayList<String>();
-
-        for (Edge<Friend, Friend> e : h) {
-            a.add(e.getFriend2().toString());
-        }
-
-        return a;
+        return listFriends(fname + " " + lname + " of " + hometown);
     }
 
     @Override
     public ArrayList<String> listFriends(Friend f)
     {
-        TreeSet<Edge<Friend, Friend>> h = (TreeSet<Edge<Friend, Friend>>) graph.edgesOf(f);
-        ArrayList<String> a = new ArrayList<String>();
-
-        for (Edge<Friend, Friend> e : h) {
-            a.add(e.getFriend2().toString());
-        }
-
-        return a;
+        return listFriends(f.toString());
     }
 
     @Override
@@ -215,5 +206,26 @@ public class DataManager implements DataManagerInterface
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private ArrayList<String> sortFriends(ArrayList<String> friends)
+    {
+        ArrayList<String> sortedFriends = new ArrayList<String>();
+        sortedFriends.add(friends.get(0));
+
+        for (String friend : friends) {
+            for (int i = 0; i < sortedFriends.size(); i++) {
+                if (sortedFriends.get(i).compareTo(friend) > 0) {
+                    sortedFriends.add(i, friend);
+                    break;
+                }
+            }
+
+            if (!sortedFriends.contains(friend)) {
+                sortedFriends.add(friend);
+            }
+        }
+
+        return sortedFriends;
     }
 }
