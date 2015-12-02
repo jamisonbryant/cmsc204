@@ -2,6 +2,8 @@ package edu.montgomerycollege.cmsc204.jbryant.server;
 
 import edu.montgomerycollege.cmsc204.jkartchner.Test;
 
+import java.util.Arrays;
+
 /**
  * Created by Jamison on 12/2/2015.
  */
@@ -49,7 +51,7 @@ public class CSTest extends Test
     }
 
     @Override
-    public String check(String testTakerAnswer)
+    public String check(String answer)
     {
         return null;
     }
