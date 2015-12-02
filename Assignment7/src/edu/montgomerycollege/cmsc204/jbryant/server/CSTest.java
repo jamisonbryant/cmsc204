@@ -42,6 +42,12 @@ public class CSTest extends Test
         answers[10] = "instanceof";
     }
 
+    public CSTest(String[] questions, String[] answers)
+    {
+        this.questions = questions;
+        this.answers = answers;
+    }
+
     @Override
     public String check(String testTakerAnswer)
     {

@@ -2,6 +2,7 @@ package edu.montgomerycollege.cmsc204.jkartchner;
 
 import static org.junit.Assert.*;
 
+import edu.montgomerycollege.cmsc204.jbryant.server.CSTest;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
