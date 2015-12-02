@@ -8,10 +8,13 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Vector;
 
+/**
+ * Defines the structure, appearance, and behavior of the application GUI.
+ *
+ * @author Jamison Bryant (jbryan46@montgomerycollege.edu) for R. Alexander's CMSC 204 (M/W 1PM-2:40PM)
+ */
 class DriverPanel extends JPanel
 {
-    private static final long serialVersionUID = 1L;
-
     private JLabel lblCode, lblEnglish;
     private JLabel fNameLbl, lNameLbl, cityLbl;
     private JTextField fNameTbx, lNameTbx, cityTbx;
@@ -27,7 +30,11 @@ class DriverPanel extends JPanel
     private ActionListener profile;
     private File filename, participantsFile, friendsFile;
 
-
+    /**
+     * Creates the application GUI
+     *
+     * @throws Exception If anything goes wrong
+     */
     DriverPanel() throws Exception
     {
         friendGraph = new DataManager();
@@ -173,6 +180,12 @@ class DriverPanel extends JPanel
         add(buttonPanel);
     }
 
+    /**
+     * Populates a combo box from a given vector
+     *
+     * @param comboBox Combo box to populate
+     * @param vector Vector to populate combo box from
+     */
     public void populateComboBox(JComboBox comboBox, Vector<String> vector)
     {
         comboBox.removeAllItems();
@@ -182,8 +195,7 @@ class DriverPanel extends JPanel
     }
 
     /**
-     * Gets the input file and output file names for the
-     * createConcordanceFile method
+     * Gets the input file and output file names
      *
      * @param in the name of the test file to be used
      * @throws Exception
