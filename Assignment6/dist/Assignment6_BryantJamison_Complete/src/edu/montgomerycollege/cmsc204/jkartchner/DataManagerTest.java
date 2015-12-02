@@ -154,7 +154,8 @@ public class DataManagerTest {
 		Vector<String> participants = new Vector<String>();
 		participants = graphManager.vectorOfParticipants();
 		assertTrue(participants.get(6).equals("Glenda Goodheart of Orem, UT"));
-		assertTrue(participants.get(13).equals("Mark Miller of Star, WY"));
+//		assertTrue(participants.get(13).equals("Mark Miller of Star, WY"));              // This is the original test construct
+        assertTrue(participants.get(12).equals("Mark Miller of Star, WY"));              // This is what it most likely should be
 		assertTrue(participants.get(17).equals("Quentin Quimby of Souix Falls, SD"));
 		assertTrue(participants.get(25).equals("Zeb Zucker of Shreveport, AL"));
 		
