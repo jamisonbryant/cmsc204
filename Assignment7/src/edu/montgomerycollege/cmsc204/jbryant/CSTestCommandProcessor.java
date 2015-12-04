@@ -1,4 +1,4 @@
-package edu.montgomerycollege.cmsc204.jbryant.server;
+package edu.montgomerycollege.cmsc204.jbryant;
 
 import edu.montgomerycollege.cmsc204.jkartchner.Test;
 import edu.montgomerycollege.cmsc204.jkartchner.TestCommandProcessor;

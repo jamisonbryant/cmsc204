@@ -1,6 +1,4 @@
-package edu.montgomerycollege.cmsc204.jbryant.server;
-
-import edu.montgomerycollege.cmsc204.jbryant.Network;
+package edu.montgomerycollege.cmsc204.jbryant;
 
 import java.io.IOException;
 import java.io.PrintWriter;

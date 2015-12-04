@@ -1,4 +1,4 @@
-package edu.montgomerycollege.cmsc204.jbryant.client;
+package edu.montgomerycollege.cmsc204.jbryant;
 
 import edu.montgomerycollege.cmsc204.jbryant.Network;
 
