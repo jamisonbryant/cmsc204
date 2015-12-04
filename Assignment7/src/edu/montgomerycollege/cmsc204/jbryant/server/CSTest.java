@@ -2,22 +2,24 @@ package edu.montgomerycollege.cmsc204.jbryant.server;
 
 import edu.montgomerycollege.cmsc204.jkartchner.Test;
 
-import java.util.Arrays;
-
 /**
  * Created by Jamison on 12/2/2015.
  */
 public class CSTest extends Test
 {
+    private int currentQuestion;
     private String[] questions;
     private String[] answers;
+    private double incorrectAnswers;
 
     public CSTest()
     {
         super();
+        currentQuestion = 0;
+        incorrectAnswers = 0;
 
         // Define questions and answers
-        questions = new String[10];
+        questions = new String[11];
         questions[0] = "";
         questions[1] = "Every node in a binary tree has _____ references.";
         questions[2] = "In a perfectly balanced binary tree, the height of the subtrees of the root are _____";
@@ -30,7 +32,7 @@ public class CSTest extends Test
         questions[9] = "When the binding of methods takes place at execution time, it is considered _____.";
         questions[10] = "Which operator is used to determine if an object is of a particular class type?";
 
-        answers = new String[10];
+        answers = new String[11];
         answers[0] = "";
         answers[1] = "2";
         answers[2] = "equal";
@@ -48,23 +50,44 @@ public class CSTest extends Test
     {
         this.questions = questions;
         this.answers = answers;
+        currentQuestion = 0;
+        incorrectAnswers = 0;
     }
 
     @Override
     public String check(String answer)
     {
-        return null;
+        String result = "Incorrect";
+
+        for (int i = 0; i < answers.length; i++) {
+            if (answers[i].equals(answer)) {
+                result = "Correct";
+                break;
+            }
+        }
+
+        if (result.equals("Incorrect")) {
+            incorrectAnswers++;
+        }
+
+        return result;
     }
 
     @Override
     public String next()
     {
-        return null;
+        String question = null;
+
+        if (currentQuestion != questions.length) {
+            question = questions[++currentQuestion];
+        }
+
+        return question;
     }
 
     @Override
     public double getPercentCorrect()
     {
-        return 0;
+        return 100.0 - (10.0 * incorrectAnswers);
     }
 }

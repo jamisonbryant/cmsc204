@@ -1,16 +1,12 @@
 package edu.montgomerycollege.cmsc204.jbryant.client;
 
-import edu.montgomerycollege.cmsc204.jbryant.Application;
+import edu.montgomerycollege.cmsc204.jbryant.Network;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.Scanner;
 
 /**
@@ -20,21 +16,22 @@ public class TestClient
 {
     public static void main(String[] args)
     {
-        boolean inputValid = false;
+//        // Get test taker's name
+//        String name = null;
+//        boolean inputValid = false;
+//
+//        while (!inputValid) {
+//            name = (String) JOptionPane.showInputDialog(null, "Enter your first and last name:", "Assignment 7",
+//                    JOptionPane.QUESTION_MESSAGE);
+//
+//            if (name != null) {
+//                if (!name.isEmpty()) {
+//                    inputValid = true;
+//                }
+//            }
+//        }
 
-        // Get test taker's name
-        String name = null;
-
-        while (!inputValid) {
-            name = (String) JOptionPane.showInputDialog(null, "Enter your first and last name:", "Assignment 7",
-                    JOptionPane.QUESTION_MESSAGE);
-
-            if (name != null) {
-                if (!name.isEmpty()) {
-                    inputValid = true;
-                }
-            }
-        }
+        String name = "John Doe";
 
         // Build test taking window
         JFrame testWindow = new JFrame("Assignment 7");
@@ -52,7 +49,7 @@ public class TestClient
         namePanel.add(nameLabel);
 
         JPanel questionPanel = new JPanel();
-        JLabel questionLabel = new JLabel("Question");
+        JLabel questionLabel = new JLabel("Question 1");
         questionPanel.add(questionLabel);
 
         JPanel answerPanel = new JPanel();
@@ -64,17 +61,76 @@ public class TestClient
         questionField.setPreferredSize(new Dimension(500, 50));
 
         JTextField answerField = new JTextField();
-        answerField.setPreferredSize(new Dimension(500, 25));
+        answerField.setPreferredSize(new Dimension(500, 15));
+
+        JButton checkButton = new JButton("Check");
+        checkButton.addActionListener(e -> {
+            // Check if answer field is empty
+            if (!answerField.getText().isEmpty()) {
+                // Send question to server to check
+                String response = send("CHECK:" + answerField.getText());
+
+                switch (response) {
+                    case "Correct":
+                        JOptionPane.showMessageDialog(null, "Your answer is correct!",
+                                "Check Answer", JOptionPane.INFORMATION_MESSAGE);
+                        break;
+
+                    case "Incorrect":
+                        JOptionPane.showMessageDialog(null, "Sorry, that answer is incorrect.",
+                                "Check Answer", JOptionPane.INFORMATION_MESSAGE);
+                        break;
+
+                    default:
+                        System.err.println("[" + Network.getTimestamp() + "] Invalid server response: " + response);
+                        break;
+                }
+            } else {
+                // Display error message
+                JOptionPane.showMessageDialog(null, "You must enter an answer in order for it to be checked",
+                        "Answer Required", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
+        JButton nextButton = new JButton("Next");
+        nextButton.addActionListener(e -> {
+            // Check if answer field is empty
+            if (!answerField.getText().isEmpty()) {
+                // Get next question from server
+                questionField.setText(send("NEXT"));
+                answerField.setText("");
+
+                // Update question label
+                int questionNumber = Integer.parseInt(questionLabel.getText().replaceAll("[\\D]", ""));
+                questionLabel.setText("Question " + ++questionNumber);
+
+                if (questionNumber == 10) {
+                    nextButton.setEnabled(false);
+                }
+            } else {
+                // Display error message
+                JOptionPane.showMessageDialog(null, "You must answer the question before going to the next one",
+                        "Answer Required", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
+        JButton gradeButton = new JButton("Grade");
+        gradeButton.addActionListener(e -> {
+            // Get grade from server
+            Double grade = Double.parseDouble(send("GRADE"));
+            String text = "Your grade is currently " + grade + "%";
+
+            // Display information message
+            JOptionPane.showMessageDialog(null, text, "Current Grade", JOptionPane.INFORMATION_MESSAGE);
+        });
+
+        JButton exitButton = new JButton("Exit");
+        exitButton.addActionListener(e -> System.exit(0) );
 
         JPanel buttonPanel = new JPanel();
-        JButton checkButton = new JButton("Check");
-        JButton nextButton = new JButton("Next");
-        JButton percentButton = new JButton("Percent Correct");
-        JButton exitButton = new JButton("Exit");
-
         buttonPanel.add(checkButton);
         buttonPanel.add(nextButton);
-        buttonPanel.add(percentButton);
+        buttonPanel.add(gradeButton);
         buttonPanel.add(exitButton);
 
         mainPanel.add(namePanel, BorderLayout.SOUTH);
@@ -87,30 +143,47 @@ public class TestClient
         testWindow.setContentPane(mainPanel);
         testWindow.setVisible(true);
 
-//        try {
-//            // Initialize client and I/O streams
-//            Socket client = new Socket("127.0.0.1", Application.getPort());
-//            Scanner input = new Scanner(client.getInputStream());
-//            PrintWriter output = new PrintWriter(client.getOutputStream());
-//            System.out.println("[" + Application.getTimestamp() + "] Initializing client " + client.hashCode());
-//
-//            // Send HELLO command to server
-//            System.out.println("[" + Application.getTimestamp() + "] Sent HELLO command to server");
-//            output.println("HELLO");
-//            output.flush();
-//
-//            // Capture and process server response
-//            String response = input.nextLine();
-//            System.out.println("[" + Application.getTimestamp() + "] Received response from server: " + response);
-//
-//            // Shut down client and connection
-//            System.out.println("[" + Application.getTimestamp() + "] Shutting down client " + client.hashCode());
-//            input.close();
-//            client.close();
-//        } catch (UnknownHostException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        // Get first question
+        questionField.setText(send("NEXT"));
+    }
+
+    private static String send(String command)
+    {
+        Socket client;
+        Scanner input;
+        PrintWriter output;
+        String response = null;
+
+        try {
+            // Connect to server
+            client = new Socket("127.0.0.1", Network.getPort());
+            input = new Scanner(client.getInputStream());
+            output = new PrintWriter(client.getOutputStream());
+            System.out.println("[" + Network.getTimestamp() + "] Initializing client " + client.hashCode());
+
+            // Validate command
+            if (command.equals("NEXT") || command.contains("CHECK:") || command.equals("GRADE")) {
+                // Send command to server
+                System.out.println("[" + Network.getTimestamp() + "] Sending command " + command + " to server");
+                output.println(command);
+                output.flush();
+
+                // Get response from server
+                response = input.nextLine();
+                System.out.println("[" + Network.getTimestamp() + "] Received response from server: " + response);
+
+                // Disconnect from server
+                System.out.println("[" + Network.getTimestamp() + "] Shutting down client " + client.hashCode());
+                input.close();
+                client.close();
+            } else {
+                System.err.println("[" + Network.getTimestamp() + "] " + command + " is not a valid command");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+
+        return response;
     }
 }
