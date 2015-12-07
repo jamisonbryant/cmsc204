@@ -21,15 +21,15 @@ public class CSTest extends Test
         // Define questions and answers
         questions = new String[11];
         questions[0] = "";
-        questions[1] = "Every node in a binary tree has _____ references.";
-        questions[2] = "In a perfectly balanced binary tree, the height of the subtrees of the root are _____";
-        questions[3] = "A node in a binary tree is called a(n) _____ if it has neither a left nor a right child.";
-        questions[4] = "The number of nodes in the longest branch of the tree is called the _____ of the tree.";
-        questions[5] = "Each item in a data set has a special member that uniquely identifies it called a(n) _____.";
-        questions[6] = "In an ordered linked list the search algorithm is somewhat improved because the list is _____.";
-        questions[7] = "A queue is a(n) _____ data structure.";
-        questions[8] = "The ability to create new data types from existing data types is called _____.";
-        questions[9] = "When the binding of methods takes place at execution time, it is considered _____.";
+        questions[1] = "Every node in a binary tree has ____ references.";
+        questions[2] = "In a perfectly balanced binary tree, the height of the subtrees of the root are ____";
+        questions[3] = "A node in a binary tree is called a(n) ____ if it has neither a left nor a right child.";
+        questions[4] = "The number of nodes in the longest branch of the tree is called the ____ of the tree.";
+        questions[5] = "Each item in a data set has a special member that uniquely identifies it called a(n) ____.";
+        questions[6] = "In an ordered linked list the search algorithm is somewhat improved because the list is ____.";
+        questions[7] = "A queue is a(n) ____ data structure.";
+        questions[8] = "The ability to create new data types from existing data types is called ____.";
+        questions[9] = "When the binding of methods takes place at execution time, it is considered ____.";
         questions[10] = "Which operator is used to determine if an object is of a particular class type?";
 
         answers = new String[11];
