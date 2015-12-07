@@ -9,6 +9,6 @@ import java.util.Date;
  */
 public class Network
 {
-    public static int getPort() { return 8890; }
+    public static int getPort() { return 9680; }
     public static String getTimestamp() { return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()); }
 }
