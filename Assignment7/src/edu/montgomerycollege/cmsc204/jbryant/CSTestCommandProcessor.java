@@ -9,7 +9,9 @@ import java.net.Socket;
 import java.util.Scanner;
 
 /**
- * Created by Jamison on 12/2/2015.
+ * Processes commands send to a server by a client and returns the results.
+ *
+ * @author Jamison Bryant <jbryan46@montgomerycollege.edu> for R. Alexander's CMSC 204 M/W 1:00PM-2:40PM
  */
 public class CSTestCommandProcessor extends TestCommandProcessor
 {
@@ -17,6 +19,8 @@ public class CSTestCommandProcessor extends TestCommandProcessor
     private Test test;
 
     /**
+     * Creates a new command processor
+     *
      * @param socket socket being used for connection
      * @param test   the test being used
      */
@@ -30,9 +34,12 @@ public class CSTestCommandProcessor extends TestCommandProcessor
     @Override
     public void executeCommands() throws IOException
     {
-
+        // I'm just here so I don't get fined...
     }
 
+    /**
+     * Runs the command processor thread
+     */
     @Override
     public void run()
     {

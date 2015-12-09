@@ -7,10 +7,17 @@ import java.net.Socket;
 import java.util.Scanner;
 
 /**
- * Created by Jamison on 12/2/2015.
+ * Listens for commands from the client, processes them, and returns the response.
+ *
+ * @author Jamison Bryant <jbryan46@montgomerycollege.edu> for R. Alexander's CMSC 204 M/W 1:00PM-2:40PM
  */
 public class TestServer
 {
+    /**
+     * Launches the server and listens for incoming commands.
+     *
+     * @param args Command-line arguments (ignored)
+     */
     public static void main(String[] args)
     {
         CSTest test = new CSTest();

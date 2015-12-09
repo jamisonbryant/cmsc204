@@ -3,7 +3,9 @@ package edu.montgomerycollege.cmsc204.jbryant;
 import edu.montgomerycollege.cmsc204.jkartchner.Test;
 
 /**
- * Created by Jamison on 12/2/2015.
+ * The CS test being administered by the application.
+ *
+ * @author Jamison Bryant <jbryan46@montgomerycollege.edu> for R. Alexander's CMSC 204 M/W 1:00PM-2:40PM
  */
 public class CSTest extends Test
 {
@@ -12,6 +14,9 @@ public class CSTest extends Test
     private String[] answers;
     private double incorrectAnswers;
 
+    /**
+     * Creates a new test to be administered
+     */
     public CSTest()
     {
         super();
@@ -46,6 +51,12 @@ public class CSTest extends Test
         answers[10] = "instanceof";
     }
 
+    /**
+     * Creates a new test with a given set of questions and answers
+     *
+     * @param questions Questions to display
+     * @param answers Correct answers to given questions
+     */
     public CSTest(String[] questions, String[] answers)
     {
         this.questions = questions;
@@ -54,6 +65,12 @@ public class CSTest extends Test
         incorrectAnswers = 0;
     }
 
+    /**
+     * Checks the answer of a particular question
+     *
+     * @param answer Answer to check
+     * @return True if the answer was correct, false otherwise
+     */
     @Override
     public String check(String answer)
     {
@@ -73,6 +90,11 @@ public class CSTest extends Test
         return result;
     }
 
+    /**
+     * Returns the next question on the test
+     *
+     * @return Next question
+     */
     @Override
     public String next()
     {
@@ -85,6 +107,11 @@ public class CSTest extends Test
         return question;
     }
 
+    /**
+     * Returns the percentage of questions that have been answered correctly
+     *
+     * @return Percent of questions answered correctly
+     */
     @Override
     public double getPercentCorrect()
     {

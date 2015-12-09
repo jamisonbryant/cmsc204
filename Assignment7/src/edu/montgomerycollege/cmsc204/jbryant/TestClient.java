@@ -10,28 +10,33 @@ import java.net.Socket;
 import java.util.Scanner;
 
 /**
- * Created by Jamison on 12/2/2015.
+ * Builds the GUI, creates the client, and communicates with the server.
+ *
+ * @author Jamison Bryant <jbryan46@montgomerycollege.edu> for R. Alexander's CMSC 204 M/W 1:00PM-2:40PM
  */
 public class TestClient
 {
+    /**
+     * Launches the client and communicates with the server to administer the test.
+     *
+     * @param args Command-line arguments (ignored)
+     */
     public static void main(String[] args)
     {
-//        // Get test taker's name
-//        String name = null;
-//        boolean inputValid = false;
-//
-//        while (!inputValid) {
-//            name = (String) JOptionPane.showInputDialog(null, "Enter your first and last name:", "Assignment 7",
-//                    JOptionPane.QUESTION_MESSAGE);
-//
-//            if (name != null) {
-//                if (!name.isEmpty()) {
-//                    inputValid = true;
-//                }
-//            }
-//        }
+        // Get test taker's name
+        String name = null;
+        boolean inputValid = false;
 
-        String name = "John Doe";
+        while (!inputValid) {
+            name = (String) JOptionPane.showInputDialog(null, "Enter your first and last name:", "Assignment 7",
+                    JOptionPane.QUESTION_MESSAGE);
+
+            if (name != null) {
+                if (!name.isEmpty()) {
+                    inputValid = true;
+                }
+            }
+        }
 
         // Build test taking window
         JFrame testWindow = new JFrame("Assignment 7");
